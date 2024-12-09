@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -9,6 +10,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Header />
+    <Header/>
+    <Footer/>
   </React.StrictMode>,
 );

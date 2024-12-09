@@ -8,8 +8,8 @@ $header-background-color: linear-gradient(#343333, #484848, #282828);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 70%;
     justify-self: center;
+    width: 100%;
 
     &__links {
       display: flex;

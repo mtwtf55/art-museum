@@ -1,0 +1,18 @@
+$footer-background-color: #FFF;
+
+.footer {
+  background-color: $footer-background-color;
+  padding: 32px;
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-self: center;
+    width: 100%;
+
+    &__logo {
+
+    }
+  }
+}
