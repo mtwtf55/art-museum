@@ -1,0 +1,61 @@
+@use "src/utils/variables" as v;
+
+.pagination {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: transparent;
+
+  &__item {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Lexend Deca;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 24px;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    text-align: center;
+    color: v.$text-color-black;
+    background-color: transparent;
+    cursor: none;
+
+    &:hover {
+      color: v.$text-color-orange;
+      cursor: pointer;
+    }
+
+    &__selected {
+      width: 30px;
+      height: 30px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-family: Lexend Deca;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 23px;
+      text-align: center;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+      color: #ffffff;
+      background-color: v.$text-color-orange;
+      border-radius: 4px;
+      caret-color: transparent;
+    }
+  }
+
+  &__next-icon {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
