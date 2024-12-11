@@ -1,7 +1,6 @@
 import React from "react";
 
-// @ts-ignore
-import svgLogo from '../../assets/modsen-logo.svg';
+const svgLogo = require("../../assets/modsen-logo.svg");
 
 function ModsenLogo() {
   return (

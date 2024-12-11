@@ -1,19 +1,19 @@
 import React from "react";
-import './Footer.scss'
+import "./Footer.scss";
 import Container from "../Container/Container";
 import LogoDark from "../Logo/LogoDark";
 import ModsenLogo from "../Logo/ModsenLogo";
 
 function Footer() {
   return (
-    <div className={'footer'}>
+    <div className={"footer"}>
       <Container>
         <div className="footer__inner">
           <div className="footer__inner__logo">
-            <LogoDark/>
+            <LogoDark />
           </div>
           <div className="footer__inner__logo">
-            <ModsenLogo/>
+            <ModsenLogo />
           </div>
         </div>
       </Container>

@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+import Home from "./pages/Home/Home";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -10,7 +11,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Header/>
-    <Footer/>
+    <Provider store={store}>
+      <Home />
+    </Provider>
   </React.StrictMode>,
 );
