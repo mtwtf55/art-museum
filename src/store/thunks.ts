@@ -34,3 +34,22 @@ export const fetchArtworks = createAppAsyncThunk(
     return response["data"];
   },
 );
+
+export const fetchRandomArtworks = createAppAsyncThunk(
+  "artworks/fetchRandomArtworks",
+  async (limit: number) => {
+    const randomOffset = Math.round(Math.random() * 1000);
+    const response = await axios
+      .get<Artwork[]>(
+        `/artworks?fields=${requestedFields.join(",")}&page=${randomOffset}&limit=${limit}`,
+      )
+      .then((res) => res.data)
+      .then((data) => {
+        // @ts-ignore
+        data["data"]["iiif_url"] = data["config"]["iiif_url"];
+        return data;
+      });
+    // @ts-ignore
+    return response["data"];
+  },
+);

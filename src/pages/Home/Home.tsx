@@ -5,17 +5,20 @@ import "./Home.scss";
 // @ts-ignore
 import searchIcon from "../../assets/search.svg";
 import { useAppDispatch, useAppSelector } from "../../withTypes";
-import { selectArtworks } from "../../store/selectors";
-import { fetchArtworks } from "../../store/thunks";
+import { selectArtworks, selectRandomArtWorks } from "../../store/selectors";
+import { fetchArtworks, fetchRandomArtworks } from "../../store/thunks";
 import ArtworkCard from "../../components/SpecialGallery/ArtworkCard";
 import SpecialGallery from "../../components/SpecialGallery/SpecialGallery";
+import OtherWorks from "../../components/OtherWorks/OtherWorks";
 
 function Home() {
   const dispatch = useAppDispatch();
   const artworks = useAppSelector(selectArtworks);
+  const randomArtworks = useAppSelector(selectRandomArtWorks);
 
   useEffect(() => {
     dispatch(fetchArtworks());
+    dispatch(fetchRandomArtworks(12));
   }, []);
 
   console.log({ artworks });
@@ -45,6 +48,7 @@ function Home() {
 
           {/*  Our special gallery*/}
           <SpecialGallery />
+          <OtherWorks artworks={randomArtworks} />
         </div>
       </div>
     </div>
