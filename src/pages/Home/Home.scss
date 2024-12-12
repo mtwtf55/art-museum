@@ -14,6 +14,7 @@ $border-grey: #f0f1f1;
 .main {
   padding-top: 135px;
   background-color: $page-background;
+  padding-bottom: 120px;
 
   &__title {
     font-family:
@@ -39,6 +40,14 @@ $border-grey: #f0f1f1;
       text-decoration-skip-ink: none;
       color: $text-color-orange;
     }
+  }
+
+  &__other-works {
+    margin-top: 120px;
+  }
+
+  &__special-gallery {
+    margin-top: 120px;
   }
 
   .input-wrapper {

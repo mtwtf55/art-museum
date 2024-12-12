@@ -28,8 +28,6 @@ function ArtworkCardSmall({
   const imgUrl =
     iiifUrl + `/${image_id}` + DEFAULT_IMG_PATH_PAYLOAD__SMALL_SIZE;
 
-  console.log(imgUrl);
-
   const icon = (
     <img
       src={addToFavouritesIcon}
@@ -59,7 +57,7 @@ function ArtworkCardSmall({
           {is_public_domain ? "Public" : "Copyright"}
         </p>
       </div>
-      <div className="artwork-card-small__add-to-favourite">
+      <div className="artwork-card-small__add-to-favourites">
         {hovered ? iconHovered : icon}
       </div>
     </div>
