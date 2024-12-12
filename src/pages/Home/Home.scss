@@ -49,37 +49,4 @@ $border-grey: #f0f1f1;
   &__special-gallery {
     margin-top: 120px;
   }
-
-  .input-wrapper {
-    width: 762px;
-    padding: 16px;
-    border-radius: 16px;
-    background-color: #3939390d;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .input {
-      background-color: transparent;
-      width: 100%;
-      border: none;
-      outline: none;
-
-      font-family: Inter;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 16.94px;
-      text-underline-position: from-font;
-      text-decoration-skip-ink: none;
-      color: #39393980;
-      text-align: left;
-    }
-
-    .input-icon {
-      &:hover {
-        transform: scale(1.1);
-        cursor: pointer;
-      }
-    }
-  }
 }

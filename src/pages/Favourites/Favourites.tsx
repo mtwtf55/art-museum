@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import "./Favourites.scss";
 import Header from "../../components/Header/Header";
 import { useAppDispatch, useAppSelector } from "../../withTypes";
-import { selectFavouriteArtworks } from "../../store/selectors";
+import {
+  selectFavouriteArtworks,
+  selectFavouriteArtworksIIIFUrl,
+} from "../../store/selectors";
 import { fetchArtworksByIds } from "../../store/thunks";
 import ArtworkCardSmall from "../../components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
 import Footer from "../../components/Footer/Footer";
@@ -10,6 +13,9 @@ import Footer from "../../components/Footer/Footer";
 function Favourites() {
   const dispatch = useAppDispatch();
   const favouriteArtworks = useAppSelector(selectFavouriteArtworks);
+  const favouriteArtworksIIIFUrl = useAppSelector(
+    selectFavouriteArtworksIIIFUrl,
+  );
 
   useEffect(() => {
     if (Object.keys(sessionStorage).length === 0) return;
@@ -31,7 +37,11 @@ function Favourites() {
             </div>
             <div className="favourites__main__list">
               {favouriteArtworks.map((a) => (
-                <ArtworkCardSmall artwork={a} key={a.id} />
+                <ArtworkCardSmall
+                  artwork={a}
+                  key={a.id}
+                  iiifUrl={favouriteArtworksIIIFUrl}
+                />
               ))}
             </div>
           </div>

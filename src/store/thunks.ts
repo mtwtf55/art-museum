@@ -1,8 +1,10 @@
 import { createAppAsyncThunk } from "../withTypes";
 import axios from "axios";
-import { Artwork } from "../types/types";
+import { Artwork, Search } from "../types/types";
 
 axios.defaults.baseURL = "https://api.artic.edu/api/v1";
+const SEARCH_LIMIT = 24;
+
 const requestedFields = [
   "id",
   "title",
@@ -18,6 +20,8 @@ const requestedFields = [
   "place_of_origin",
   "alt_image_ids",
 ];
+
+const requestedSearchFields = ["id", "api_link", "title"];
 
 export const fetchArtworks = createAppAsyncThunk(
   "artworks/fetchArtworks",
@@ -87,5 +91,34 @@ export const fetchArtworksByIds = createAppAsyncThunk(
       });
     // @ts-ignore
     return response["data"];
+  },
+);
+
+export const searchArtworks = createAppAsyncThunk(
+  "artworks/searchArtworks",
+  async (searchString: string) => {
+    const searchResponse = await axios
+      .get<{
+        data: Search[];
+      }>(
+        `/artworks/search?q=${searchString}&fields=${requestedSearchFields.join(",")}&limit=${SEARCH_LIMIT}`,
+      )
+      .then((r) => r.data.data);
+
+    const ids = searchResponse.map((s) => s.id);
+
+    const res = await axios
+      .get<Artwork[]>(
+        `/artworks?ids=${ids.join(",")}&fields=${requestedFields.join(",")}`,
+      )
+      .then((res) => res.data)
+      .then((data) => {
+        // @ts-ignore
+        data.data["iiif_url"] = data["config"]["iiif_url"];
+        return data;
+      });
+
+    // @ts-ignore
+    return res["data"];
   },
 );

@@ -13,3 +13,9 @@ export type Artwork = {
   place_of_origin: string;
   alt_image_ids: string[];
 };
+
+export type Search = {
+  api_link: string;
+  id: number;
+  title: string;
+};

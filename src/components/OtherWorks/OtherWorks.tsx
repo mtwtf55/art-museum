@@ -5,11 +5,12 @@ import ArtworkCardSmall from "./ArtworkCardSmall/ArtworkCardSmall";
 
 type OtherWorksProps = {
   artworks: Artwork[];
+  iiifUrl: string;
 };
 
-function OtherWorks({ artworks }: OtherWorksProps) {
+function OtherWorks({ artworks, iiifUrl }: OtherWorksProps) {
   const artworksToRender = artworks.map((aw) => (
-    <ArtworkCardSmall artwork={aw} key={aw.id} />
+    <ArtworkCardSmall artwork={aw} key={aw.id} iiifUrl={iiifUrl} />
   ));
 
   return (

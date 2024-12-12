@@ -5,6 +5,7 @@ import {
   fetchArtworks,
   fetchArtworksByIds,
   fetchRandomArtworks,
+  searchArtworks,
 } from "../thunks";
 import { Artwork } from "../../types/types";
 
@@ -30,6 +31,13 @@ export interface SelectedArtworkState {
 }
 
 export interface FavouriteArtworksState {
+  value: Artwork[];
+  status: "idle" | "pending" | "succeeded" | "failed";
+  error: string | null;
+  iiifUrl: string;
+}
+
+export interface SearchArtworksState {
   value: Artwork[];
   status: "idle" | "pending" | "succeeded" | "failed";
   error: string | null;
@@ -64,11 +72,19 @@ const favouriteArtworksInitialState: FavouriteArtworksState = {
   iiifUrl: "",
 };
 
+const searchArtworksInitialState: SearchArtworksState = {
+  value: [],
+  status: "idle",
+  error: null,
+  iiifUrl: "",
+};
+
 export interface SliceState {
   artworks: ArtworksState;
   randomArtworks: RandomArtworksState;
   selectedArtwork: SelectedArtworkState;
   favouriteArtworks: FavouriteArtworksState;
+  searchArtworks: SearchArtworksState;
 }
 
 const sliceInitialState: SliceState = {
@@ -76,6 +92,7 @@ const sliceInitialState: SliceState = {
   randomArtworks: randomArtworksInitialState,
   selectedArtwork: selectedArtworkInitialState,
   favouriteArtworks: favouriteArtworksInitialState,
+  searchArtworks: searchArtworksInitialState,
 };
 
 export const artworksSlice = createSlice({
@@ -86,6 +103,12 @@ export const artworksSlice = createSlice({
       state.favouriteArtworks.value = state.favouriteArtworks.value.filter(
         (v) => v.id !== action.payload.artworkId,
       );
+    },
+    searchClear(state) {
+      state.searchArtworks.value = [];
+      state.searchArtworks.status = "idle";
+      state.searchArtworks.error = null;
+      state.searchArtworks.iiifUrl = "";
     },
   },
   extraReducers: (builder) => {
@@ -128,10 +151,22 @@ export const artworksSlice = createSlice({
       state.favouriteArtworks.value = action.payload;
       state.favouriteArtworks.iiifUrl = action.payload["iiif_url"];
     });
+    builder.addCase(searchArtworks.pending, (state) => {
+      state.searchArtworks.status = "pending";
+    });
+    builder.addCase(searchArtworks.fulfilled, (state, action) => {
+      state.searchArtworks.value = action.payload;
+      state.searchArtworks.status = "succeeded";
+      state.searchArtworks.iiifUrl = action.payload["iiif_url"];
+    });
+    builder.addCase(searchArtworks.rejected, (state, action) => {
+      state.searchArtworks.status = "failed";
+      state.searchArtworks.error = action.error.message ?? "Unknown error";
+    });
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { favouriteRemoved } = artworksSlice.actions;
+export const { favouriteRemoved, searchClear } = artworksSlice.actions;
 
 export default artworksSlice.reducer;

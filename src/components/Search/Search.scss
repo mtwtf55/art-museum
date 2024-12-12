@@ -1,0 +1,55 @@
+@use "../../utils/variables" as v;
+
+.input-wrapper {
+  width: 762px;
+  padding: 16px;
+  border-radius: 16px;
+  background-color: #3939390d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .input {
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    outline: none;
+
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.94px;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #39393980;
+    text-align: left;
+  }
+
+  .input-icon {
+    &:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+  }
+}
+
+.search-results {
+  &__title {
+    font-family: Lexend Deca;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 40px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: v.$text-color-black;
+  }
+
+  &__main {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 130px;
+    gap: 16px;
+  }
+}

@@ -1,35 +1,26 @@
 import React, { useState } from "react";
 import "./ArtworkCardSmall.scss";
 import { Artwork } from "../../../types/types";
-import { useAppSelector } from "../../../withTypes";
-import {
-  selectFavouriteArtworksIIIFUrl,
-  selectRandomArtworksIIIFUrl,
-} from "../../../store/selectors";
 import { DEFAULT_IMG_PATH_PAYLOAD__SMALL_SIZE } from "../../../utils/constants";
 import { useNavigate } from "react-router-dom";
 import AddToFavouritesIcon from "../../Buttons/AddToFavourites/AddToFavouritesIcon";
 
 type ArtworkCardSmall = {
   artwork: Artwork;
+  iiifUrl: string;
 };
 
 function ArtworkCardSmall({
   artwork: { title, artist_title, is_public_domain, image_id, id: artworkId },
+  iiifUrl,
 }: ArtworkCardSmall) {
-  const randomArtworksIIIFUrl = useAppSelector(selectRandomArtworksIIIFUrl);
-  const favouriteArtworksIIIFUrl = useAppSelector(
-    selectFavouriteArtworksIIIFUrl,
-  );
   const navigate = useNavigate();
   const [isArtworkInFavourites, setIsArtworkInFavourites] = useState(
     sessionStorage.getItem(artworkId.toString()) !== null,
   );
 
   const imgUrl =
-    (randomArtworksIIIFUrl || favouriteArtworksIIIFUrl) +
-    `/${image_id}` +
-    DEFAULT_IMG_PATH_PAYLOAD__SMALL_SIZE;
+    iiifUrl + `/${image_id}` + DEFAULT_IMG_PATH_PAYLOAD__SMALL_SIZE;
 
   function handleOnClick() {
     navigate(`/artworks/${artworkId}`);

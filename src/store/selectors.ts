@@ -16,3 +16,9 @@ export const selectFavouriteArtworks = (state: RootState) =>
   state.artworks.favouriteArtworks.value;
 export const selectFavouriteArtworksIIIFUrl = (state: RootState) =>
   state.artworks.favouriteArtworks.iiifUrl;
+export const selectSearchArtworks = (state: RootState) =>
+  state.artworks.searchArtworks.value;
+export const selectSearchArtworksIIIFUrl = (state: RootState) =>
+  state.artworks.searchArtworks.iiifUrl;
+export const selectSearchArtworksLength = (state: RootState) =>
+  state.artworks.searchArtworks.value.length;
