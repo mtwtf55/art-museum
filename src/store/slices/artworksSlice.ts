@@ -1,6 +1,11 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchArtwork, fetchArtworks, fetchRandomArtworks } from "../thunks";
+import {
+  fetchArtwork,
+  fetchArtworks,
+  fetchArtworksByIds,
+  fetchRandomArtworks,
+} from "../thunks";
 import { Artwork } from "../../types/types";
 
 export interface ArtworksState {
@@ -19,6 +24,13 @@ export interface RandomArtworksState {
 
 export interface SelectedArtworkState {
   value: Artwork | null;
+  status: "idle" | "pending" | "succeeded" | "failed";
+  error: string | null;
+  iiifUrl: string;
+}
+
+export interface FavouriteArtworksState {
+  value: Artwork[];
   status: "idle" | "pending" | "succeeded" | "failed";
   error: string | null;
   iiifUrl: string;
@@ -45,24 +57,35 @@ const selectedArtworkInitialState: SelectedArtworkState = {
   iiifUrl: "",
 };
 
+const favouriteArtworksInitialState: FavouriteArtworksState = {
+  value: [],
+  status: "idle",
+  error: null,
+  iiifUrl: "",
+};
+
 export interface SliceState {
   artworks: ArtworksState;
   randomArtworks: RandomArtworksState;
   selectedArtwork: SelectedArtworkState;
+  favouriteArtworks: FavouriteArtworksState;
 }
 
 const sliceInitialState: SliceState = {
   artworks: artworksInitialState,
   randomArtworks: randomArtworksInitialState,
   selectedArtwork: selectedArtworkInitialState,
+  favouriteArtworks: favouriteArtworksInitialState,
 };
 
 export const artworksSlice = createSlice({
   name: "artworks",
   initialState: sliceInitialState,
   reducers: {
-    postsAdded(state, action: PayloadAction<Artwork[]>) {
-      state.artworks.value.concat(action.payload);
+    favouriteRemoved(state, action: PayloadAction<{ artworkId: number }>) {
+      state.favouriteArtworks.value = state.favouriteArtworks.value.filter(
+        (v) => v.id !== action.payload.artworkId,
+      );
     },
   },
   extraReducers: (builder) => {
@@ -100,10 +123,15 @@ export const artworksSlice = createSlice({
       state.selectedArtwork.status = "failed";
       state.selectedArtwork.error = action.error.message ?? null;
     });
+    builder.addCase(fetchArtworksByIds.fulfilled, (state, action) => {
+      state.favouriteArtworks.status = "succeeded";
+      state.favouriteArtworks.value = action.payload;
+      state.favouriteArtworks.iiifUrl = action.payload["iiif_url"];
+    });
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { postsAdded } = artworksSlice.actions;
+export const { favouriteRemoved } = artworksSlice.actions;
 
 export default artworksSlice.reducer;

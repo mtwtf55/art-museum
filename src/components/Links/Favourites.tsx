@@ -3,10 +3,15 @@ import React from "react";
 import svgLogo from "../../assets/favourites.svg";
 import "./Favourites.scss";
 
-function Favourites() {
+function Favourites({ onClick: handleOnClick }: { onClick?: () => void }) {
   return (
     <>
-      <img src={svgLogo} alt="Favourites logo" className={"logo"} />
+      <img
+        src={svgLogo}
+        alt="Favourites logo"
+        className={"logo"}
+        onClick={handleOnClick}
+      />
     </>
   );
 }

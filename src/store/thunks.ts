@@ -71,3 +71,21 @@ export const fetchArtwork = createAppAsyncThunk(
     return response["data"];
   },
 );
+
+export const fetchArtworksByIds = createAppAsyncThunk(
+  "artworks/fetchArtworksByIds",
+  async (ids: string[]) => {
+    const response = await axios
+      .get<Artwork[]>(
+        `/artworks?ids=${ids.join(",")}&fields=${requestedFields.join(",")}`,
+      )
+      .then((res) => res.data)
+      .then((data) => {
+        // @ts-ignore
+        data["data"]["iiif_url"] = data["config"]["iiif_url"];
+        return data;
+      });
+    // @ts-ignore
+    return response["data"];
+  },
+);

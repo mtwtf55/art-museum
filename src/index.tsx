@@ -6,6 +6,7 @@ import { store } from "./store/store";
 import Home from "./pages/Home/Home";
 import DetailInfo from "./pages/DetailInfo/DetailInfo";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Favourites from "./pages/Favourites/Favourites";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -16,6 +17,7 @@ const Routing = () => {
     <BrowserRouter>
       <Routes>
         <Route path={"/artworks/:artworkId"} element={<DetailInfo />} />
+        <Route path={"/favourites"} element={<Favourites />} />
         <Route path={"/"} element={<Home />} />
       </Routes>
     </BrowserRouter>
