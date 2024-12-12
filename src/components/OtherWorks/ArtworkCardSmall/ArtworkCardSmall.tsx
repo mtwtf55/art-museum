@@ -14,16 +14,19 @@ import {
   DEFAULT_IMG_PATH_PAYLOAD__MEDIUM_SIZE,
   DEFAULT_IMG_PATH_PAYLOAD__SMALL_SIZE,
 } from "../../../utils/constants";
+import { useNavigate } from "react-router-dom";
+import AddToFavouritesIcon from "../../Buttons/AddToFavourites/AddToFavouritesIcon";
 
 type ArtworkCardSmall = {
   artwork: Artwork;
 };
 
 function ArtworkCardSmall({
-  artwork: { title, artist_title, is_public_domain, image_id },
+  artwork: { title, artist_title, is_public_domain, image_id, id: artworkId },
 }: ArtworkCardSmall) {
   const [hovered, setHovered] = useState(false);
   const iiifUrl = useAppSelector(selectRandomArtworksIIIFUrl);
+  const navigate = useNavigate();
 
   const imgUrl =
     iiifUrl + `/${image_id}` + DEFAULT_IMG_PATH_PAYLOAD__SMALL_SIZE;
@@ -31,7 +34,7 @@ function ArtworkCardSmall({
   const icon = (
     <img
       src={addToFavouritesIcon}
-      alt="Icon"
+      alt=""
       onMouseEnter={() => setHovered(true)}
       style={{ cursor: "pointer" }}
     />
@@ -45,10 +48,14 @@ function ArtworkCardSmall({
     />
   );
 
+  function handleOnClick() {
+    navigate(`/artworks/${artworkId}`);
+  }
+
   return (
-    <div className={"artwork-card-small"}>
+    <div className={"artwork-card-small"} onClick={handleOnClick}>
       <div className="artwork-card-small__image">
-        <img src={imgUrl} alt="Image" />
+        <img src={imgUrl} alt="" />
       </div>
       <div className="artwork-card-small__content">
         <p className="artwork-card-small__content__title">{title}</p>
@@ -58,7 +65,8 @@ function ArtworkCardSmall({
         </p>
       </div>
       <div className="artwork-card-small__add-to-favourites">
-        {hovered ? iconHovered : icon}
+        {/*{hovered ? iconHovered : icon}*/}
+        <AddToFavouritesIcon />
       </div>
     </div>
   );

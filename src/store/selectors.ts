@@ -8,3 +8,7 @@ export const selectRandomArtWorks = (state: RootState) =>
   state.artworks.randomArtworks.value;
 export const selectRandomArtworksIIIFUrl = (state: RootState) =>
   state.artworks.randomArtworks.iiifUrl;
+export const selectSelectedArtwork = (state: RootState) =>
+  state.artworks.selectedArtwork.value;
+export const selectSelectedArtworkIIIFUrl = (state: RootState) =>
+  state.artworks.selectedArtwork.iiifUrl;

@@ -34,6 +34,7 @@ function SpecialGallery() {
             title={aw.title}
             author={aw.artist_title}
             isPublic={aw.is_public_domain}
+            id={aw.id}
             key={aw.id}
           />
         ))}

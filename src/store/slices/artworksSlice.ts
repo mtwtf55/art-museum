@@ -1,6 +1,6 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchArtworks, fetchRandomArtworks } from "../thunks";
+import { fetchArtwork, fetchArtworks, fetchRandomArtworks } from "../thunks";
 import { Artwork } from "../../types/types";
 
 export interface ArtworksState {
@@ -12,6 +12,13 @@ export interface ArtworksState {
 
 export interface RandomArtworksState {
   value: Artwork[];
+  status: "idle" | "pending" | "succeeded" | "failed";
+  error: string | null;
+  iiifUrl: string;
+}
+
+export interface SelectedArtworkState {
+  value: Artwork | null;
   status: "idle" | "pending" | "succeeded" | "failed";
   error: string | null;
   iiifUrl: string;
@@ -31,14 +38,23 @@ const randomArtworksInitialState: RandomArtworksState = {
   iiifUrl: "",
 };
 
+const selectedArtworkInitialState: SelectedArtworkState = {
+  value: null,
+  status: "idle",
+  error: null,
+  iiifUrl: "",
+};
+
 export interface SliceState {
   artworks: ArtworksState;
   randomArtworks: RandomArtworksState;
+  selectedArtwork: SelectedArtworkState;
 }
 
 const sliceInitialState: SliceState = {
   artworks: artworksInitialState,
   randomArtworks: randomArtworksInitialState,
+  selectedArtwork: selectedArtworkInitialState,
 };
 
 export const artworksSlice = createSlice({
@@ -71,6 +87,18 @@ export const artworksSlice = createSlice({
     });
     builder.addCase(fetchRandomArtworks.rejected, (state) => {
       state.randomArtworks.status = "failed";
+    });
+    builder.addCase(fetchArtwork.pending, (state) => {
+      state.selectedArtwork.status = "pending";
+    });
+    builder.addCase(fetchArtwork.fulfilled, (state, action) => {
+      state.selectedArtwork.status = "succeeded";
+      state.selectedArtwork.value = action.payload;
+      state.selectedArtwork.iiifUrl = action.payload["iiif_url"];
+    });
+    builder.addCase(fetchArtwork.rejected, (state, action) => {
+      state.selectedArtwork.status = "failed";
+      state.selectedArtwork.error = action.error.message ?? null;
     });
   },
 });

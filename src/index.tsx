@@ -4,15 +4,28 @@ import "./index.css";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import Home from "./pages/Home/Home";
+import DetailInfo from "./pages/DetailInfo/DetailInfo";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
 
+const Routing = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path={"/artworks/:artworkId"} element={<DetailInfo />} />
+        <Route path={"/"} element={<Home />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Home />
+      <Routing />
     </Provider>
   </React.StrictMode>,
 );

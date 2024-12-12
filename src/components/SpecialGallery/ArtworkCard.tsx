@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // @ts-ignore
 import cardPicture from "../../assets/picture-big.png";
 // @ts-ignore
@@ -7,29 +7,39 @@ import { useAppSelector } from "../../withTypes";
 import { selectIIIFUrl } from "../../store/selectors";
 import { DEFAULT_IMG_PATH_PAYLOAD__MEDIUM_SIZE } from "../../utils/constants";
 import "./SpecialGallery.scss";
-import ImagePlaceholder from "./ImagePlaceholder";
+import AddToFavouritesIcon from "../Buttons/AddToFavourites/AddToFavouritesIcon";
+import { useNavigate } from "react-router-dom";
 
 type ArtworkCardProps = {
+  id: number;
   imageId: string;
   title: string;
   author: string;
   isPublic: boolean;
 };
 
-function ArtworkCard({ imageId, title, author, isPublic }: ArtworkCardProps) {
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
+function ArtworkCard({
+  imageId,
+  title,
+  author,
+  isPublic,
+  id: artworkId,
+}: ArtworkCardProps) {
+  const navigate = useNavigate();
   const iiifUrl = useAppSelector(selectIIIFUrl);
   const imgUrl =
     iiifUrl + `/${imageId}` + DEFAULT_IMG_PATH_PAYLOAD__MEDIUM_SIZE;
 
-  const image = console.log(isImageLoaded);
+  function handleOnClick() {
+    navigate(`/artworks/${artworkId}`);
+  }
 
   return (
     <div className="card">
       <div className="card__picture">
-        <img src={imgUrl} alt="Card picture" />;
+        <img src={imgUrl} alt="" />
       </div>
-      <div className="card__info">
+      <div className="card__info" onClick={handleOnClick}>
         <div className="card__info__wrapper">
           <div className="card__info__description">
             <p className="card__info__description__title">{title}</p>
@@ -39,11 +49,7 @@ function ArtworkCard({ imageId, title, author, isPublic }: ArtworkCardProps) {
             {isPublic ? "Public" : "Copyright"}
           </p>
         </div>
-        <img
-          className={"card__info__icon"}
-          src={addToFavouritesIcon}
-          alt={"Add favourite icon"}
-        />
+        <AddToFavouritesIcon />
       </div>
     </div>
   );
