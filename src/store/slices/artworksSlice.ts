@@ -1,41 +1,76 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchArtworks } from "../thunks";
+import { fetchArtworks, fetchRandomArtworks } from "../thunks";
 import { Artwork } from "../../types/types";
 
 export interface ArtworksState {
-  artworks: Artwork[];
+  value: Artwork[];
   status: "idle" | "pending" | "succeeded" | "failed";
   error: string | null;
   iiifUrl: string;
 }
 
-const initialState: ArtworksState = {
-  artworks: [],
+export interface RandomArtworksState {
+  value: Artwork[];
+  status: "idle" | "pending" | "succeeded" | "failed";
+  error: string | null;
+  iiifUrl: string;
+}
+
+const artworksInitialState: ArtworksState = {
+  value: [],
   status: "idle",
   error: null,
   iiifUrl: "",
 };
 
+const randomArtworksInitialState: RandomArtworksState = {
+  value: [],
+  status: "idle",
+  error: null,
+  iiifUrl: "",
+};
+
+export interface SliceState {
+  artworks: ArtworksState;
+  randomArtworks: RandomArtworksState;
+}
+
+const sliceInitialState: SliceState = {
+  artworks: artworksInitialState,
+  randomArtworks: randomArtworksInitialState,
+};
+
 export const artworksSlice = createSlice({
   name: "artworks",
-  initialState,
+  initialState: sliceInitialState,
   reducers: {
     postsAdded(state, action: PayloadAction<Artwork[]>) {
-      state.artworks.concat(action.payload);
+      state.artworks.value.concat(action.payload);
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchArtworks.pending, (state) => {
-      state.status = "pending";
+      state.artworks.status = "pending";
     });
     builder.addCase(fetchArtworks.fulfilled, (state, action) => {
-      state.status = "succeeded";
-      state.iiifUrl = action.payload["iiif_url"];
-      state.artworks = action.payload;
+      state.artworks.status = "succeeded";
+      state.artworks.iiifUrl = action.payload["iiif_url"];
+      state.artworks.value = action.payload;
     });
     builder.addCase(fetchArtworks.rejected, (state) => {
-      state.status = "failed";
+      state.artworks.status = "failed";
+    });
+    builder.addCase(fetchRandomArtworks.pending, (state) => {
+      state.randomArtworks.status = "pending";
+    });
+    builder.addCase(fetchRandomArtworks.fulfilled, (state, action) => {
+      state.randomArtworks.status = "succeeded";
+      state.randomArtworks.value = action.payload;
+      state.randomArtworks.iiifUrl = action.payload["iiif_url"];
+    });
+    builder.addCase(fetchRandomArtworks.rejected, (state) => {
+      state.randomArtworks.status = "failed";
     });
   },
 });
