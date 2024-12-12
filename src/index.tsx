@@ -25,9 +25,9 @@ const Routing = () => {
 };
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Routing />
-    </Provider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <Provider store={store}>
+    <Routing />
+  </Provider>,
+  // </React.StrictMode>,
 );

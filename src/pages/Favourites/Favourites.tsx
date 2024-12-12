@@ -5,10 +5,12 @@ import { useAppDispatch, useAppSelector } from "../../withTypes";
 import {
   selectFavouriteArtworks,
   selectFavouriteArtworksIIIFUrl,
+  selectFavouritesAreLoading,
 } from "../../store/selectors";
 import { fetchArtworksByIds } from "../../store/thunks";
 import ArtworkCardSmall from "../../components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
 import Footer from "../../components/Footer/Footer";
+import Spinner from "../../components/Spinner/Spinner";
 
 function Favourites() {
   const dispatch = useAppDispatch();
@@ -16,6 +18,7 @@ function Favourites() {
   const favouriteArtworksIIIFUrl = useAppSelector(
     selectFavouriteArtworksIIIFUrl,
   );
+  const areLoading = useAppSelector(selectFavouritesAreLoading);
 
   useEffect(() => {
     if (Object.keys(sessionStorage).length === 0) return;
@@ -35,15 +38,21 @@ function Favourites() {
                 Your favorites list
               </p>
             </div>
-            <div className="favourites__main__list">
-              {favouriteArtworks.map((a) => (
-                <ArtworkCardSmall
-                  artwork={a}
-                  key={a.id}
-                  iiifUrl={favouriteArtworksIIIFUrl}
-                />
-              ))}
-            </div>
+            {areLoading ? (
+              <div className="favourites__main__spinner-wrapper">
+                <Spinner />
+              </div>
+            ) : (
+              <div className="favourites__main__list">
+                {favouriteArtworks.map((a) => (
+                  <ArtworkCardSmall
+                    artwork={a}
+                    key={a.id}
+                    iiifUrl={favouriteArtworksIIIFUrl}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

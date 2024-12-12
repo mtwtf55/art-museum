@@ -1,15 +1,15 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import Pagination from "../Pagination/Pagination";
-import { useAppDispatch, useAppSelector } from "../../withTypes";
-import { selectArtworks } from "../../store/selectors";
-import { fetchArtworks } from "../../store/thunks";
 import ArtworkCard from "./ArtworkCard";
 import { ARTWORKS_AMOUNT_PER_ROW } from "../../utils/constants";
 import "./SpecialGallery.scss";
+import { Artwork } from "../../types/types";
 
-function SpecialGallery() {
-  const dispatch = useAppDispatch();
-  const artworks = useAppSelector(selectArtworks);
+type SpecialGalleryProps = {
+  artworks: Artwork[];
+};
+
+function SpecialGallery({ artworks }: SpecialGalleryProps) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const artworksToShow = useMemo(() => {
@@ -18,10 +18,6 @@ function SpecialGallery() {
       currentPage * ARTWORKS_AMOUNT_PER_ROW - ARTWORKS_AMOUNT_PER_ROW;
     return artworks.filter((_, k) => k >= floorIndex && k < ceilIndex);
   }, [currentPage, artworks]);
-
-  useEffect(() => {
-    dispatch(fetchArtworks());
-  }, []);
 
   return (
     <div className="gallery">

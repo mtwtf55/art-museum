@@ -110,6 +110,12 @@ export const artworksSlice = createSlice({
       state.searchArtworks.error = null;
       state.searchArtworks.iiifUrl = "";
     },
+    selectedClear(state) {
+      state.selectedArtwork.value = null;
+      state.selectedArtwork.status = "idle";
+      state.selectedArtwork.error = null;
+      state.selectedArtwork.iiifUrl = "";
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchArtworks.pending, (state) => {
@@ -146,6 +152,9 @@ export const artworksSlice = createSlice({
       state.selectedArtwork.status = "failed";
       state.selectedArtwork.error = action.error.message ?? null;
     });
+    builder.addCase(fetchArtworksByIds.pending, (state) => {
+      state.favouriteArtworks.status = "pending";
+    });
     builder.addCase(fetchArtworksByIds.fulfilled, (state, action) => {
       state.favouriteArtworks.status = "succeeded";
       state.favouriteArtworks.value = action.payload;
@@ -167,6 +176,7 @@ export const artworksSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { favouriteRemoved, searchClear } = artworksSlice.actions;
+export const { favouriteRemoved, searchClear, selectedClear } =
+  artworksSlice.actions;
 
 export default artworksSlice.reducer;

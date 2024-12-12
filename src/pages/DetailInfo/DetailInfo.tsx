@@ -11,6 +11,8 @@ import {
 import { fetchArtwork } from "../../store/thunks";
 import { DEFAULT_IMG_PATH_PAYLOAD__BIG_SIZE } from "../../utils/constants";
 import AddToFavouritesIcon from "../../components/Buttons/AddToFavourites/AddToFavouritesIcon";
+import Spinner from "../../components/Spinner/Spinner";
+import { selectedClear } from "../../store/slices/artworksSlice";
 
 function DetailInfo() {
   const dispatch = useAppDispatch();
@@ -20,9 +22,14 @@ function DetailInfo() {
   const [isArtworkInFavourites, setIsArtworkInFavourites] = useState(
     sessionStorage.getItem(selectedArtwork?.id.toString() ?? "") !== null,
   );
+  const [isImageLoading, setIsImageLoading] = useState(true);
 
   useEffect(() => {
     dispatch(fetchArtwork(artworkId ?? ""));
+
+    return () => {
+      dispatch(selectedClear());
+    };
   }, []);
 
   const imgUrl =
@@ -48,7 +55,12 @@ function DetailInfo() {
       <div className="detail-info-page__main-wrapper">
         <div className="detail-info-page__main">
           <div className="detail-info-page__main__image">
-            <img src={imgUrl} alt="" />
+            {isImageLoading && (
+              <div className="spinner-wrapper">
+                <Spinner />
+              </div>
+            )}
+            <img src={imgUrl} alt="" onLoad={() => setIsImageLoading(false)} />
             <div className="detail-info-page__main__image__icon">
               <AddToFavouritesIcon
                 onClick={handleAddToFavourites}

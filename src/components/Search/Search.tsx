@@ -6,12 +6,17 @@ import debounce from "lodash.debounce";
 import { useDispatch } from "react-redux";
 import { searchArtworks } from "../../store/thunks";
 import { searchClear } from "../../store/slices/artworksSlice";
+import { DEBOUNCE_DELAY } from "../../utils/constants";
 
 function Search() {
   const [value, setValue] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (value === "") {
+      dispatch(searchClear());
+      return;
+    }
     handleSearchDebounced(value);
   }, [value]);
 
@@ -21,7 +26,10 @@ function Search() {
     };
   }, []);
 
-  const handleSearchDebounced = useMemo(() => debounce(handleSearch, 500), []);
+  const handleSearchDebounced = useMemo(
+    () => debounce(handleSearch, DEBOUNCE_DELAY),
+    [],
+  );
   useEffect(() => {
     return () => handleSearchDebounced.cancel();
   }, [handleSearchDebounced]);
