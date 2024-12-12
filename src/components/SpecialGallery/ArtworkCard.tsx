@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // @ts-ignore
 import cardPicture from "../../assets/picture-big.png";
 // @ts-ignore
@@ -27,11 +27,23 @@ function ArtworkCard({
 }: ArtworkCardProps) {
   const navigate = useNavigate();
   const iiifUrl = useAppSelector(selectIIIFUrl);
+  const [isArtworkInFavourites, setIsArtworkInFavourites] = useState(
+    sessionStorage.getItem(artworkId.toString()) !== null,
+  );
   const imgUrl =
     iiifUrl + `/${imageId}` + DEFAULT_IMG_PATH_PAYLOAD__MEDIUM_SIZE;
 
   function handleOnClick() {
     navigate(`/artworks/${artworkId}`);
+  }
+
+  function handleAddToFavourites(event: React.MouseEvent<HTMLElement>) {
+    setIsArtworkInFavourites(!isArtworkInFavourites);
+    event.stopPropagation();
+
+    if (sessionStorage.getItem(artworkId.toString()) === null) {
+      sessionStorage.setItem(artworkId.toString(), title);
+    } else sessionStorage.removeItem(artworkId.toString());
   }
 
   return (
@@ -49,7 +61,10 @@ function ArtworkCard({
             {isPublic ? "Public" : "Copyright"}
           </p>
         </div>
-        <AddToFavouritesIcon />
+        <AddToFavouritesIcon
+          onClick={handleAddToFavourites}
+          isFavourite={isArtworkInFavourites}
+        />
       </div>
     </div>
   );

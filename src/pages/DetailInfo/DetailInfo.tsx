@@ -1,20 +1,15 @@
-import React, { useEffect } from "react";
-import { Artwork } from "../../types/types";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import "./DetailInfo.scss";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../../withTypes";
 import {
   selectSelectedArtwork,
   selectSelectedArtworkIIIFUrl,
 } from "../../store/selectors";
 import { fetchArtwork } from "../../store/thunks";
-import {
-  DEFAULT_IMG_PATH_PAYLOAD__BIG_SIZE,
-  DEFAULT_IMG_PATH_PAYLOAD__SMALL_SIZE,
-} from "../../utils/constants";
+import { DEFAULT_IMG_PATH_PAYLOAD__BIG_SIZE } from "../../utils/constants";
 import AddToFavouritesIcon from "../../components/Buttons/AddToFavourites/AddToFavouritesIcon";
 
 function DetailInfo() {
@@ -22,6 +17,9 @@ function DetailInfo() {
   const selectedArtwork = useAppSelector(selectSelectedArtwork);
   const { artworkId } = useParams();
   const iiifUrl = useAppSelector(selectSelectedArtworkIIIFUrl);
+  const [isArtworkInFavourites, setIsArtworkInFavourites] = useState(
+    sessionStorage.getItem(selectedArtwork?.id.toString() ?? "") !== null,
+  );
 
   useEffect(() => {
     dispatch(fetchArtwork(artworkId ?? ""));
@@ -32,7 +30,17 @@ function DetailInfo() {
     `/${selectedArtwork?.image_id}` +
     DEFAULT_IMG_PATH_PAYLOAD__BIG_SIZE;
 
-  console.log({ selectedArtwork });
+  function handleAddToFavourites(event: React.MouseEvent<HTMLElement>) {
+    setIsArtworkInFavourites(!isArtworkInFavourites);
+    event.stopPropagation();
+
+    if (sessionStorage.getItem(selectedArtwork?.id.toString() ?? "") === null) {
+      sessionStorage.setItem(
+        selectedArtwork?.id.toString() ?? "",
+        selectedArtwork?.title ?? "",
+      );
+    } else sessionStorage.removeItem(selectedArtwork?.id.toString() ?? "");
+  }
 
   return (
     <div className={"detail-info-page"}>
@@ -42,7 +50,14 @@ function DetailInfo() {
           <div className="detail-info-page__main__image">
             <img src={imgUrl} alt="" />
             <div className="detail-info-page__main__image__icon">
-              <AddToFavouritesIcon />
+              <AddToFavouritesIcon
+                onClick={handleAddToFavourites}
+                isFavourite={
+                  sessionStorage.getItem(
+                    selectedArtwork?.id.toString() ?? "",
+                  ) !== null
+                }
+              />
             </div>
           </div>
           <div className="detail-info-page__main__info">
@@ -62,7 +77,7 @@ function DetailInfo() {
                 Overview
               </p>
               <p className="detail-info-page__main__info__overview__item">
-                <span className="overview-category">Artist nacionality:</span>
+                <span className="overview-category">Artist nationality:</span>
                 {selectedArtwork?.place_of_origin}
               </p>
               <p className="detail-info-page__main__info__overview__item">
