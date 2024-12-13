@@ -1,0 +1,126 @@
+@use "@utils/variables" as v;
+
+.gallery {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+
+  &__pretitle {
+    margin: 0;
+    font-family: Lexend Deca;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: v.$text-color-orange;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: Lexend Deca;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 40px;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: v.$text-color-black;
+  }
+
+  &__main {
+    padding-top: 40px;
+    //display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+}
+
+.card {
+  &__picture {
+    width: 380px;
+    height: 440px;
+    background-color: #d9c7c7;
+  }
+
+  &__info {
+    display: inline-block;
+    background-color: white;
+    padding: 24px 32px;
+    border: 1px v.$border-grey;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    position: relative;
+    left: 7%;
+    bottom: 15%;
+
+    &:hover {
+      transform: scale(1.01);
+      cursor: pointer;
+    }
+
+    &__wrapper {
+      display: flex;
+      flex-direction: column;
+      max-width: 80%;
+    }
+
+    &__description {
+      &__title {
+        margin: 0;
+        font-family: Lexend Deca;
+        font-size: 17.54px;
+        font-weight: 500;
+        line-height: 26.32px;
+        letter-spacing: -0.03em;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: v.$text-color-black;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &__author {
+        margin: 0;
+        font-family: Lexend Deca;
+        font-size: 15.35px;
+        font-weight: 400;
+        line-height: 26.32px;
+        letter-spacing: -0.01em;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: v.$text-color-orange;
+      }
+    }
+
+    &__isPublic {
+      margin: 0;
+      font-family: Lexend Deca;
+      font-size: 15.35px;
+      font-weight: 700;
+      line-height: 26.32px;
+      letter-spacing: -0.01em;
+      text-align: left;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+      color: v.$text-color-black;
+    }
+
+    &__icon {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.image-placeholder {
+  width: 380px;
+  height: 440px;
+  background-color: #d9c7c7;
+}
