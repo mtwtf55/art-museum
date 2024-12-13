@@ -1,12 +1,10 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
-import logger from "redux-logger";
 import artworksSlice from "./slices/artworksSlice";
 
 export const store = configureStore({
   reducer: {
     artworks: artworksSlice,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

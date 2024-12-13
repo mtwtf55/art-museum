@@ -22,7 +22,8 @@ function Favourites() {
 
   useEffect(() => {
     if (Object.keys(sessionStorage).length === 0) return;
-    dispatch(fetchArtworksByIds(Object.keys(sessionStorage)));
+    const ids = Object.keys(sessionStorage).filter((k) => !isNaN(Number(k)));
+    dispatch(fetchArtworksByIds(ids));
   }, []);
 
   return (
