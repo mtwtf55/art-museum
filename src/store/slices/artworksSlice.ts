@@ -40,6 +40,7 @@ export interface FavouriteArtworksState {
 export interface SearchArtworksState {
   value: Artwork[];
   status: "idle" | "pending" | "succeeded" | "failed";
+  searchString: string;
   error: string | null;
   iiifUrl: string;
 }
@@ -77,6 +78,7 @@ const searchArtworksInitialState: SearchArtworksState = {
   status: "idle",
   error: null,
   iiifUrl: "",
+  searchString: "",
 };
 
 export interface SliceState {
@@ -115,6 +117,9 @@ export const artworksSlice = createSlice({
       state.selectedArtwork.status = "idle";
       state.selectedArtwork.error = null;
       state.selectedArtwork.iiifUrl = "";
+    },
+    updateSearchString(state, action: PayloadAction<{ value: string }>) {
+      state.searchArtworks.searchString = action.payload.value;
     },
   },
   extraReducers: (builder) => {
@@ -164,7 +169,9 @@ export const artworksSlice = createSlice({
       state.searchArtworks.status = "pending";
     });
     builder.addCase(searchArtworks.fulfilled, (state, action) => {
-      state.searchArtworks.value = action.payload;
+      if (state.searchArtworks.searchString === "")
+        state.searchArtworks.value = [];
+      else state.searchArtworks.value = action.payload;
       state.searchArtworks.status = "succeeded";
       state.searchArtworks.iiifUrl = action.payload["iiif_url"];
     });
@@ -176,7 +183,11 @@ export const artworksSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { favouriteRemoved, searchClear, selectedClear } =
-  artworksSlice.actions;
+export const {
+  favouriteRemoved,
+  searchClear,
+  selectedClear,
+  updateSearchString,
+} = artworksSlice.actions;
 
 export default artworksSlice.reducer;
