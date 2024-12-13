@@ -4,6 +4,11 @@ $header-background-color: linear-gradient(#343333, #484848, #282828);
   background: $header-background-color;
   padding: 32px;
 
+  &__container {
+    width: 70%;
+    margin: 0 auto;
+  }
+
   &__inner {
     display: flex;
     justify-content: space-between;
@@ -19,5 +24,18 @@ $header-background-color: linear-gradient(#343333, #484848, #282828);
         padding-left: 32px;
       }
     }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .header__container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .header__inner {
+    flex-direction: column;
+    gap: 40px;
   }
 }

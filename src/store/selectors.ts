@@ -28,3 +28,5 @@ export const selectRandomArtworksAreLoading = (state: RootState) =>
   state.artworks.randomArtworks.status === "pending";
 export const selectFavouritesAreLoading = (state: RootState) =>
   state.artworks.favouriteArtworks.status === "pending";
+export const selectSearchString = (state: RootState) =>
+  state.artworks.searchArtworks.searchString;

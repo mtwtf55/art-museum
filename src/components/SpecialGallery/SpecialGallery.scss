@@ -29,7 +29,6 @@
 
   &__main {
     padding-top: 40px;
-    //display: flex;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
@@ -51,10 +50,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 70%;
+    width: 266px;
     position: relative;
-    left: 7%;
-    bottom: 15%;
+    left: 6%;
+    bottom: 11%;
 
     &:hover {
       transform: scale(1.01);
@@ -95,6 +94,10 @@
         text-underline-position: from-font;
         text-decoration-skip-ink: none;
         color: v.$text-color-orange;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
@@ -123,4 +126,20 @@
   width: 380px;
   height: 440px;
   background-color: #d9c7c7;
+}
+
+@media screen and (max-width: 1300px) {
+  .gallery {
+    &__main {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .gallery {
+    &__main {
+      grid-template-columns: 1fr;
+    }
+  }
 }

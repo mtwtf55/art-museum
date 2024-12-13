@@ -1,6 +1,5 @@
 import React from "react";
 import "./Footer.scss";
-import Container from "@components/Container/Container";
 import LogoDark from "@components/Logo/LogoDark";
 import ModsenLogo from "@components/Logo/ModsenLogo";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +13,7 @@ function Footer() {
 
   return (
     <div className={"footer"}>
-      <Container>
+      <div className="footer__container">
         <div className="footer__inner">
           <div className="footer__inner__logo">
             <LogoDark onClick={handleClicked} />
@@ -23,7 +22,7 @@ function Footer() {
             <ModsenLogo />
           </div>
         </div>
-      </Container>
+      </div>
     </div>
   );
 }
