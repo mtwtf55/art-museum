@@ -18,6 +18,8 @@ import Footer from "@components/Footer/Footer";
 import Search from "@components/Search/Search";
 import SearchResults from "@components/Search/SearchResults";
 import Spinner from "@components/Spinner/Spinner";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorBoundaryFallback from "@components/ErrorBoundaryFallback/ErrorBoundaryFallback";
 
 function Home() {
   const dispatch = useAppDispatch();
@@ -47,25 +49,32 @@ function Home() {
           </p>
 
           <Search />
+
           {searchArtworksLength !== 0 ? (
-            <SearchResults />
+            <ErrorBoundary fallback={<ErrorBoundaryFallback />}>
+              <SearchResults />
+            </ErrorBoundary>
           ) : (
             <>
               <div className="main__special-gallery">
                 {areArtworksLoading ? (
                   <Spinner />
                 ) : (
-                  <SpecialGallery artworks={artworks} />
+                  <ErrorBoundary fallback={<ErrorBoundaryFallback />}>
+                    <SpecialGallery artworks={artworks} />
+                  </ErrorBoundary>
                 )}
               </div>
               <div className="main__other-works">
                 {areRandomArtworksLoading ? (
                   <Spinner />
                 ) : (
-                  <OtherWorks
-                    artworks={randomArtworks}
-                    iiifUrl={randomArtworksIIIFUrl}
-                  />
+                  <ErrorBoundary fallback={<ErrorBoundaryFallback />}>
+                    <OtherWorks
+                      artworks={randomArtworks}
+                      iiifUrl={randomArtworksIIIFUrl}
+                    />
+                  </ErrorBoundary>
                 )}
               </div>
             </>

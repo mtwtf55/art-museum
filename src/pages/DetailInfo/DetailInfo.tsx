@@ -89,19 +89,19 @@ function DetailInfo() {
                 Overview
               </p>
               <p className="detail-info-page__main__info__overview__item">
-                <span className="overview-category">Artist nationality:</span>
+                <span className="overview-category">Artist nationality: </span>
                 {selectedArtwork?.place_of_origin}
               </p>
               <p className="detail-info-page__main__info__overview__item">
-                <span className="overview-category">Dimensions:</span>
+                <span className="overview-category">Dimensions: </span>
                 {selectedArtwork?.dimensions}
               </p>
               <p className="detail-info-page__main__info__overview__item">
-                <span className="overview-category">Credit Line:</span>
+                <span className="overview-category">Credit Line: </span>
                 {selectedArtwork?.credit_line}
               </p>
               <p className="detail-info-page__main__info__overview__item">
-                <span className="overview-category">Repository:</span>
+                <span className="overview-category">Repository: </span>
                 {selectedArtwork?.gallery_title ?? "Unknown"}
               </p>
             </div>

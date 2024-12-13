@@ -1,0 +1,14 @@
+@use "@utils/variables" as v;
+
+.error-boundary-fallback {
+  &__text {
+    font-family: Lexend Deca;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 40px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: v.$text-color-black;
+  }
+}
