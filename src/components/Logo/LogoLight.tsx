@@ -1,6 +1,6 @@
 import React from "react";
 // @ts-ignore
-import logo from "../../assets/museum-logo-light.svg";
+import logo from "@assets/museum-logo-light.svg";
 
 function LogoLight({ onClick: handleClicked }: { onClick?: () => void }) {
   return (

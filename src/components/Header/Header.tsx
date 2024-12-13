@@ -1,8 +1,8 @@
 import React from "react";
 import "./Header.scss";
-import LogoLight from "../Logo/LogoLight";
-import Favourites from "../Links/Favourites";
-import Container from "../Container/Container";
+import LogoLight from "@components/Logo/LogoLight";
+import Favourites from "@components/Links/Favourites";
+import Container from "@components/Container/Container";
 import { useNavigate } from "react-router-dom";
 
 function Header() {

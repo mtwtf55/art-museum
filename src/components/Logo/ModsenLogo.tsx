@@ -1,6 +1,6 @@
 import React from "react";
 // @ts-ignore
-import logo from "../../assets/modsen-logo.svg";
+import logo from "@assets/modsen-logo.svg";
 
 function ModsenLogo() {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 // @ts-ignore
-import svgLogo from "../../assets/favourites.svg";
+import svgLogo from "@assets/favourites.svg";
 import "./Favourites.scss";
 
 function Favourites({ onClick: handleOnClick }: { onClick?: () => void }) {

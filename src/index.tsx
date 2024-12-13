@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { Provider } from "react-redux";
-import { store } from "./store/store";
-import Home from "./pages/Home/Home";
-import DetailInfo from "./pages/DetailInfo/DetailInfo";
+import { store } from "@store/store";
+import Home from "@pages/Home/Home";
+import DetailInfo from "@pages/DetailInfo/DetailInfo";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Favourites from "./pages/Favourites/Favourites";
+import Favourites from "@pages/Favourites/Favourites";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -25,9 +25,7 @@ const Routing = () => {
 };
 
 root.render(
-  // <React.StrictMode>
   <Provider store={store}>
     <Routing />
   </Provider>,
-  // </React.StrictMode>,
 );

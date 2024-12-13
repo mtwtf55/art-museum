@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./Search.scss";
 // @ts-ignore
-import searchIcon from "../../assets/search.svg";
+import searchIcon from "@assets/search.svg";
 import debounce from "lodash.debounce";
 import { useDispatch } from "react-redux";
-import { searchArtworks } from "../../store/thunks";
-import { searchClear } from "../../store/slices/artworksSlice";
-import { DEBOUNCE_DELAY } from "../../utils/constants";
+import { searchArtworks } from "@store/thunks";
+import { searchClear } from "@store/slices/artworksSlice";
+import { DEBOUNCE_DELAY } from "@constants/constants";
 
 function Search() {
   const [value, setValue] = useState("");

@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
+import Header from "@components/Header/Header";
+import Footer from "@components/Footer/Footer";
 import "./DetailInfo.scss";
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../withTypes";
+import { useAppDispatch, useAppSelector } from "@src/withTypes";
 import {
   selectSelectedArtwork,
   selectSelectedArtworkIIIFUrl,
-} from "../../store/selectors";
-import { fetchArtwork } from "../../store/thunks";
-import { DEFAULT_IMG_PATH_PAYLOAD__BIG_SIZE } from "../../utils/constants";
-import AddToFavouritesIcon from "../../components/Buttons/AddToFavourites/AddToFavouritesIcon";
-import Spinner from "../../components/Spinner/Spinner";
-import { selectedClear } from "../../store/slices/artworksSlice";
+} from "@store/selectors";
+import { fetchArtwork } from "@store/thunks";
+import { DEFAULT_IMG_PATH_PAYLOAD__BIG_SIZE } from "@constants/constants";
+import AddToFavouritesIcon from "@components/Buttons/AddToFavourites/AddToFavouritesIcon";
+import Spinner from "@components/Spinner/Spinner";
+import { selectedClear } from "@store/slices/artworksSlice";
 
 function DetailInfo() {
   const dispatch = useAppDispatch();

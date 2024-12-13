@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from "react";
-import Pagination from "../Pagination/Pagination";
+import Pagination from "@components/Pagination/Pagination";
 import ArtworkCard from "./ArtworkCard";
-import { ARTWORKS_AMOUNT_PER_ROW } from "../../utils/constants";
+import { ARTWORKS_AMOUNT_PER_ROW } from "@constants/constants";
 import "./SpecialGallery.scss";
-import { Artwork } from "../../types/types";
+import { Artwork } from "@src/types/types";
 
 type SpecialGalleryProps = {
   artworks: Artwork[];

@@ -1,8 +1,8 @@
 import React from "react";
 import "./Footer.scss";
-import Container from "../Container/Container";
-import LogoDark from "../Logo/LogoDark";
-import ModsenLogo from "../Logo/ModsenLogo";
+import Container from "@components/Container/Container";
+import LogoDark from "@components/Logo/LogoDark";
+import ModsenLogo from "@components/Logo/ModsenLogo";
 import { useNavigate } from "react-router-dom";
 
 function Footer() {

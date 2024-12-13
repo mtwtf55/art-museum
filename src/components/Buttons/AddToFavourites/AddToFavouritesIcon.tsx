@@ -1,13 +1,13 @@
 import React, { MouseEventHandler, useState } from "react";
 import "./AddToFavouritesIcon.scss";
 // @ts-ignore
-import icon from "../../../assets/add-to-favourites-icon.svg";
+import icon from "@assets/add-to-favourites-icon.svg";
 // @ts-ignore
-import iconHovered from "../../../assets/add-to-favourites-icon-hovered.svg";
+import iconHovered from "@assets/add-to-favourites-icon-hovered.svg";
 // @ts-ignore
-import iconFilled from "../../../assets/add-to-favourites-icon-filled.svg";
+import iconFilled from "@assets/add-to-favourites-icon-filled.svg";
 // @ts-ignore
-import iconFilledHovered from "../../../assets/add-to-favourites-icon-filled-hovered.svg";
+import iconFilledHovered from "@assets/add-to-favourites-icon-filled-hovered.svg";
 
 function AddToFavouritesIcon({
   isFavourite,

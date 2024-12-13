@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import "./Favourites.scss";
-import Header from "../../components/Header/Header";
-import { useAppDispatch, useAppSelector } from "../../withTypes";
+import Header from "@components/Header/Header";
+import { useAppDispatch, useAppSelector } from "@src/withTypes";
 import {
   selectFavouriteArtworks,
   selectFavouriteArtworksIIIFUrl,
   selectFavouritesAreLoading,
-} from "../../store/selectors";
-import { fetchArtworksByIds } from "../../store/thunks";
-import ArtworkCardSmall from "../../components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
-import Footer from "../../components/Footer/Footer";
-import Spinner from "../../components/Spinner/Spinner";
+} from "@store/selectors";
+import { fetchArtworksByIds } from "@store/thunks";
+import ArtworkCardSmall from "@components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
+import Footer from "@components/Footer/Footer";
+import Spinner from "@components/Spinner/Spinner";
 
 function Favourites() {
   const dispatch = useAppDispatch();

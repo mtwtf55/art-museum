@@ -2,7 +2,7 @@ import React from "react";
 import "./Pagination.scss";
 import PaginationItem from "./PaginationItem";
 // @ts-ignore
-import nextIcon from "../../assets/next-icon.svg";
+import nextIcon from "@assets/next-icon.svg";
 
 type PaginationProps = {
   page: number;

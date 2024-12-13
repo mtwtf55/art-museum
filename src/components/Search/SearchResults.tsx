@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import {
   selectSearchArtworks,
   selectSearchArtworksIIIFUrl,
-} from "../../store/selectors";
-import ArtworkCardSmall from "../OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
-import { useAppSelector } from "../../withTypes";
+} from "@store/selectors";
+import ArtworkCardSmall from "@components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
+import { useAppSelector } from "@src/withTypes";
 
 function SearchResults() {
   const artworks = useAppSelector(selectSearchArtworks);

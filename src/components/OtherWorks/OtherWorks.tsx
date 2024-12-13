@@ -1,5 +1,5 @@
 import React from "react";
-import { Artwork } from "../../types/types";
+import { Artwork } from "@src/types/types";
 import "./OtherWorks.scss";
 import ArtworkCardSmall from "./ArtworkCardSmall/ArtworkCardSmall";
 

@@ -7,7 +7,7 @@ import {
   fetchRandomArtworks,
   searchArtworks,
 } from "../thunks";
-import { Artwork } from "../../types/types";
+import { Artwork } from "@src/types/types";
 
 export interface ArtworksState {
   value: Artwork[];
