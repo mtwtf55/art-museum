@@ -21,9 +21,11 @@ function Favourites() {
   const areLoading = useAppSelector(selectFavouritesAreLoading);
 
   useEffect(() => {
-    if (Object.keys(sessionStorage).length === 0) return;
-    const ids = Object.keys(sessionStorage).filter((k) => !isNaN(Number(k)));
-    dispatch(fetchArtworksByIds(ids));
+    const validIds = Object.keys(sessionStorage).filter(
+      (k) => !isNaN(Number(k)),
+    );
+    if (validIds.length === 0) return;
+    dispatch(fetchArtworksByIds(validIds));
   }, []);
 
   return (
