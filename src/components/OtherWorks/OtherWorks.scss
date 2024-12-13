@@ -34,3 +34,18 @@
     margin-top: 50px;
   }
 }
+@media screen and (max-width: 1300px) {
+  .other-works {
+    &__main {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .other-works {
+    &__main {
+      grid-template-columns: 1fr;
+    }
+  }
+}

@@ -4,6 +4,11 @@ $footer-background-color: #fff;
   background-color: $footer-background-color;
   padding: 32px;
 
+  &__container {
+    width: 70%;
+    margin: 0 auto;
+  }
+
   &__inner {
     display: flex;
     justify-content: space-between;
@@ -13,5 +18,18 @@ $footer-background-color: #fff;
 
     &__logo {
     }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .footer__container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .footer__inner {
+    flex-direction: column;
+    gap: 40px;
   }
 }

@@ -5,26 +5,24 @@ import searchIcon from "@assets/search.svg";
 import debounce from "lodash.debounce";
 import { useDispatch } from "react-redux";
 import { searchArtworks } from "@store/thunks";
-import { searchClear } from "@store/slices/artworksSlice";
+import { searchClear, updateSearchString } from "@store/slices/artworksSlice";
 import { DEBOUNCE_DELAY } from "@constants/constants";
+import { useAppSelector } from "@src/withTypes";
+import { selectSearchString } from "@store/selectors";
 
 function Search() {
-  const [value, setValue] = useState("");
+  const searchString = useAppSelector(selectSearchString);
   const dispatch = useDispatch();
+  const [value, setValue] = useState(searchString);
 
   useEffect(() => {
+    dispatch(updateSearchString({ value }));
     if (value === "") {
       dispatch(searchClear());
       return;
     }
     handleSearchDebounced(value);
   }, [value]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(searchClear());
-    };
-  }, []);
 
   const handleSearchDebounced = useMemo(
     () => debounce(handleSearch, DEBOUNCE_DELAY),

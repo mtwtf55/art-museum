@@ -2,7 +2,6 @@ import React from "react";
 import "./Header.scss";
 import LogoLight from "@components/Logo/LogoLight";
 import Favourites from "@components/Links/Favourites";
-import Container from "@components/Container/Container";
 import { useNavigate } from "react-router-dom";
 
 function Header() {
@@ -18,7 +17,7 @@ function Header() {
 
   return (
     <div className="header">
-      <Container>
+      <div className="header__container">
         <div className="header__inner">
           <div className="header__inner__logo">
             <LogoLight onClick={handleLogoClicked} />
@@ -28,7 +27,7 @@ function Header() {
             <Favourites onClick={handleFavouritesClicked} />
           </div>
         </div>
-      </Container>
+      </div>
     </div>
   );
 }
