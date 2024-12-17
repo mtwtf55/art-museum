@@ -11,6 +11,7 @@ import { fetchArtworksByIds } from "@store/thunks";
 import ArtworkCardSmall from "@components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
 import Footer from "@components/Footer/Footer";
 import Spinner from "@components/Spinner/Spinner";
+import { Artwork } from "@src/types/types";
 
 function Favourites() {
   const dispatch = useAppDispatch();
@@ -27,6 +28,18 @@ function Favourites() {
     if (validIds.length === 0) return;
     dispatch(fetchArtworksByIds(validIds));
   }, []);
+
+  function createArtworkCard(a: Artwork) {
+    return (
+      <ArtworkCardSmall
+        artwork={a}
+        key={a.id}
+        iiifUrl={favouriteArtworksIIIFUrl}
+      />
+    );
+  }
+
+  const favouriteItems = favouriteArtworks.map(createArtworkCard);
 
   return (
     <div>
@@ -46,15 +59,7 @@ function Favourites() {
                 <Spinner />
               </div>
             ) : (
-              <div className="favourites__main__list">
-                {favouriteArtworks.map((a) => (
-                  <ArtworkCardSmall
-                    artwork={a}
-                    key={a.id}
-                    iiifUrl={favouriteArtworksIIIFUrl}
-                  />
-                ))}
-              </div>
+              <div className="favourites__main__list">{favouriteItems}</div>
             )}
           </div>
         </div>

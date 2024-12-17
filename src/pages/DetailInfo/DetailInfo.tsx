@@ -49,6 +49,13 @@ function DetailInfo() {
     } else sessionStorage.removeItem(selectedArtwork?.id.toString() ?? "");
   }
 
+  const isFavourite =
+    sessionStorage.getItem(selectedArtwork?.id.toString() ?? "") !== null;
+
+  function handleImageLoads() {
+    setIsImageLoading(false);
+  }
+
   return (
     <div className={"detail-info-page"}>
       <Header />
@@ -60,15 +67,11 @@ function DetailInfo() {
                 <Spinner />
               </div>
             )}
-            <img src={imgUrl} alt="" onLoad={() => setIsImageLoading(false)} />
+            <img src={imgUrl} alt="" onLoad={handleImageLoads} />
             <div className="detail-info-page__main__image__icon">
               <AddToFavouritesIcon
                 onClick={handleAddToFavourites}
-                isFavourite={
-                  sessionStorage.getItem(
-                    selectedArtwork?.id.toString() ?? "",
-                  ) !== null
-                }
+                isFavourite={isFavourite}
               />
             </div>
           </div>

@@ -1,12 +1,8 @@
-import React, { MouseEventHandler, useState } from "react";
+import React, { useState } from "react";
 import "./AddToFavouritesIcon.scss";
-// @ts-ignore
 import icon from "@assets/add-to-favourites-icon.svg";
-// @ts-ignore
 import iconHovered from "@assets/add-to-favourites-icon-hovered.svg";
-// @ts-ignore
 import iconFilled from "@assets/add-to-favourites-icon-filled.svg";
-// @ts-ignore
 import iconFilledHovered from "@assets/add-to-favourites-icon-filled-hovered.svg";
 
 function AddToFavouritesIcon({
@@ -18,19 +14,22 @@ function AddToFavouritesIcon({
 }) {
   const [isHovered, setIsHovered] = useState(false);
 
+  function handleEnter() {
+    setIsHovered(true);
+  }
+
+  function handleLeave() {
+    setIsHovered(false);
+  }
+
   const image = (
-    <img
-      src={icon}
-      alt=""
-      onMouseEnter={() => setIsHovered(true)}
-      onClick={handleOnClick}
-    />
+    <img src={icon} alt="" onMouseEnter={handleEnter} onClick={handleOnClick} />
   );
   const imageHovered = (
     <img
       src={iconHovered}
       alt=""
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={handleLeave}
       onClick={handleOnClick}
     />
   );
@@ -38,7 +37,7 @@ function AddToFavouritesIcon({
     <img
       src={iconFilled}
       alt=""
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={handleEnter}
       onClick={handleOnClick}
     />
   );
@@ -46,7 +45,7 @@ function AddToFavouritesIcon({
     <img
       src={iconFilledHovered}
       alt=""
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={handleLeave}
       onClick={handleOnClick}
     />
   );

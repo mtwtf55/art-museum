@@ -19,24 +19,26 @@ function SpecialGallery({ artworks }: SpecialGalleryProps) {
     return artworks.filter((_, k) => k >= floorIndex && k < ceilIndex);
   }, [currentPage, artworks]);
 
+  function createArtworkCard(aw: Artwork) {
+    return (
+      <ArtworkCard
+        imageId={aw.image_id}
+        title={aw.title}
+        author={aw.artist_title}
+        isPublic={aw.is_public_domain}
+        id={aw.id}
+        key={aw.id}
+      />
+    );
+  }
+
+  const galleryItems = artworksToShow.map(createArtworkCard);
+
   return (
     <div className="gallery">
       <p className="gallery__pretitle">Topics for you</p>
       <p className="gallery__title">Our special gallery</p>
-      <div className="gallery__main">
-        {artworksToShow.map((aw) => (
-          <ArtworkCard
-            imageId={aw.image_id}
-            title={aw.title}
-            author={aw.artist_title}
-            isPublic={aw.is_public_domain}
-            id={aw.id}
-            key={aw.id}
-          />
-        ))}
-      </div>
-
-      {/*  Pagination*/}
+      <div className="gallery__main">{galleryItems}</div>
       <Pagination pagesCount={4} page={currentPage} setPage={setCurrentPage} />
     </div>
   );

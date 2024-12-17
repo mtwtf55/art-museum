@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 import "./Search.scss";
 import debounce from "lodash.debounce";
 import { useDispatch } from "react-redux";
@@ -38,13 +38,17 @@ function Search() {
     if (value !== "") dispatch(searchArtworks(value));
   }
 
+  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
+    setValue(e.currentTarget.value);
+  }
+
   return (
     <div className="input-wrapper">
       <input
         type="text"
         className="input"
         value={value}
-        onChange={(e) => setValue(e.currentTarget.value)}
+        onChange={handleInputChange}
         placeholder={"Search art, artist, work..."}
       />
       <Icon imgName={SEARCH_ICON_NAME} isClickable={true} />
