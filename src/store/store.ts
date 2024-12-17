@@ -1,4 +1,5 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
+
 import artworksSlice from "./slices/artworksSlice";
 
 export const store = configureStore({

@@ -1,7 +1,13 @@
-import React, { useEffect } from "react";
-import Header from "@components/Header/Header";
 import "./Home.scss";
 
+import ErrorBoundaryFallback from "@components/ErrorBoundaryFallback/ErrorBoundaryFallback";
+import Footer from "@components/Footer/Footer";
+import Header from "@components/Header/Header";
+import OtherWorks from "@components/OtherWorks/OtherWorks";
+import Search from "@components/Search/Search";
+import SearchResults from "@components/Search/SearchResults";
+import SpecialGallery from "@components/SpecialGallery/SpecialGallery";
+import Spinner from "@components/Spinner/Spinner";
 import { useAppDispatch, useAppSelector } from "@src/withTypes";
 import {
   selectArtworks,
@@ -12,14 +18,8 @@ import {
   selectSearchArtworksLength,
 } from "@store/selectors";
 import { fetchArtworks, fetchRandomArtworks } from "@store/thunks";
-import SpecialGallery from "@components/SpecialGallery/SpecialGallery";
-import OtherWorks from "@components/OtherWorks/OtherWorks";
-import Footer from "@components/Footer/Footer";
-import Search from "@components/Search/Search";
-import SearchResults from "@components/Search/SearchResults";
-import Spinner from "@components/Spinner/Spinner";
+import React, { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import ErrorBoundaryFallback from "@components/ErrorBoundaryFallback/ErrorBoundaryFallback";
 
 function Home() {
   const dispatch = useAppDispatch();

@@ -1,5 +1,7 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
+import { Artwork } from "@src/types/types";
+
 import {
   fetchArtwork,
   fetchArtworks,
@@ -7,7 +9,6 @@ import {
   fetchRandomArtworks,
   searchArtworks,
 } from "../thunks";
-import { Artwork } from "@src/types/types";
 
 export interface ArtworksState {
   value: Artwork[];

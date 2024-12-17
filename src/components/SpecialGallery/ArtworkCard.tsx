@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import "./SpecialGallery.scss";
+
+import AddToFavouritesIcon from "@components/Buttons/AddToFavourites/AddToFavouritesIcon";
+import { DEFAULT_IMG_PATH_PAYLOAD__MEDIUM_SIZE } from "@constants/constants";
 import { useAppSelector } from "@src/withTypes";
 import { selectIIIFUrl } from "@store/selectors";
-import { DEFAULT_IMG_PATH_PAYLOAD__MEDIUM_SIZE } from "@constants/constants";
-import "./SpecialGallery.scss";
-import AddToFavouritesIcon from "@components/Buttons/AddToFavourites/AddToFavouritesIcon";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 type ArtworkCardProps = {

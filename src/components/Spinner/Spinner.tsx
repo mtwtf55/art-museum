@@ -1,5 +1,6 @@
-import React from "react";
 import "./Spinner.scss";
+
+import React from "react";
 
 function Spinner() {
   return <div className="spinner"></div>;

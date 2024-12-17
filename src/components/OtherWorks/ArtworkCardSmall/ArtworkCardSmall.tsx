@@ -1,10 +1,11 @@
-import React, { useState } from "react";
 import "./ArtworkCardSmall.scss";
-import { Artwork } from "@src/types/types";
-import { DEFAULT_IMG_PATH_PAYLOAD__SMALL_SIZE } from "@constants/constants";
-import { useNavigate } from "react-router-dom";
+
 import AddToFavouritesIcon from "@components/Buttons/AddToFavourites/AddToFavouritesIcon";
 import Spinner from "@components/Spinner/Spinner";
+import { DEFAULT_IMG_PATH_PAYLOAD__SMALL_SIZE } from "@constants/constants";
+import { Artwork } from "@src/types/types";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type ArtworkCardSmall = {
   artwork: Artwork;

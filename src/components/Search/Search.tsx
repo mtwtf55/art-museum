@@ -1,13 +1,14 @@
-import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 import "./Search.scss";
-import debounce from "lodash.debounce";
-import { useDispatch } from "react-redux";
-import { searchArtworks } from "@store/thunks";
-import { searchClear, updateSearchString } from "@store/slices/artworksSlice";
+
+import Icon from "@components/Icon/Icon";
 import { DEBOUNCE_DELAY } from "@constants/constants";
 import { useAppSelector } from "@src/withTypes";
 import { selectSearchString } from "@store/selectors";
-import Icon from "@components/Icon/Icon";
+import { searchClear, updateSearchString } from "@store/slices/artworksSlice";
+import { searchArtworks } from "@store/thunks";
+import debounce from "lodash.debounce";
+import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const SEARCH_ICON_NAME = "search.svg";
 

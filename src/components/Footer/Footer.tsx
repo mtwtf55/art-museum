@@ -1,6 +1,7 @@
-import React from "react";
 import "./Footer.scss";
+
 import Icon from "@components/Icon/Icon";
+import React from "react";
 
 const MUSEUM_LOGO_NAME = "museum-logo-dark.svg";
 const MODSEN_LOGO_NAME = "modsen-logo.svg";

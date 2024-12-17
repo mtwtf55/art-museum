@@ -1,7 +1,9 @@
-import React from "react";
 import "./Pagination.scss";
-import PaginationItem from "./PaginationItem";
+
 import Icon from "@components/Icon/Icon";
+import React from "react";
+
+import PaginationItem from "./PaginationItem";
 
 const NEXT_ICON_NAME = "next-icon.svg";
 

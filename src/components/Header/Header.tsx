@@ -1,8 +1,9 @@
-import React from "react";
 import "./Header.scss";
+
 import Icon from "@components/Icon/Icon";
-import { useNavigate } from "react-router-dom";
 import pathNames from "@constants/path-names";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const MUSEUM_LOGO_NAME = "museum-logo-light.svg";
 const HOME_LOGO_NAME = "home.svg";

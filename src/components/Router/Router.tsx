@@ -1,6 +1,6 @@
-import { Route, Routes } from "react-router-dom";
-import React from "react";
 import pageRoutes from "@components/Router/page-routes";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 
 function Router() {
   const routes = pageRoutes.map((route) => (

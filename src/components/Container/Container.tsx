@@ -1,5 +1,6 @@
-import React, { PropsWithChildren } from "react";
 import "./Container.scss";
+
+import React, { PropsWithChildren } from "react";
 
 function Container({ children }: PropsWithChildren) {
   return <div className={"container"}>{children}</div>;

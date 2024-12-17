@@ -1,5 +1,6 @@
-import React from "react";
 import "./ErrorBoundaryFallback.scss";
+
+import React from "react";
 
 function ErrorBoundaryFallback() {
   return (

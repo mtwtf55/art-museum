@@ -1,11 +1,11 @@
-import React from "react";
+import ArtworkCardSmall from "@components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
+import { Artwork } from "@src/types/types";
+import { useAppSelector } from "@src/withTypes";
 import {
   selectSearchArtworks,
   selectSearchArtworksIIIFUrl,
 } from "@store/selectors";
-import ArtworkCardSmall from "@components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
-import { useAppSelector } from "@src/withTypes";
-import { Artwork } from "@src/types/types";
+import React from "react";
 
 function SearchResults() {
   const artworks = useAppSelector(selectSearchArtworks);

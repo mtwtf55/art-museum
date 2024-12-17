@@ -1,6 +1,10 @@
-import React, { useEffect } from "react";
 import "./Favourites.scss";
+
+import Footer from "@components/Footer/Footer";
 import Header from "@components/Header/Header";
+import ArtworkCardSmall from "@components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
+import Spinner from "@components/Spinner/Spinner";
+import { Artwork } from "@src/types/types";
 import { useAppDispatch, useAppSelector } from "@src/withTypes";
 import {
   selectFavouriteArtworks,
@@ -8,10 +12,7 @@ import {
   selectFavouritesAreLoading,
 } from "@store/selectors";
 import { fetchArtworksByIds } from "@store/thunks";
-import ArtworkCardSmall from "@components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
-import Footer from "@components/Footer/Footer";
-import Spinner from "@components/Spinner/Spinner";
-import { Artwork } from "@src/types/types";
+import React, { useEffect } from "react";
 
 function Favourites() {
   const dispatch = useAppDispatch();

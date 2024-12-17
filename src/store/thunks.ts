@@ -1,6 +1,6 @@
+import { Artwork, Search } from "@src/types/types";
 import { createAppAsyncThunk } from "@src/withTypes";
 import axios from "axios";
-import { Artwork, Search } from "@src/types/types";
 
 axios.defaults.baseURL = "https://api.artic.edu/api/v1";
 const SEARCH_LIMIT = 24;

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
 import "./AddToFavouritesIcon.scss";
+
 import icon from "@assets/add-to-favourites-icon.svg";
-import iconHovered from "@assets/add-to-favourites-icon-hovered.svg";
 import iconFilled from "@assets/add-to-favourites-icon-filled.svg";
 import iconFilledHovered from "@assets/add-to-favourites-icon-filled-hovered.svg";
+import iconHovered from "@assets/add-to-favourites-icon-hovered.svg";
+import React, { useState } from "react";
 
 function AddToFavouritesIcon({
   isFavourite,
