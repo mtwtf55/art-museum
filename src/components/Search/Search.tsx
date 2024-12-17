@@ -9,6 +9,7 @@ import { searchArtworks } from "@store/thunks";
 import debounce from "lodash.debounce";
 import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useDebounce } from "@utils/hooks";
 
 const SEARCH_ICON_NAME = "search.svg";
 
@@ -16,6 +17,7 @@ function Search() {
   const searchString = useAppSelector(selectSearchString);
   const dispatch = useDispatch();
   const [value, setValue] = useState(searchString);
+  const handleSearchDebounced = useDebounce(handleSearch, DEBOUNCE_DELAY);
 
   useEffect(() => {
     dispatch(updateSearchString({ value }));
@@ -25,14 +27,6 @@ function Search() {
     }
     handleSearchDebounced(value);
   }, [value]);
-
-  const handleSearchDebounced = useMemo(
-    () => debounce(handleSearch, DEBOUNCE_DELAY),
-    [],
-  );
-  useEffect(() => {
-    return () => handleSearchDebounced.cancel();
-  }, [handleSearchDebounced]);
 
   function handleSearch(value: string) {
     // @ts-ignore

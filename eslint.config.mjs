@@ -19,6 +19,7 @@ export default [
       "@typescript-eslint/no-require-imports": "off",
       "react/react-in-jsx-scope": "off",
       "simple-import-sort/imports": "error",
+      "@typescript-eslint/no-unsafe-function-type": "off",
     },
   },
 ];
