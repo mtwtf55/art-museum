@@ -36,6 +36,13 @@
 }
 
 .card {
+  transition: transform 200ms;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+  }
+
   &__picture {
     width: 380px;
     height: 440px;
@@ -54,11 +61,6 @@
     position: relative;
     left: 6%;
     bottom: 11%;
-
-    &:hover {
-      transform: scale(1.01);
-      cursor: pointer;
-    }
 
     &__wrapper {
       display: flex;

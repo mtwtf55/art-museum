@@ -8,8 +8,11 @@
   grid-gap: 16px;
   background-color: white;
 
+  transition: border 200ms;
+
   &:hover {
     border: 1px solid bisque;
+    cursor: pointer;
   }
 
   &__add-to-favourites {

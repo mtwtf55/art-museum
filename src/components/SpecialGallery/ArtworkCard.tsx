@@ -43,11 +43,11 @@ function ArtworkCard({
   }
 
   return (
-    <div className="card">
+    <div className="card" onClick={handleOnClick}>
       <div className="card__picture">
         <img src={imgUrl} alt="" />
       </div>
-      <div className="card__info" onClick={handleOnClick}>
+      <div className="card__info">
         <div className="card__info__wrapper">
           <div className="card__info__description">
             <p className="card__info__description__title">{title}</p>
