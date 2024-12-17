@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./Search.scss";
-// @ts-ignore
-import searchIcon from "@assets/search.svg";
 import debounce from "lodash.debounce";
 import { useDispatch } from "react-redux";
 import { searchArtworks } from "@store/thunks";
@@ -9,6 +7,9 @@ import { searchClear, updateSearchString } from "@store/slices/artworksSlice";
 import { DEBOUNCE_DELAY } from "@constants/constants";
 import { useAppSelector } from "@src/withTypes";
 import { selectSearchString } from "@store/selectors";
+import Icon from "@components/Icon/Icon";
+
+const SEARCH_ICON_NAME = "search.svg";
 
 function Search() {
   const searchString = useAppSelector(selectSearchString);
@@ -46,7 +47,7 @@ function Search() {
         onChange={(e) => setValue(e.currentTarget.value)}
         placeholder={"Search art, artist, work..."}
       />
-      <img src={searchIcon} alt="Search icon" className={"input-icon"} />
+      <Icon imgName={SEARCH_ICON_NAME} isClickable={true} />
     </div>
   );
 }

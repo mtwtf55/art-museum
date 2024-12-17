@@ -1,25 +1,20 @@
 import React from "react";
 import "./Footer.scss";
-import LogoDark from "@components/Logo/LogoDark";
-import ModsenLogo from "@components/Logo/ModsenLogo";
-import { useNavigate } from "react-router-dom";
+import Icon from "@components/Icon/Icon";
+
+const MUSEUM_LOGO_NAME = "museum-logo-dark.svg";
+const MODSEN_LOGO_NAME = "modsen-logo.svg";
 
 function Footer() {
-  const navigate = useNavigate();
-
-  function handleClicked() {
-    navigate("/");
-  }
-
   return (
     <div className={"footer"}>
       <div className="footer__container">
         <div className="footer__inner">
           <div className="footer__inner__logo">
-            <LogoDark onClick={handleClicked} />
+            <Icon imgName={MUSEUM_LOGO_NAME} isClickable={false} />
           </div>
           <div className="footer__inner__logo">
-            <ModsenLogo />
+            <Icon imgName={MODSEN_LOGO_NAME} isClickable={false} />
           </div>
         </div>
       </div>
