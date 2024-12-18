@@ -4,14 +4,13 @@ import { ArtworkCardSmall, Footer, Header, Spinner } from "@Components";
 import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants/constants";
 import { Artwork, ArtworksResponseType } from "@Types/types";
 import { createRequestUrl } from "@Utils/functions/createRequestUrl";
+import { sessionStorageHelper } from "@Utils/functions/sessionStorageHelper";
 import { useQuery } from "@Utils/hooks/useQuery";
 import React, { useEffect, useMemo } from "react";
 
 function Favourites() {
-  const validIds = useMemo(
-    () => Object.keys(sessionStorage).filter((k) => !isNaN(Number(k))),
-    [],
-  );
+  const storageHelper = useMemo(sessionStorageHelper, []);
+  const validIds = useMemo(storageHelper.getValidArtworksIds, [storageHelper]);
 
   const {
     query: getFavourites,

@@ -3,6 +3,7 @@ import "./ArtworkCardSmall.scss";
 import { AddToFavouritesIcon, Spinner } from "@Components";
 import { DEFAULT_IMG_PATH_PAYLOAD__SMALL_SIZE } from "@Constants/constants";
 import { Artwork } from "@Types/types";
+import { sessionStorageHelper } from "@Utils/functions/sessionStorageHelper";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,8 +17,9 @@ function ArtworkCardSmall({
   iiifUrl,
 }: ArtworkCardSmall) {
   const navigate = useNavigate();
+  const storageHelper = sessionStorageHelper();
   const [isArtworkInFavourites, setIsArtworkInFavourites] = useState(
-    sessionStorage.getItem(artworkId.toString()) !== null,
+    storageHelper.has(artworkId),
   );
   const [isImageLoading, setIsImageLoading] = useState(true);
 
@@ -32,9 +34,8 @@ function ArtworkCardSmall({
     setIsArtworkInFavourites(!isArtworkInFavourites);
     event.stopPropagation();
 
-    if (sessionStorage.getItem(artworkId.toString()) === null) {
-      sessionStorage.setItem(artworkId.toString(), title);
-    } else sessionStorage.removeItem(artworkId.toString());
+    if (!storageHelper.has(artworkId)) storageHelper.add(artworkId, title);
+    else storageHelper.remove(artworkId);
   }
 
   return (
@@ -55,7 +56,6 @@ function ArtworkCardSmall({
         </p>
       </div>
       <div className="artwork-card-small__add-to-favourites">
-        {/*{hovered ? iconHovered : icon}*/}
         <AddToFavouritesIcon
           onClick={handleAddToFavourites}
           isFavourite={isArtworkInFavourites}
