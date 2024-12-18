@@ -1,22 +1,20 @@
 import "./Home.scss";
 
 import {
-  ErrorBoundaryFallback,
   Footer,
   Header,
   OtherWorks,
   SpecialGallery,
   Spinner,
 } from "@Components";
+import ErrorBoundary from "@Components/ErrorBoundaryFallback/ErrorBoundary";
+import Search from "@Components/Search/Search";
+import SearchResults from "@Components/Search/SearchResults";
 import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants/constants";
 import { ArtworksResponseType } from "@Types/types";
 import { createRequestUrl } from "@Utils/functions/createRequestUrl";
 import { useQuery } from "@Utils/hooks/useQuery";
 import React, { useEffect, useMemo, useState } from "react";
-import { ErrorBoundary } from "react-error-boundary";
-
-import Search from "../../components/Search/Search";
-import SearchResults from "../../components/Search/SearchResults";
 
 const RANDOM_SEED = 500;
 const SEARCH_RESULT_LIMIT = 15;
@@ -90,7 +88,7 @@ function Home() {
           <Search onSearch={handleSearch} initialValue={searchString} />
 
           {searchString.length !== 0 ? (
-            <ErrorBoundary fallback={<ErrorBoundaryFallback />}>
+            <ErrorBoundary>
               <SearchResults
                 artworks={searchResults?.data || []}
                 iiifUrl={searchResults?.config.iiif_url || DEFAULT_IIIF_URL}
@@ -102,7 +100,7 @@ function Home() {
                 {artworksLoading ? (
                   <Spinner />
                 ) : (
-                  <ErrorBoundary fallback={<ErrorBoundaryFallback />}>
+                  <ErrorBoundary>
                     <SpecialGallery
                       artworks={artworks?.data ?? []}
                       iiifUrl={artworks?.config.iiif_url ?? DEFAULT_IIIF_URL}
@@ -114,7 +112,7 @@ function Home() {
                 {otherArtworksLoading ? (
                   <Spinner />
                 ) : (
-                  <ErrorBoundary fallback={<ErrorBoundaryFallback />}>
+                  <ErrorBoundary>
                     <OtherWorks
                       artworks={otherArtworks?.data ?? []}
                       iiifUrl={

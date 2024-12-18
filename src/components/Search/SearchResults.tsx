@@ -8,9 +8,6 @@ type SearchResultsType = {
 };
 
 function SearchResults({ artworks, iiifUrl }: SearchResultsType) {
-  // const artworks = useAppSelector(selectSearchArtworks);
-  // const iiifUrl = useAppSelector(selectSearchArtworksIIIFUrl);
-
   function createArtworkCard(a: Artwork) {
     return <ArtworkCardSmall artwork={a} key={a.id} iiifUrl={iiifUrl} />;
   }
