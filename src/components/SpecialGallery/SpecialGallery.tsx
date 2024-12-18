@@ -1,27 +1,24 @@
 import "./SpecialGallery.scss";
 
-import React, { useMemo, useState } from "react";
+import { Pagination } from "@Components";
+import { Artwork } from "@Types/types";
+import React from "react";
 
-import { ARTWORKS_AMOUNT_PER_ROW } from "../../constants/constants";
-import { Artwork } from "../../types/types";
-import { Pagination } from "../index";
 import ArtworkCard from "./ArtworkCard";
 
 type SpecialGalleryProps = {
   artworks: Artwork[];
   iiifUrl: string;
+  onNextPage: (page: number) => void;
+  currentPage: number;
 };
 
-function SpecialGallery({ artworks, iiifUrl }: SpecialGalleryProps) {
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const artworksToShow = useMemo(() => {
-    const ceilIndex = currentPage * ARTWORKS_AMOUNT_PER_ROW;
-    const floorIndex =
-      currentPage * ARTWORKS_AMOUNT_PER_ROW - ARTWORKS_AMOUNT_PER_ROW;
-    return artworks.filter((_, k) => k >= floorIndex && k < ceilIndex);
-  }, [currentPage, artworks]);
-
+function SpecialGallery({
+  artworks,
+  iiifUrl,
+  onNextPage: handleNextPage,
+  currentPage,
+}: SpecialGalleryProps) {
   function createArtworkCard(aw: Artwork) {
     return (
       <ArtworkCard
@@ -36,14 +33,14 @@ function SpecialGallery({ artworks, iiifUrl }: SpecialGalleryProps) {
     );
   }
 
-  const galleryItems = artworksToShow.map(createArtworkCard);
+  const galleryItems = artworks.map(createArtworkCard);
 
   return (
     <div className="gallery">
       <p className="gallery__pretitle">Topics for you</p>
       <p className="gallery__title">Our special gallery</p>
       <div className="gallery__main">{galleryItems}</div>
-      <Pagination pagesCount={4} page={currentPage} setPage={setCurrentPage} />
+      <Pagination pagesCount={4} page={currentPage} setPage={handleNextPage} />
     </div>
   );
 }
