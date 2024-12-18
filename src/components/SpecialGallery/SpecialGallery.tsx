@@ -1,10 +1,10 @@
 import "./SpecialGallery.scss";
 
-import Pagination from "@components/Pagination/Pagination";
-import { ARTWORKS_AMOUNT_PER_ROW } from "@constants/constants";
-import { Artwork } from "@src/types/types";
 import React, { useMemo, useState } from "react";
 
+import { ARTWORKS_AMOUNT_PER_ROW } from "../../constants/constants";
+import { Artwork } from "../../types/types";
+import { Pagination } from "../index";
 import ArtworkCard from "./ArtworkCard";
 
 type SpecialGalleryProps = {

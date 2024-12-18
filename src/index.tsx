@@ -1,6 +1,5 @@
 import "./index.css";
 
-import { ArtworksProvider } from "@src/context/ArtworksProvider";
 import React from "react";
 import ReactDOM from "react-dom/client";
 
@@ -10,8 +9,4 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
 
-root.render(
-  <ArtworksProvider>
-    <App />
-  </ArtworksProvider>,
-);
+root.render(<App />);

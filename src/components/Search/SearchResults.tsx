@@ -1,5 +1,5 @@
-import ArtworkCardSmall from "@components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
-import { Artwork } from "@src/types/types";
+import { ArtworkCardSmall } from "@Components";
+import { Artwork } from "@Types/types";
 import React from "react";
 
 type SearchResultsType = {

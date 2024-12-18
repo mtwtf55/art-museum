@@ -6,7 +6,7 @@ import tseslint from "typescript-eslint";
 
 /** @type {import("eslint").Linter.Config[]} */
 export default [
-  { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
+  { files: [".src/**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
@@ -20,6 +20,7 @@ export default [
       "react/react-in-jsx-scope": "off",
       "simple-import-sort/imports": "error",
       "@typescript-eslint/no-unsafe-function-type": "off",
+      "@typescript-eslint/triple-slash-reference": "off",
     },
   },
 ];

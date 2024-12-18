@@ -1,7 +1,7 @@
 import "./Header.scss";
 
-import Icon from "@components/Icon/Icon";
-import pathNames from "@constants/path-names";
+import { Icon } from "@Components";
+import pathNames from "@Constants/path-names";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 

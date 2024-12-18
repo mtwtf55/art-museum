@@ -1,8 +1,8 @@
 import "./Search.scss";
 
-import Icon from "@components/Icon/Icon";
-import { DEBOUNCE_DELAY } from "@constants/constants";
-import { useDebounce } from "@utils/hooks/useDebounce";
+import { Icon } from "@Components";
+import { DEBOUNCE_DELAY } from "@Constants/constants";
+import { useDebounce } from "@Utils/hooks/useDebounce";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { string, ValidationError } from "yup";
 

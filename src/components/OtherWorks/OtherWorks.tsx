@@ -1,8 +1,8 @@
 import "./OtherWorks.scss";
 
-import { Artwork } from "@src/types/types";
 import React from "react";
 
+import { Artwork } from "../../types/types";
 import ArtworkCardSmall from "./ArtworkCardSmall/ArtworkCardSmall";
 
 type OtherWorksProps = {

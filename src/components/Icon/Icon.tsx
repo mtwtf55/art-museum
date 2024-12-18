@@ -17,7 +17,7 @@ function Icon({
 
   return (
     <img
-      src={require(`@assets/${imgName}`)}
+      src={require(`../../assets/${imgName}`)}
       alt=""
       onMouseEnter={handleMouseEnter}
       onClick={handleClick}

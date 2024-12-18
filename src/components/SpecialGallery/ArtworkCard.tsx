@@ -1,9 +1,10 @@
 import "./SpecialGallery.scss";
 
-import AddToFavouritesIcon from "@components/Buttons/AddToFavourites/AddToFavouritesIcon";
-import { DEFAULT_IMG_PATH_PAYLOAD__MEDIUM_SIZE } from "@constants/constants";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { DEFAULT_IMG_PATH_PAYLOAD__MEDIUM_SIZE } from "../../constants/constants";
+import { AddToFavouritesIcon } from "../index";
 
 type ArtworkCardProps = {
   id: number;

@@ -1,13 +1,10 @@
 import "./Favourites.scss";
 
-import Footer from "@components/Footer/Footer";
-import Header from "@components/Header/Header";
-import ArtworkCardSmall from "@components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
-import Spinner from "@components/Spinner/Spinner";
-import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@constants/constants";
-import { useQuery } from "@utils/hooks/useQuery";
-import { Artwork, ArtworksResponseType } from "@src/types/types";
-import { createRequestUrl } from "@utils/functions/createRequestUrl";
+import { ArtworkCardSmall, Footer, Header, Spinner } from "@Components";
+import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants/constants";
+import { Artwork, ArtworksResponseType } from "@Types/types";
+import { createRequestUrl } from "@Utils/functions/createRequestUrl";
+import { useQuery } from "@Utils/hooks/useQuery";
 import React, { useEffect, useMemo } from "react";
 
 function Favourites() {

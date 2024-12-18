@@ -1,19 +1,22 @@
 import "./Home.scss";
 
-import ErrorBoundaryFallback from "@components/ErrorBoundaryFallback/ErrorBoundaryFallback";
-import Footer from "@components/Footer/Footer";
-import Header from "@components/Header/Header";
-import OtherWorks from "@components/OtherWorks/OtherWorks";
-import Search from "@components/Search/Search";
-import SearchResults from "@components/Search/SearchResults";
-import SpecialGallery from "@components/SpecialGallery/SpecialGallery";
-import Spinner from "@components/Spinner/Spinner";
-import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@constants/constants";
-import { ArtworksResponseType } from "@src/types/types";
-import { createRequestUrl } from "@utils/functions/createRequestUrl";
-import { useQuery } from "@utils/hooks/useQuery";
+import {
+  ErrorBoundaryFallback,
+  Footer,
+  Header,
+  OtherWorks,
+  SpecialGallery,
+  Spinner,
+} from "@Components";
+import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants/constants";
+import { ArtworksResponseType } from "@Types/types";
+import { createRequestUrl } from "@Utils/functions/createRequestUrl";
+import { useQuery } from "@Utils/hooks/useQuery";
 import React, { useEffect, useMemo, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+
+import Search from "../../components/Search/Search";
+import SearchResults from "../../components/Search/SearchResults";
 
 const RANDOM_SEED = 500;
 const SEARCH_RESULT_LIMIT = 15;

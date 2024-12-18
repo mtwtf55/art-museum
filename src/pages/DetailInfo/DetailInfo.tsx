@@ -1,26 +1,19 @@
 import "./DetailInfo.scss";
 
-import AddToFavouritesIcon from "@components/Buttons/AddToFavourites/AddToFavouritesIcon";
-import Footer from "@components/Footer/Footer";
-import Header from "@components/Header/Header";
-import Spinner from "@components/Spinner/Spinner";
+import { AddToFavouritesIcon, Footer, Header, Spinner } from "@Components";
 import {
   DEFAULT_IMG_PATH_PAYLOAD__BIG_SIZE,
   REQUESTED_FIELDS,
-} from "@constants/constants";
-import { useQuery } from "@utils/hooks/useQuery";
-import { ArtworkResponseType } from "@src/types/types";
-import { createRequestUrl } from "@utils/functions/createRequestUrl";
+} from "@Constants/constants";
+import { ArtworkResponseType } from "@Types/types";
+import { createRequestUrl } from "@Utils/functions/createRequestUrl";
+import { useQuery } from "@Utils/hooks/useQuery";
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function DetailInfo() {
   const { artworkId } = useParams();
-  const {
-    query: getArtwork,
-    data: artwork,
-    loading,
-  } = useQuery<ArtworkResponseType>({
+  const { query: getArtwork, data: artwork } = useQuery<ArtworkResponseType>({
     url: createRequestUrl()
       .artwork(Number(artworkId))
       .fields(REQUESTED_FIELDS)
