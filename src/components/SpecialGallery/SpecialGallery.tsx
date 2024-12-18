@@ -9,9 +9,10 @@ import ArtworkCard from "./ArtworkCard";
 
 type SpecialGalleryProps = {
   artworks: Artwork[];
+  iiifUrl: string;
 };
 
-function SpecialGallery({ artworks }: SpecialGalleryProps) {
+function SpecialGallery({ artworks, iiifUrl }: SpecialGalleryProps) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const artworksToShow = useMemo(() => {
@@ -30,6 +31,7 @@ function SpecialGallery({ artworks }: SpecialGalleryProps) {
         isPublic={aw.is_public_domain}
         id={aw.id}
         key={aw.id}
+        iiifUrl={iiifUrl}
       />
     );
   }

@@ -4,43 +4,44 @@ import Footer from "@components/Footer/Footer";
 import Header from "@components/Header/Header";
 import ArtworkCardSmall from "@components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
 import Spinner from "@components/Spinner/Spinner";
-import { Artwork } from "@src/types/types";
-import { useAppDispatch, useAppSelector } from "@src/withTypes";
-import {
-  selectFavouriteArtworks,
-  selectFavouriteArtworksIIIFUrl,
-  selectFavouritesAreLoading,
-} from "@store/selectors";
-import { fetchArtworksByIds } from "@store/thunks";
-import React, { useEffect } from "react";
+import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@constants/constants";
+import { useQuery } from "@utils/hooks/useQuery";
+import { Artwork, ArtworksResponseType } from "@src/types/types";
+import { createRequestUrl } from "@utils/functions/createRequestUrl";
+import React, { useEffect, useMemo } from "react";
 
 function Favourites() {
-  const dispatch = useAppDispatch();
-  const favouriteArtworks = useAppSelector(selectFavouriteArtworks);
-  const favouriteArtworksIIIFUrl = useAppSelector(
-    selectFavouriteArtworksIIIFUrl,
+  const validIds = useMemo(
+    () => Object.keys(sessionStorage).filter((k) => !isNaN(Number(k))),
+    [],
   );
-  const areLoading = useAppSelector(selectFavouritesAreLoading);
+
+  const {
+    query: getFavourites,
+    data: favourites,
+    loading: favouritesLoading,
+  } = useQuery<ArtworksResponseType>({
+    url: createRequestUrl()
+      .ids(validIds.map(Number))
+      .fields(REQUESTED_FIELDS)
+      .build(),
+  });
 
   useEffect(() => {
-    const validIds = Object.keys(sessionStorage).filter(
-      (k) => !isNaN(Number(k)),
-    );
-    if (validIds.length === 0) return;
-    dispatch(fetchArtworksByIds(validIds));
-  }, []);
+    if (validIds.length !== 0) getFavourites();
+  }, [validIds]);
 
   function createArtworkCard(a: Artwork) {
     return (
       <ArtworkCardSmall
         artwork={a}
         key={a.id}
-        iiifUrl={favouriteArtworksIIIFUrl}
+        iiifUrl={favourites?.config.iiif_url || DEFAULT_IIIF_URL}
       />
     );
   }
 
-  const favouriteItems = favouriteArtworks.map(createArtworkCard);
+  const favouriteItems = favourites?.data.map(createArtworkCard);
 
   return (
     <div>
@@ -55,7 +56,7 @@ function Favourites() {
                 Your favorites list
               </p>
             </div>
-            {areLoading ? (
+            {favouritesLoading ? (
               <div className="favourites__main__spinner-wrapper">
                 <Spinner />
               </div>

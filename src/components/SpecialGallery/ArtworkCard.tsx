@@ -2,8 +2,6 @@ import "./SpecialGallery.scss";
 
 import AddToFavouritesIcon from "@components/Buttons/AddToFavourites/AddToFavouritesIcon";
 import { DEFAULT_IMG_PATH_PAYLOAD__MEDIUM_SIZE } from "@constants/constants";
-import { useAppSelector } from "@src/withTypes";
-import { selectIIIFUrl } from "@store/selectors";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +11,7 @@ type ArtworkCardProps = {
   title: string;
   author: string;
   isPublic: boolean;
+  iiifUrl: string;
 };
 
 function ArtworkCard({
@@ -21,9 +20,9 @@ function ArtworkCard({
   author,
   isPublic,
   id: artworkId,
+  iiifUrl,
 }: ArtworkCardProps) {
   const navigate = useNavigate();
-  const iiifUrl = useAppSelector(selectIIIFUrl);
   const [isArtworkInFavourites, setIsArtworkInFavourites] = useState(
     sessionStorage.getItem(artworkId.toString()) !== null,
   );

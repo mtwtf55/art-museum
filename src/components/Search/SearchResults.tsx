@@ -1,15 +1,15 @@
 import ArtworkCardSmall from "@components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
 import { Artwork } from "@src/types/types";
-import { useAppSelector } from "@src/withTypes";
-import {
-  selectSearchArtworks,
-  selectSearchArtworksIIIFUrl,
-} from "@store/selectors";
 import React from "react";
 
-function SearchResults() {
-  const artworks = useAppSelector(selectSearchArtworks);
-  const iiifUrl = useAppSelector(selectSearchArtworksIIIFUrl);
+type SearchResultsType = {
+  artworks: Artwork[];
+  iiifUrl: string;
+};
+
+function SearchResults({ artworks, iiifUrl }: SearchResultsType) {
+  // const artworks = useAppSelector(selectSearchArtworks);
+  // const iiifUrl = useAppSelector(selectSearchArtworksIIIFUrl);
 
   function createArtworkCard(a: Artwork) {
     return <ArtworkCardSmall artwork={a} key={a.id} iiifUrl={iiifUrl} />;

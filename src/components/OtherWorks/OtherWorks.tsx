@@ -14,7 +14,6 @@ function OtherWorks({ artworks, iiifUrl }: OtherWorksProps) {
   const artworksToRender = artworks.map((aw) => (
     <ArtworkCardSmall artwork={aw} key={aw.id} iiifUrl={iiifUrl} />
   ));
-
   return (
     <div className="other-works">
       <p className="other-works__pretitle">Here some more</p>
