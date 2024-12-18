@@ -1,9 +1,8 @@
 import "./ArtworkCardSmall.scss";
 
-import AddToFavouritesIcon from "@components/Buttons/AddToFavourites/AddToFavouritesIcon";
-import Spinner from "@components/Spinner/Spinner";
-import { DEFAULT_IMG_PATH_PAYLOAD__SMALL_SIZE } from "@constants/constants";
-import { Artwork } from "@src/types/types";
+import { AddToFavouritesIcon, Spinner } from "@Components";
+import { DEFAULT_IMG_PATH_PAYLOAD__SMALL_SIZE } from "@Constants/constants";
+import { Artwork } from "@Types/types";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 

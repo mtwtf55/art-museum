@@ -1,41 +1,78 @@
 import "./Home.scss";
 
-import ErrorBoundaryFallback from "@components/ErrorBoundaryFallback/ErrorBoundaryFallback";
-import Footer from "@components/Footer/Footer";
-import Header from "@components/Header/Header";
-import OtherWorks from "@components/OtherWorks/OtherWorks";
-import Search from "@components/Search/Search";
-import SearchResults from "@components/Search/SearchResults";
-import SpecialGallery from "@components/SpecialGallery/SpecialGallery";
-import Spinner from "@components/Spinner/Spinner";
-import { useAppDispatch, useAppSelector } from "@src/withTypes";
 import {
-  selectArtworks,
-  selectArtworksAreLoading,
-  selectRandomArtworks,
-  selectRandomArtworksAreLoading,
-  selectRandomArtworksIIIFUrl,
-  selectSearchArtworksLength,
-} from "@store/selectors";
-import { fetchArtworks, fetchRandomArtworks } from "@store/thunks";
-import React, { useEffect } from "react";
-import { ErrorBoundary } from "react-error-boundary";
+  Footer,
+  Header,
+  OtherWorks,
+  SpecialGallery,
+  Spinner,
+} from "@Components";
+import ErrorBoundary from "@Components/ErrorBoundaryFallback/ErrorBoundary";
+import Search from "@Components/Search/Search";
+import SearchResults from "@Components/Search/SearchResults";
+import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants/constants";
+import { ArtworksResponseType } from "@Types/types";
+import { createRequestUrl } from "@Utils/functions/createRequestUrl";
+import { useQuery } from "@Utils/hooks/useQuery";
+import React, { useEffect, useMemo, useState } from "react";
+
+const RANDOM_SEED = 500;
+const SEARCH_RESULT_LIMIT = 15;
 
 function Home() {
-  const dispatch = useAppDispatch();
-  const randomArtworks = useAppSelector(selectRandomArtworks);
-  const artworks = useAppSelector(selectArtworks);
-  const randomArtworksIIIFUrl = useAppSelector(selectRandomArtworksIIIFUrl);
-  const searchArtworksLength = useAppSelector(selectSearchArtworksLength);
-  const areArtworksLoading = useAppSelector(selectArtworksAreLoading);
-  const areRandomArtworksLoading = useAppSelector(
-    selectRandomArtworksAreLoading,
+  const [searchString, setSearchString] = useState<string>("");
+
+  const searchReqUrl = useMemo(
+    () =>
+      createRequestUrl()
+        .search(searchString)
+        .fields(REQUESTED_FIELDS)
+        .limit(SEARCH_RESULT_LIMIT)
+        .build(),
+    [searchString],
   );
 
+  const { query: searchQuery, data: searchResults } =
+    useQuery<ArtworksResponseType>({
+      url: searchReqUrl,
+    });
+
+  const {
+    query: getArtworks,
+    data: artworks,
+    loading: artworksLoading,
+  } = useQuery<ArtworksResponseType>({
+    url: createRequestUrl()
+      .limit(12)
+      .page(Math.round(Math.random() * RANDOM_SEED))
+      .fields(REQUESTED_FIELDS)
+      .build(),
+  });
+
+  const {
+    query: getOtherArtworks,
+    data: otherArtworks,
+    loading: otherArtworksLoading,
+  } = useQuery<ArtworksResponseType>({
+    url: createRequestUrl()
+      .limit(12)
+      .page(Math.round(Math.random() * RANDOM_SEED))
+      .fields(REQUESTED_FIELDS)
+      .build(),
+  });
+
   useEffect(() => {
-    dispatch(fetchArtworks());
-    dispatch(fetchRandomArtworks(12));
+    getArtworks();
+    getOtherArtworks();
   }, []);
+
+  useEffect(() => {
+    if (searchString !== "") searchQuery();
+  }, [searchQuery]);
+
+  function handleSearch(str: string) {
+    setSearchString(str);
+  }
 
   return (
     <div>
@@ -48,31 +85,39 @@ function Home() {
             <br /> Here!
           </p>
 
-          <Search />
+          <Search onSearch={handleSearch} initialValue={searchString} />
 
-          {searchArtworksLength !== 0 ? (
-            <ErrorBoundary fallback={<ErrorBoundaryFallback />}>
-              <SearchResults />
+          {searchString.length !== 0 ? (
+            <ErrorBoundary>
+              <SearchResults
+                artworks={searchResults?.data || []}
+                iiifUrl={searchResults?.config.iiif_url || DEFAULT_IIIF_URL}
+              />
             </ErrorBoundary>
           ) : (
             <>
               <div className="main__special-gallery">
-                {areArtworksLoading ? (
+                {artworksLoading ? (
                   <Spinner />
                 ) : (
-                  <ErrorBoundary fallback={<ErrorBoundaryFallback />}>
-                    <SpecialGallery artworks={artworks} />
+                  <ErrorBoundary>
+                    <SpecialGallery
+                      artworks={artworks?.data ?? []}
+                      iiifUrl={artworks?.config.iiif_url ?? DEFAULT_IIIF_URL}
+                    />
                   </ErrorBoundary>
                 )}
               </div>
               <div className="main__other-works">
-                {areRandomArtworksLoading ? (
+                {otherArtworksLoading ? (
                   <Spinner />
                 ) : (
-                  <ErrorBoundary fallback={<ErrorBoundaryFallback />}>
+                  <ErrorBoundary>
                     <OtherWorks
-                      artworks={randomArtworks}
-                      iiifUrl={randomArtworksIIIFUrl}
+                      artworks={otherArtworks?.data ?? []}
+                      iiifUrl={
+                        otherArtworks?.config.iiif_url || DEFAULT_IIIF_URL
+                      }
                     />
                   </ErrorBoundary>
                 )}

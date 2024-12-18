@@ -1,8 +1,9 @@
-import PathNames from "@constants/path-names";
-import DetailInfo from "@pages/DetailInfo/DetailInfo";
-import Favourites from "@pages/Favourites/Favourites";
-import Home from "@pages/Home/Home";
-import { RouteType } from "@src/types/route.type";
+import PathNames from "@Constants/path-names";
+import DetailInfo from "@Pages/DetailInfo/DetailInfo";
+import Favourites from "@Pages/Favourites/Favourites";
+import Home from "@Pages/Home/Home";
+import { RouteType } from "@Types/route.type";
+import React from "react";
 
 const pageRoutes: RouteType[] = [
   {

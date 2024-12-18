@@ -1,57 +1,55 @@
 import "./DetailInfo.scss";
 
-import AddToFavouritesIcon from "@components/Buttons/AddToFavourites/AddToFavouritesIcon";
-import Footer from "@components/Footer/Footer";
-import Header from "@components/Header/Header";
-import Spinner from "@components/Spinner/Spinner";
-import { DEFAULT_IMG_PATH_PAYLOAD__BIG_SIZE } from "@constants/constants";
-import { useAppDispatch, useAppSelector } from "@src/withTypes";
+import { AddToFavouritesIcon, Footer, Header, Spinner } from "@Components";
 import {
-  selectSelectedArtwork,
-  selectSelectedArtworkIIIFUrl,
-} from "@store/selectors";
-import { selectedClear } from "@store/slices/artworksSlice";
-import { fetchArtwork } from "@store/thunks";
-import React, { useEffect, useState } from "react";
+  DEFAULT_IMG_PATH_PAYLOAD__BIG_SIZE,
+  REQUESTED_FIELDS,
+} from "@Constants/constants";
+import { ArtworkResponseType } from "@Types/types";
+import { createRequestUrl } from "@Utils/functions/createRequestUrl";
+import { useQuery } from "@Utils/hooks/useQuery";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function DetailInfo() {
-  const dispatch = useAppDispatch();
-  const selectedArtwork = useAppSelector(selectSelectedArtwork);
   const { artworkId } = useParams();
-  const iiifUrl = useAppSelector(selectSelectedArtworkIIIFUrl);
+  const { query: getArtwork, data: artwork } = useQuery<ArtworkResponseType>({
+    url: createRequestUrl()
+      .artwork(Number(artworkId))
+      .fields(REQUESTED_FIELDS)
+      .build(),
+  });
   const [isArtworkInFavourites, setIsArtworkInFavourites] = useState(
-    sessionStorage.getItem(selectedArtwork?.id.toString() ?? "") !== null,
+    sessionStorage.getItem(artwork?.data?.id.toString() ?? "") !== null,
   );
   const [isImageLoading, setIsImageLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchArtwork(artworkId ?? ""));
-
-    return () => {
-      dispatch(selectedClear());
-    };
+    getArtwork();
   }, []);
 
-  const imgUrl =
-    iiifUrl +
-    `/${selectedArtwork?.image_id}` +
-    DEFAULT_IMG_PATH_PAYLOAD__BIG_SIZE;
+  const imgUrl = useMemo(
+    () =>
+      artwork?.config.iiif_url +
+      `/${artwork?.data?.image_id}` +
+      DEFAULT_IMG_PATH_PAYLOAD__BIG_SIZE,
+    [artwork],
+  );
 
   function handleAddToFavourites(event: React.MouseEvent<HTMLElement>) {
     setIsArtworkInFavourites(!isArtworkInFavourites);
     event.stopPropagation();
 
-    if (sessionStorage.getItem(selectedArtwork?.id.toString() ?? "") === null) {
+    if (sessionStorage.getItem(artwork?.data?.id.toString() ?? "") === null) {
       sessionStorage.setItem(
-        selectedArtwork?.id.toString() ?? "",
-        selectedArtwork?.title ?? "",
+        artwork?.data?.id.toString() ?? "",
+        artwork?.data?.title ?? "",
       );
-    } else sessionStorage.removeItem(selectedArtwork?.id.toString() ?? "");
+    } else sessionStorage.removeItem(artwork?.data?.id.toString() ?? "");
   }
 
   const isFavourite =
-    sessionStorage.getItem(selectedArtwork?.id.toString() ?? "") !== null;
+    sessionStorage.getItem(artwork?.data?.id.toString() ?? "") !== null;
 
   function handleImageLoads() {
     setIsImageLoading(false);
@@ -79,13 +77,13 @@ function DetailInfo() {
           <div className="detail-info-page__main__info">
             <div className="detail-info-page__main__info__general">
               <p className="detail-info-page__main__info__general__title">
-                {selectedArtwork?.title}
+                {artwork?.data?.title}
               </p>
               <p className="detail-info-page__main__info__general__author">
-                {selectedArtwork?.artist_title}
+                {artwork?.data?.artist_title}
               </p>
               <p className="detail-info-page__main__info__general__createdAt">
-                {selectedArtwork?.date_display}
+                {artwork?.data?.date_display}
               </p>
             </div>
             <div className="detail-info-page__main__info__overview">
@@ -94,19 +92,19 @@ function DetailInfo() {
               </p>
               <p className="detail-info-page__main__info__overview__item">
                 <span className="overview-category">Artist nationality: </span>
-                {selectedArtwork?.place_of_origin}
+                {artwork?.data?.place_of_origin}
               </p>
               <p className="detail-info-page__main__info__overview__item">
                 <span className="overview-category">Dimensions: </span>
-                {selectedArtwork?.dimensions}
+                {artwork?.data?.dimensions}
               </p>
               <p className="detail-info-page__main__info__overview__item">
                 <span className="overview-category">Credit Line: </span>
-                {selectedArtwork?.credit_line}
+                {artwork?.data?.credit_line}
               </p>
               <p className="detail-info-page__main__info__overview__item">
                 <span className="overview-category">Repository: </span>
-                {selectedArtwork?.gallery_title ?? "Unknown"}
+                {artwork?.data?.gallery_title ?? "Unknown"}
               </p>
             </div>
           </div>

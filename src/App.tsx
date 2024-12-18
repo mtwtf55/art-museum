@@ -1,4 +1,4 @@
-import Router from "@components/Router/Router";
+import { Router } from "@Components";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 

@@ -1,8 +1,8 @@
 import "./OtherWorks.scss";
 
-import { Artwork } from "@src/types/types";
 import React from "react";
 
+import { Artwork } from "../../types/types";
 import ArtworkCardSmall from "./ArtworkCardSmall/ArtworkCardSmall";
 
 type OtherWorksProps = {
@@ -14,7 +14,6 @@ function OtherWorks({ artworks, iiifUrl }: OtherWorksProps) {
   const artworksToRender = artworks.map((aw) => (
     <ArtworkCardSmall artwork={aw} key={aw.id} iiifUrl={iiifUrl} />
   ));
-
   return (
     <div className="other-works">
       <p className="other-works__pretitle">Here some more</p>

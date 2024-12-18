@@ -1,6 +1,6 @@
 import "./Pagination.scss";
 
-import Icon from "@components/Icon/Icon";
+import { Icon } from "@Components";
 import React from "react";
 
 import PaginationItem from "./PaginationItem";

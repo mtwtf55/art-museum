@@ -1,25 +1,23 @@
 import "./Search.scss";
 
-import Icon from "@components/Icon/Icon";
-import { DEBOUNCE_DELAY } from "@constants/constants";
-import { useAppSelector } from "@src/withTypes";
-import { selectSearchString } from "@store/selectors";
-import { searchClear, updateSearchString } from "@store/slices/artworksSlice";
-import { searchArtworks } from "@store/thunks";
-import { useDebounce } from "@utils/hooks";
+import { Icon } from "@Components";
+import { DEBOUNCE_DELAY } from "@Constants/constants";
+import { useDebounce } from "@Utils/hooks/useDebounce";
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { string, ValidationError } from "yup";
 
 const SEARCH_ICON_NAME = "search.svg";
 
-function Search() {
-  const searchString = useAppSelector(selectSearchString);
-  const dispatch = useDispatch();
-  const [value, setValue] = useState<string>(searchString); // raw value from input field
+type SearchType = {
+  onSearch: (q: string) => void;
+  initialValue?: string;
+};
+
+function Search({ onSearch: handleSearch, initialValue }: SearchType) {
+  const [value, setValue] = useState<string>(initialValue || ""); // raw value from input field
   const [validatedValue, setValidatedValue] = useState<string | undefined>(); // validated value after yup schema verification
   const [error, setError] = useState<string | null>(null); // represents errors after validation
-  const handleSearchDebounced = useDebounce(handleSearch, DEBOUNCE_DELAY);
+  const validateInputDebounced = useDebounce(validateInput, DEBOUNCE_DELAY);
 
   const searchStringSchema = string().matches(
     /^[a-zA-Z0-9-\s]*$/,
@@ -27,28 +25,20 @@ function Search() {
   );
 
   useEffect(() => {
-    dispatch(updateSearchString({ value }));
-    if (value === "") handleSearchIsEmpty();
-    else validateInput(value);
+    validateInputDebounced(value);
   }, [value]);
 
   useEffect(() => {
-    if (validatedValue) handleSearchDebounced(validatedValue);
+    if (value === "") handleEmptyInput();
+    handleSearch(validatedValue ?? "");
   }, [validatedValue]);
 
-  function handleSearchIsEmpty() {
-    dispatch(searchClear());
+  function handleEmptyInput() {
     setError(null);
-  }
-
-  function handleSearch(value: string) {
-    // @ts-ignore
-    dispatch(searchArtworks(value));
+    setValidatedValue(undefined);
   }
 
   function validateInput(str: string) {
-    if (str.length === 0) return;
-
     function handleError(error: ValidationError) {
       setError(error.errors.join(","));
     }

@@ -1,17 +1,18 @@
 import "./SpecialGallery.scss";
 
-import Pagination from "@components/Pagination/Pagination";
-import { ARTWORKS_AMOUNT_PER_ROW } from "@constants/constants";
-import { Artwork } from "@src/types/types";
 import React, { useMemo, useState } from "react";
 
+import { ARTWORKS_AMOUNT_PER_ROW } from "../../constants/constants";
+import { Artwork } from "../../types/types";
+import { Pagination } from "../index";
 import ArtworkCard from "./ArtworkCard";
 
 type SpecialGalleryProps = {
   artworks: Artwork[];
+  iiifUrl: string;
 };
 
-function SpecialGallery({ artworks }: SpecialGalleryProps) {
+function SpecialGallery({ artworks, iiifUrl }: SpecialGalleryProps) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const artworksToShow = useMemo(() => {
@@ -30,6 +31,7 @@ function SpecialGallery({ artworks }: SpecialGalleryProps) {
         isPublic={aw.is_public_domain}
         id={aw.id}
         key={aw.id}
+        iiifUrl={iiifUrl}
       />
     );
   }
