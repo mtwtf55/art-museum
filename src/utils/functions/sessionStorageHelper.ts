@@ -11,7 +11,7 @@ export function sessionStorageHelper(): SessionStorageHelper {
   }
 
   function has(artworkId: number) {
-    return sessionStorage.getItem(artworkId.toString()) === null;
+    return sessionStorage.getItem(artworkId.toString()) !== null;
   }
 
   function add(artworkId: number, title: string) {

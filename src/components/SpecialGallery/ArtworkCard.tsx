@@ -1,10 +1,10 @@
 import "./SpecialGallery.scss";
 
+import { AddToFavouritesIcon } from "@Components";
+import { DEFAULT_IMG_PATH_PAYLOAD__MEDIUM_SIZE } from "@Constants/constants";
+import { sessionStorageHelper } from "@Utils/functions/sessionStorageHelper";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { DEFAULT_IMG_PATH_PAYLOAD__MEDIUM_SIZE } from "../../constants/constants";
-import { AddToFavouritesIcon } from "../index";
 
 type ArtworkCardProps = {
   id: number;
@@ -24,8 +24,9 @@ function ArtworkCard({
   iiifUrl,
 }: ArtworkCardProps) {
   const navigate = useNavigate();
+  const storageHelper = sessionStorageHelper();
   const [isArtworkInFavourites, setIsArtworkInFavourites] = useState(
-    sessionStorage.getItem(artworkId.toString()) !== null,
+    storageHelper.has(artworkId),
   );
   const imgUrl =
     iiifUrl + `/${imageId}` + DEFAULT_IMG_PATH_PAYLOAD__MEDIUM_SIZE;
@@ -38,9 +39,8 @@ function ArtworkCard({
     setIsArtworkInFavourites(!isArtworkInFavourites);
     event.stopPropagation();
 
-    if (sessionStorage.getItem(artworkId.toString()) === null) {
-      sessionStorage.setItem(artworkId.toString(), title);
-    } else sessionStorage.removeItem(artworkId.toString());
+    if (!storageHelper.has(artworkId)) storageHelper.add(artworkId, title);
+    else storageHelper.remove(artworkId);
   }
 
   return (

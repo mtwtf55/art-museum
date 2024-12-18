@@ -18,9 +18,12 @@ import React, { useEffect, useMemo, useState } from "react";
 
 const RANDOM_SEED = 500;
 const SEARCH_RESULT_LIMIT = 15;
+const GALLERY_ARTWORKS_PER_PAGE = 3;
+const OTHER_ARTWORKS_LIMIT = 12;
 
 function Home() {
   const [searchString, setSearchString] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   const searchReqUrl = useMemo(
     () =>
@@ -30,6 +33,16 @@ function Home() {
         .limit(SEARCH_RESULT_LIMIT)
         .build(),
     [searchString],
+  );
+
+  const specialGalleryReqUrl = useMemo(
+    () =>
+      createRequestUrl()
+        .limit(GALLERY_ARTWORKS_PER_PAGE)
+        .page(currentPage)
+        .fields(REQUESTED_FIELDS)
+        .build(),
+    [currentPage],
   );
 
   const { query: searchQuery, data: searchResults } =
@@ -42,11 +55,7 @@ function Home() {
     data: artworks,
     loading: artworksLoading,
   } = useQuery<ArtworksResponseType>({
-    url: createRequestUrl()
-      .limit(12)
-      .page(Math.round(Math.random() * RANDOM_SEED))
-      .fields(REQUESTED_FIELDS)
-      .build(),
+    url: specialGalleryReqUrl,
   });
 
   const {
@@ -55,7 +64,7 @@ function Home() {
     loading: otherArtworksLoading,
   } = useQuery<ArtworksResponseType>({
     url: createRequestUrl()
-      .limit(12)
+      .limit(OTHER_ARTWORKS_LIMIT)
       .page(Math.round(Math.random() * RANDOM_SEED))
       .fields(REQUESTED_FIELDS)
       .build(),
@@ -67,11 +76,19 @@ function Home() {
   }, []);
 
   useEffect(() => {
+    getArtworks();
+  }, [getArtworks]);
+
+  useEffect(() => {
     if (searchString !== "") searchQuery();
   }, [searchQuery]);
 
   function handleSearch(str: string) {
     setSearchString(str);
+  }
+
+  function handleNextPage(page: number) {
+    setCurrentPage(page);
   }
 
   return (
@@ -104,6 +121,8 @@ function Home() {
                     <SpecialGallery
                       artworks={artworks?.data ?? []}
                       iiifUrl={artworks?.config.iiif_url ?? DEFAULT_IIIF_URL}
+                      onNextPage={handleNextPage}
+                      currentPage={currentPage}
                     />
                   </ErrorBoundary>
                 )}
