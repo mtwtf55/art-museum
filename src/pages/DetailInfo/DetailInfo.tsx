@@ -7,12 +7,14 @@ import {
 } from "@Constants/constants";
 import { ArtworkResponseType } from "@Types/types";
 import { createRequestUrl } from "@Utils/functions/createRequestUrl";
+import { sessionStorageHelper } from "@Utils/functions/sessionStorageHelper";
 import { useQuery } from "@Utils/hooks/useQuery";
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function DetailInfo() {
   const { artworkId } = useParams();
+  const storageHelper = sessionStorageHelper();
   const { query: getArtwork, data: artwork } = useQuery<ArtworkResponseType>({
     url: createRequestUrl()
       .artwork(Number(artworkId))
@@ -20,7 +22,7 @@ function DetailInfo() {
       .build(),
   });
   const [isArtworkInFavourites, setIsArtworkInFavourites] = useState(
-    sessionStorage.getItem(artwork?.data?.id.toString() ?? "") !== null,
+    storageHelper.has(artwork?.data.id),
   );
   const [isImageLoading, setIsImageLoading] = useState(true);
 
@@ -40,16 +42,12 @@ function DetailInfo() {
     setIsArtworkInFavourites(!isArtworkInFavourites);
     event.stopPropagation();
 
-    if (sessionStorage.getItem(artwork?.data?.id.toString() ?? "") === null) {
-      sessionStorage.setItem(
-        artwork?.data?.id.toString() ?? "",
-        artwork?.data?.title ?? "",
-      );
-    } else sessionStorage.removeItem(artwork?.data?.id.toString() ?? "");
+    if (!storageHelper.has(artwork?.data.id)) {
+      storageHelper.add(artwork?.data.id, artwork?.data.title ?? "");
+    } else storageHelper.remove(artwork?.data.id);
   }
 
-  const isFavourite =
-    sessionStorage.getItem(artwork?.data?.id.toString() ?? "") !== null;
+  const isFavourite = storageHelper.has(artwork?.data.id);
 
   function handleImageLoads() {
     setIsImageLoading(false);

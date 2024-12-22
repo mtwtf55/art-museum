@@ -1,8 +1,8 @@
 type SessionStorageHelper = {
   getValidArtworksIds: () => string[];
-  has: (artworkId: number) => boolean;
-  add: (artworkId: number, title: string) => void;
-  remove: (artworkId: number) => void;
+  has: (artworkId: number | null | undefined) => boolean;
+  add: (artworkId: number | undefined, title: string) => void;
+  remove: (artworkId: number | undefined) => void;
 };
 
 export function sessionStorageHelper(): SessionStorageHelper {
@@ -10,15 +10,18 @@ export function sessionStorageHelper(): SessionStorageHelper {
     return Object.keys(sessionStorage).filter((k) => !isNaN(Number(k)));
   }
 
-  function has(artworkId: number) {
+  function has(artworkId: number | null | undefined) {
+    if (artworkId === null || artworkId === undefined) return false;
     return sessionStorage.getItem(artworkId.toString()) !== null;
   }
 
-  function add(artworkId: number, title: string) {
+  function add(artworkId: number | undefined, title: string) {
+    if (artworkId === undefined) return;
     sessionStorage.setItem(artworkId.toString(), title);
   }
 
-  function remove(artworkId: number) {
+  function remove(artworkId: number | undefined) {
+    if (artworkId === undefined) return;
     sessionStorage.removeItem(artworkId.toString());
   }
 
