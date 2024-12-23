@@ -1,8 +1,10 @@
-$header-background-color: linear-gradient(#343333, #484848, #282828);
+@use "@Utils/variables" as v;
 
 .header {
-  background: $header-background-color;
-  padding: 32px;
+  background: v.$header-background-color;
+  height: v.$header-height;
+  display: flex;
+  align-items: center;
 
   &__container {
     width: 70%;
@@ -30,12 +32,5 @@ $header-background-color: linear-gradient(#343333, #484848, #282828);
 @media screen and (max-width: 900px) {
   .header__container {
     width: 100%;
-  }
-}
-
-@media screen and (max-width: 470px) {
-  .header__inner {
-    flex-direction: column;
-    gap: 40px;
   }
 }

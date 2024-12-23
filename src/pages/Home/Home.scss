@@ -1,7 +1,4 @@
-$text-color-black: #393939;
-$text-color-orange: #f17900;
-$page-background: #fafafa;
-$border-grey: #f0f1f1;
+@use "@Utils/variables" as v;
 
 .container {
   width: 70%;
@@ -13,7 +10,7 @@ $border-grey: #f0f1f1;
 
 .main {
   padding-top: 135px;
-  background-color: $page-background;
+  background-color: v.$page-background;
   padding-bottom: 120px;
 
   &__title {
@@ -26,7 +23,7 @@ $border-grey: #f0f1f1;
     text-align: center;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
-    color: $text-color-black;
+    color: v.$text-color-black;
 
     &__inner {
       font-family:
@@ -38,7 +35,7 @@ $border-grey: #f0f1f1;
       text-align: center;
       text-underline-position: from-font;
       text-decoration-skip-ink: none;
-      color: $text-color-orange;
+      color: v.$text-color-orange;
     }
   }
 

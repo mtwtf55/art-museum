@@ -1,0 +1,29 @@
+@use "@Utils/variables" as v;
+
+.burger-menu {
+  &__icon {
+    height: 50px;
+    width: 50px;
+  }
+
+  &__links {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: v.$header-height;
+    display: flex;
+    flex-direction: column;
+    background-color: #343333;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+    &__container {
+      text-align: center;
+      padding: 10px 0;
+    }
+  }
+}
+
+.active {
+  opacity: 1;
+}
