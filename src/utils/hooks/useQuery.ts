@@ -32,5 +32,5 @@ export function useQuery<T>({ url }: { url: string }) {
       .finally(handleFinally);
   }, [url]);
 
-  return { query, data, loading, error };
+  return { query, data, loading, error, setData };
 }

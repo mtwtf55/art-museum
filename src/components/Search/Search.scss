@@ -36,6 +36,7 @@
 
 .search-results {
   &__title {
+    margin-top: 50px;
     font-family: Lexend Deca;
     font-size: 32px;
     font-weight: 400;
@@ -44,6 +45,15 @@
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     color: v.$text-color-black;
+
+    position: relative;
+
+    .sort-icon {
+      position: absolute;
+      height: 100%;
+      right: 0;
+      top: 0;
+    }
   }
 
   &__main {

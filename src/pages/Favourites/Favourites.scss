@@ -61,6 +61,15 @@
         text-underline-position: from-font;
         text-decoration-skip-ink: none;
         color: v.$text-color-black;
+
+        position: relative;
+
+        .sort-icon {
+          position: absolute;
+          height: 100%;
+          right: 0;
+          top: 0;
+        }
       }
     }
 

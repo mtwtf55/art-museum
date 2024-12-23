@@ -1,9 +1,11 @@
 import "./Favourites.scss";
 
 import { ArtworkCardSmall, Footer, Header, Spinner } from "@Components";
+import SortMenu from "@Components/SortMenu/SortMenu";
 import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants/constants";
 import { Artwork, ArtworksResponseType } from "@Types/types";
 import { createRequestUrl } from "@Utils/functions/createRequestUrl";
+import mutateSet from "@Utils/functions/mutateSet";
 import { sessionStorageHelper } from "@Utils/functions/sessionStorageHelper";
 import { useQuery } from "@Utils/hooks/useQuery";
 import React, { useEffect, useMemo } from "react";
@@ -16,6 +18,7 @@ function Favourites() {
     query: getFavourites,
     data: favourites,
     loading: favouritesLoading,
+    setData: setFavourites,
   } = useQuery<ArtworksResponseType>({
     url: createRequestUrl()
       .ids(validIds.map(Number))
@@ -38,6 +41,7 @@ function Favourites() {
   }
 
   const favouriteItems = favourites?.data.map(createArtworkCard);
+  const handleSetFavourites = mutateSet(setFavourites);
 
   return (
     <div>
@@ -48,9 +52,15 @@ function Favourites() {
           <div className="favourites__main">
             <div className="favourites__main__title">
               <p className="favourites__main__title__sub">Saved by you</p>
-              <p className="favourites__main__title__main">
+              <div className="favourites__main__title__main">
                 Your favorites list
-              </p>
+                <div className="sort-icon">
+                  <SortMenu
+                    data={favourites?.data ?? []}
+                    setData={handleSetFavourites}
+                  />
+                </div>
+              </div>
             </div>
             {favouritesLoading ? (
               <div className="favourites__main__spinner-wrapper">

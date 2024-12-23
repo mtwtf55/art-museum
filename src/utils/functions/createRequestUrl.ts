@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../../constants/constants";
+import { API_BASE_URL } from "@Constants/constants";
 
 type CreateRequestUrlType = {
   limit: (limit: number) => CreateRequestUrlType;
@@ -8,8 +8,12 @@ type CreateRequestUrlType = {
   artwork: (id: number) => CreateRequestUrlType;
   search: (q: string) => CreateRequestUrlType;
   ids: (ids: number[]) => CreateRequestUrlType;
+  random: (length?: number) => CreateRequestUrlType;
   build: () => string;
 };
+
+const RANDOM_CEILING = 10000;
+const RANDOM_ARTWORKS_COUNT = 30;
 
 export function createRequestUrl(): CreateRequestUrlType {
   let reqUrl = `${API_BASE_URL}`;
@@ -47,6 +51,16 @@ export function createRequestUrl(): CreateRequestUrlType {
     return this;
   }
 
+  function random(this: CreateRequestUrlType, length?: number) {
+    const randomIds = Array.from(
+      { length: length ?? RANDOM_ARTWORKS_COUNT },
+      () => Math.round(Math.random() * RANDOM_CEILING),
+    );
+    params.ids = randomIds;
+    console.log({ randomIds });
+    return this;
+  }
+
   function artwork(this: CreateRequestUrlType, id: number) {
     reqUrl = API_BASE_URL + `/${id}`;
     return this;
@@ -66,5 +80,5 @@ export function createRequestUrl(): CreateRequestUrlType {
     return `${reqUrl}?${urlParams}`;
   }
 
-  return { limit, artwork, build, fields, page, q, search, ids };
+  return { limit, artwork, build, fields, page, q, search, ids, random };
 }

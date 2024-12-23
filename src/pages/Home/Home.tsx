@@ -13,13 +13,12 @@ import SearchResults from "@Components/Search/SearchResults";
 import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants/constants";
 import { ArtworksResponseType } from "@Types/types";
 import { createRequestUrl } from "@Utils/functions/createRequestUrl";
+import mutateSet from "@Utils/functions/mutateSet";
 import { useQuery } from "@Utils/hooks/useQuery";
 import React, { useEffect, useMemo, useState } from "react";
 
-const RANDOM_SEED = 500;
 const SEARCH_RESULT_LIMIT = 15;
 const GALLERY_ARTWORKS_PER_PAGE = 3;
-const OTHER_ARTWORKS_LIMIT = 12;
 
 function Home() {
   const [searchString, setSearchString] = useState<string>("");
@@ -45,10 +44,13 @@ function Home() {
     [currentPage],
   );
 
-  const { query: searchQuery, data: searchResults } =
-    useQuery<ArtworksResponseType>({
-      url: searchReqUrl,
-    });
+  const {
+    query: searchQuery,
+    data: searchResults,
+    setData: setSearchResults,
+  } = useQuery<ArtworksResponseType>({
+    url: searchReqUrl,
+  });
 
   const {
     query: getArtworks,
@@ -62,12 +64,9 @@ function Home() {
     query: getOtherArtworks,
     data: otherArtworks,
     loading: otherArtworksLoading,
+    setData: setOtherArtworks,
   } = useQuery<ArtworksResponseType>({
-    url: createRequestUrl()
-      .limit(OTHER_ARTWORKS_LIMIT)
-      .page(Math.round(Math.random() * RANDOM_SEED))
-      .fields(REQUESTED_FIELDS)
-      .build(),
+    url: createRequestUrl().random().fields(REQUESTED_FIELDS).build(),
   });
 
   useEffect(() => {
@@ -91,6 +90,9 @@ function Home() {
     setCurrentPage(page);
   }
 
+  const handleSetSearchResults = mutateSet(setSearchResults);
+  const handleSetOtherArtworks = mutateSet(setOtherArtworks);
+
   return (
     <div>
       <Header />
@@ -109,6 +111,7 @@ function Home() {
               <SearchResults
                 artworks={searchResults?.data || []}
                 iiifUrl={searchResults?.config.iiif_url || DEFAULT_IIIF_URL}
+                setArtworks={handleSetSearchResults}
               />
             </ErrorBoundary>
           ) : (
@@ -137,6 +140,7 @@ function Home() {
                       iiifUrl={
                         otherArtworks?.config.iiif_url || DEFAULT_IIIF_URL
                       }
+                      setArtworks={handleSetOtherArtworks}
                     />
                   </ErrorBoundary>
                 )}

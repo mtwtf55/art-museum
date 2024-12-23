@@ -1,3 +1,5 @@
+import "./Icon.scss";
+
 import React from "react";
 
 export type LinkProps = {
@@ -21,6 +23,7 @@ function Icon({
       alt=""
       onMouseEnter={handleMouseEnter}
       onClick={handleClick}
+      className="icon"
     />
   );
 }
