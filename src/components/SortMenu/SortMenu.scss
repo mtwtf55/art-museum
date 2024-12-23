@@ -1,4 +1,4 @@
-@use "@Utils/variables" as v;
+@use "@Utils/theme" as *;
 
 .sort-menu {
   position: relative;
@@ -9,22 +9,21 @@
     right: 0;
     top: 1em;
 
-    background-color: #fff;
+    background-color: $background-color-primary;
     border-radius: 5px;
-    border: 1px solid v.$text-color-orange;
+    border: 1px solid $text-color-secondary;
 
     &__item {
-      font-size: 18px;
-      line-height: normal;
-      padding: 5px 10px;
-      height: 1em;
+      @include text(1.125rem);
+      padding: $indent-xs;
+      height: 20px;
 
       display: flex;
       justify-content: space-between;
-      gap: 1em;
+      gap: $indent-s;
 
       &:hover {
-        background-color: v.$page-background;
+        background-color: $background-color-secondary;
         cursor: pointer;
       }
     }

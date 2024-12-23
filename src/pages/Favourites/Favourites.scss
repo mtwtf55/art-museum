@@ -1,7 +1,7 @@
-@use "@Utils/variables" as v;
+@use "@Utils/theme" as *;
 
 .favourites-wrapper {
-  background-color: v.$page-background;
+  background-color: $background-color-secondary;
 }
 
 .favourites {
@@ -11,57 +11,28 @@
   flex-direction: column;
 
   &__title {
-    margin-top: 120px;
-
-    font-family: Lexend Deca;
-    font-size: 64px;
-    font-weight: 700;
-    line-height: 80px;
-    text-align: center;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    color: v.$text-color-black;
+    @include text-big;
+    color: $text-color-primary;
+    margin-top: $indent-l;
 
     &__sub {
-      font-family: Lexend Deca;
-      font-size: 64px;
-      font-weight: 700;
-      line-height: 80px;
-      text-align: center;
-      text-underline-position: from-font;
-      text-decoration-skip-ink: none;
-      color: v.$text-color-orange;
+      @include text-big;
+      color: $text-color-secondary;
     }
   }
 
   &__main {
-    margin-top: 140px;
-    margin-bottom: 120px;
+    margin: $indent-l 0;
 
     &__title {
       &__sub {
-        margin: 0;
-        font-family: Lexend Deca;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 20px;
-        text-align: center;
-        text-underline-position: from-font;
-        text-decoration-skip-ink: none;
-        color: v.$text-color-orange;
+        @include text-small;
+        color: $text-color-secondary;
       }
 
       &__main {
-        margin: 0;
-        font-family: Lexend Deca;
-        font-size: 32px;
-        font-weight: 400;
-        line-height: 40px;
-        text-align: center;
-        text-underline-position: from-font;
-        text-decoration-skip-ink: none;
-        color: v.$text-color-black;
-
+        @include text-medium;
+        color: $text-color-primary;
         position: relative;
 
         .sort-icon {
@@ -76,14 +47,14 @@
     &__list {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-gap: 16px;
+      grid-gap: $indent-s;
       grid-auto-rows: 120px;
 
-      margin-top: 50px;
+      margin-top: $indent-m;
     }
 
     &__spinner-wrapper {
-      margin: 50px 50%;
+      margin: $indent-m 50%;
     }
   }
 }

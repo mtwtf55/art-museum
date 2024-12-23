@@ -1,15 +1,15 @@
-@use "@Utils/variables" as v;
+@use "@Utils/theme" as *;
 
 .detail-info-page {
   &__main-wrapper {
-    background-color: v.$page-background;
+    background-color: $background-color-secondary;
   }
 
   &__main {
-    padding: 120px 0;
+    padding: $indent-l 0;
     display: grid;
     grid-template-columns: 2fr 3fr;
-    gap: 10px;
+    gap: $indent-xs;
     justify-content: start;
     width: 70%;
     margin: 0 auto;
@@ -17,13 +17,13 @@
     &__image {
       width: 500px;
       height: 570px;
-      background-color: bisque;
+      background-color: $image-background-color;
       position: relative;
 
       &__icon {
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: $indent-xs;
+        right: $indent-xs;
       }
     }
 
@@ -33,72 +33,49 @@
       align-content: space-between;
 
       &__general {
-        place-self: start;
+        display: flex;
+        flex-direction: column;
+        gap: $indent-xxs;
 
         &__title {
-          margin-top: 0;
-          font-family: Lexend Deca;
-          font-size: 32px;
-          font-weight: 400;
-          line-height: 40px;
+          @include text-medium;
           text-align: left;
-          text-underline-position: from-font;
-          text-decoration-skip-ink: none;
-          color: v.$text-color-black;
+          color: $text-color-primary;
         }
 
         &__author {
-          margin: 0;
-          font-family: Lexend Deca;
-          font-size: 24px;
-          font-weight: 400;
-          line-height: 30px;
+          @include text(1.5rem);
           text-align: left;
-          text-underline-position: from-font;
-          text-decoration-skip-ink: none;
-          color: v.$text-color-orange;
+          color: $text-color-secondary;
         }
 
         &__createdAt {
-          margin: 0;
-          font-family: Lexend Deca;
-          font-size: 16px;
-          font-weight: 700;
-          line-height: 20px;
+          @include text($font-size-small, $font-weight-bold);
           text-align: left;
-          text-underline-position: from-font;
-          text-decoration-skip-ink: none;
-          color: v.$text-color-black;
+          color: $text-color-primary;
         }
       }
 
       &__overview {
-        align-content: end;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: $indent-xs;
 
         &__title {
-          font-family: Lexend Deca;
-          font-size: 32px;
-          font-weight: 400;
-          line-height: 40px;
+          @include text-medium;
           text-align: left;
-          text-underline-position: from-font;
-          text-decoration-skip-ink: none;
-          color: v.$text-color-black;
+          color: $text-color-primary;
         }
 
         &__item {
-          font-family: Lexend Deca;
-          font-size: 16px;
-          font-weight: 400;
-          line-height: 20px;
+          @include text-small;
           text-align: left;
-          text-underline-position: from-font;
-          text-decoration-skip-ink: none;
-          color: v.$text-color-black;
+          color: $text-color-primary;
         }
 
         .overview-category {
-          color: v.$text-color-orange;
+          color: $text-color-secondary;
         }
       }
     }

@@ -1,0 +1,61 @@
+$font-size-big: 4rem;
+$font-size-medium: 2rem;
+$font-size-small: 1rem;
+
+$font-family-primary:
+  Lexend Deca,
+  serif;
+$font-family-secondary: Inter, serif;
+
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+$font-weight-semibold: 500;
+
+$indent-l: 128px;
+$indent-xs: 8px;
+$indent-xxs: 4px;
+$indent-s: 16px;
+$indent-sm: 32px;
+$indent-m: 64px;
+
+$text-color-primary: #393939;
+$text-color-secondary: #f17900;
+$text-color-alternative: #fff;
+
+$background-color-primary: #fff;
+$background-color-secondary: #fafafa;
+$background-color-alternative: #f17900;
+
+$image-background-color: busque;
+
+$input-background-color: #3939390d;
+
+$border-color-primary: #f0f1f1;
+
+$header-background: linear-gradient(#343333, #484848, #282828);
+$header-burger-menu-background-color: #282828;
+$header-height: 130px;
+
+@function calc-line-height($font-size) {
+  @return calc($font-size * 1.25);
+}
+
+@mixin text($font-size, $font-weight: $font-weight-normal) {
+  font-family: $font-family-primary;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: calc-line-height($font-size);
+  text-align: center;
+}
+
+@mixin text-big() {
+  @include text($font-size-big, $font-weight-bold);
+}
+
+@mixin text-small() {
+  @include text($font-size-small);
+}
+
+@mixin text-medium() {
+  @include text($font-size-medium);
+}

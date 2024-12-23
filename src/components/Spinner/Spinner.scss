@@ -1,10 +1,10 @@
-@use "@Utils/variables" as v;
+@use "@Utils/theme" as *;
 
 .spinner {
   width: 30px;
   height: 30px;
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid v.$text-color-orange;
+  border: $indent-xxs solid #fafafa;
+  border-top: $indent-xxs solid $text-color-secondary;
   border-radius: 50%;
   animation: spin 1s infinite linear;
 }

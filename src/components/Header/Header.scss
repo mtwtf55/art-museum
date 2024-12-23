@@ -1,8 +1,8 @@
-@use "@Utils/variables" as v;
+@use "@Utils/theme" as *;
 
 .header {
-  background: v.$header-background-color;
-  height: v.$header-height;
+  background: $header-background;
+  height: $header-height;
   display: flex;
   align-items: center;
 
@@ -23,7 +23,7 @@
       justify-content: right;
 
       * {
-        padding-left: 32px;
+        padding-left: $indent-sm;
       }
     }
   }

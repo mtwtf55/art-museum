@@ -1,17 +1,17 @@
-@use "@Utils/variables" as v;
+@use "@Utils/theme" as *;
 
 .artwork-card-small {
-  padding: 16px;
-  border: 1px v.$border-grey;
+  padding: $indent-s;
+  border: 1px $border-color-primary;
   display: grid;
   grid-template-columns: 80px auto auto;
-  grid-gap: 16px;
-  background-color: white;
+  grid-gap: $indent-s;
+  background-color: $background-color-primary;
 
   transition: border 200ms;
 
   &:hover {
-    border: 1px solid bisque;
+    border: 1px solid $border-color-primary;
     cursor: pointer;
   }
 
@@ -24,7 +24,7 @@
   &__image {
     width: 80px;
     height: 80px;
-    background-color: bisque;
+    background-color: $image-background-color;
 
     display: grid;
     justify-content: flex-start;
@@ -41,15 +41,10 @@
     text-align: start;
 
     &__title {
-      margin: 0;
-      font-family: Inter;
-      font-size: 17.54px;
-      font-weight: 500;
-      line-height: 26.32px;
-      letter-spacing: -0.03em;
-      text-underline-position: from-font;
-      text-decoration-skip-ink: none;
-      color: v.$text-color-black;
+      @include text(1.125rem, $font-weight-semibold);
+      text-align: left;
+      font-family: $font-family-secondary;
+      color: $text-color-primary;
 
       text-wrap: nowrap;
       text-overflow: ellipsis;
@@ -57,15 +52,10 @@
     }
 
     &__artist {
-      margin: 0;
-      font-family: Inter;
-      font-size: 15.35px;
-      font-weight: 400;
-      line-height: 26.32px;
-      letter-spacing: -0.01em;
-      text-underline-position: from-font;
-      text-decoration-skip-ink: none;
-      color: v.$text-color-orange;
+      @include text-small;
+      text-align: left;
+      font-family: $font-family-secondary;
+      color: $text-color-secondary;
 
       text-wrap: nowrap;
       text-overflow: ellipsis;
@@ -73,15 +63,10 @@
     }
 
     &__is-public {
-      margin: 0;
-      font-family: Inter;
-      font-size: 15.35px;
-      font-weight: 700;
-      line-height: 26.32px;
-      letter-spacing: -0.01em;
-      text-underline-position: from-font;
-      text-decoration-skip-ink: none;
-      color: v.$text-color-black;
+      @include text($font-size-small, $font-weight-bold);
+      text-align: left;
+      font-family: $font-family-secondary;
+      color: $text-color-primary;
     }
   }
 }

@@ -1,4 +1,4 @@
-@use "@Utils/variables" as v;
+@use "@Utils/theme" as *;
 
 .burger-menu {
   &__icon {
@@ -10,16 +10,19 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: v.$header-height;
+    top: $header-height;
+
     display: flex;
     flex-direction: column;
-    background-color: #343333;
+
+    background-color: $header-burger-menu-background-color;
+
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
 
     &__container {
       text-align: center;
-      padding: 10px 0;
+      padding: $indent-xs 0;
     }
   }
 }

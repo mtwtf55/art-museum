@@ -1,4 +1,4 @@
-@use "@Utils/variables" as v;
+@use "@Utils/theme" as *;
 
 .gallery {
   text-align: center;
@@ -6,32 +6,20 @@
   flex-direction: column;
 
   &__pretitle {
-    margin: 0;
-    font-family: Lexend Deca;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    color: v.$text-color-orange;
+    @include text-small;
+    color: $text-color-secondary;
   }
 
   &__title {
-    margin: 0;
-    font-family: Lexend Deca;
-    font-size: 32px;
-    font-weight: 400;
-    line-height: 40px;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    color: v.$text-color-black;
+    @include text-medium;
+    color: $text-color-primary;
   }
 
   &__main {
-    padding-top: 40px;
+    padding-top: $indent-m;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    gap: $indent-sm;
   }
 }
 
@@ -46,21 +34,20 @@
   &__picture {
     width: 380px;
     height: 440px;
-    background-color: #d9c7c7;
+    background-color: $image-background-color;
   }
 
   &__info {
-    display: inline-block;
-    background-color: white;
-    padding: 24px 32px;
-    border: 1px v.$border-grey;
+    background-color: $background-color-primary;
+    padding: $indent-s $indent-s;
+    border: 1px $border-color-primary;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 266px;
+    width: 300px;
     position: relative;
-    left: 6%;
-    bottom: 11%;
+    left: 7%;
+    bottom: 10%;
 
     &__wrapper {
       display: flex;
@@ -69,33 +56,24 @@
     }
 
     &__description {
+      display: flex;
+      flex-direction: column;
+      gap: $indent-xxs;
+
       &__title {
-        margin: 0;
-        font-family: Lexend Deca;
-        font-size: 17.54px;
-        font-weight: 500;
-        line-height: 26.32px;
-        letter-spacing: -0.03em;
+        @include text(1.125rem, $font-weight-semibold);
         text-align: left;
-        text-underline-position: from-font;
-        text-decoration-skip-ink: none;
-        color: v.$text-color-black;
+        color: $text-color-primary;
+
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
       &__author {
-        margin: 0;
-        font-family: Lexend Deca;
-        font-size: 15.35px;
-        font-weight: 400;
-        line-height: 26.32px;
-        letter-spacing: -0.01em;
+        @include text-small;
         text-align: left;
-        text-underline-position: from-font;
-        text-decoration-skip-ink: none;
-        color: v.$text-color-orange;
+        color: $text-color-secondary;
 
         white-space: nowrap;
         overflow: hidden;
@@ -104,16 +82,11 @@
     }
 
     &__isPublic {
-      margin: 0;
-      font-family: Lexend Deca;
-      font-size: 15.35px;
-      font-weight: 700;
-      line-height: 26.32px;
-      letter-spacing: -0.01em;
+      @include text($font-size-small, $font-weight-bold);
       text-align: left;
-      text-underline-position: from-font;
-      text-decoration-skip-ink: none;
-      color: v.$text-color-black;
+      color: $text-color-primary;
+
+      margin-top: $indent-xs;
     }
 
     &__icon {
@@ -127,7 +100,7 @@
 .image-placeholder {
   width: 380px;
   height: 440px;
-  background-color: #d9c7c7;
+  background-color: $image-background-color;
 }
 
 @media screen and (max-width: 1300px) {
