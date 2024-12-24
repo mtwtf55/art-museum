@@ -7,7 +7,7 @@ import { sessionStorageHelper } from "@Utils/functions/sessionStorageHelper";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-type ArtworkCardSmall = {
+type ArtworkCardSmallProps = {
   artwork: Artwork;
   iiifUrl: string;
 };
@@ -15,7 +15,7 @@ type ArtworkCardSmall = {
 function ArtworkCardSmall({
   artwork: { title, artist_title, is_public_domain, image_id, id: artworkId },
   iiifUrl,
-}: ArtworkCardSmall) {
+}: ArtworkCardSmallProps) {
   const navigate = useNavigate();
   const storageHelper = sessionStorageHelper();
   const [isArtworkInFavourites, setIsArtworkInFavourites] = useState(

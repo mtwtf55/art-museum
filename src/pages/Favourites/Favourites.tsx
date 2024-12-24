@@ -16,7 +16,10 @@ const NO_FAVOURITE_ITEMS_MESSAGE = `You don't have any favourite artworks`;
 
 function Favourites() {
   const storageHelper = useMemo(sessionStorageHelper, []);
-  const validIds = useMemo(storageHelper.getValidArtworksIds, [storageHelper]);
+  const validIds = useMemo(
+    () => storageHelper.getValidArtworksIds(),
+    [storageHelper],
+  );
 
   const {
     query: getFavourites,
