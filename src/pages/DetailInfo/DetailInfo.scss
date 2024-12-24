@@ -15,8 +15,7 @@
     margin: 0 auto;
 
     &__image {
-      width: 500px;
-      height: 570px;
+      width: 100%;
       background-color: $image-background-color;
       position: relative;
 
@@ -86,14 +85,21 @@
   margin: 50%;
 }
 
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 1000px) {
   .detail-info-page__main {
     grid-template-columns: 1fr;
+    padding-top: $indent-m;
   }
   .detail-info-page__main__info {
     grid-template-rows: 1fr;
   }
   .detail-info-page__main__image {
-    place-self: center;
+    place-self: start;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .detail-info-page__main {
+    padding-top: $indent-lm;
   }
 }

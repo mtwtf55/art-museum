@@ -44,3 +44,10 @@
     }
   }
 }
+
+@media (max-width: 500px) {
+  .other-works__title,
+  .other-works__pretitle {
+    text-align: left;
+  }
+}
