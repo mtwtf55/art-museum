@@ -22,15 +22,15 @@ function SearchResults({ artworks, iiifUrl, setArtworks }: SearchResultsType) {
   return artworks.length === 0 ? (
     <NotFoundPlaceholder message={NO_RESULTS_MESSAGE} />
   ) : (
-    <div className="search-results">
-      <div className="search-results__title">
-        Results Of A Search
+    <section className="search-results">
+      <div className="search-results__title__container">
+        <h2 className="search-results__title__text">Results Of A Search</h2>
         <div className="sort-icon">
           <SortMenu data={artworks} setData={setArtworks} />
         </div>
       </div>
       <div className="search-results__main">{artworkCards}</div>
-    </div>
+    </section>
   );
 }
 

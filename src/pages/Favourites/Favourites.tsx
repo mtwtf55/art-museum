@@ -54,15 +54,15 @@ function Favourites() {
         <LoadingPlaceholder />
       ) : (
         <div className="favourites-wrapper">
-          <div className={"favourites"}>
+          <div className="favourites">
             <FavouritesTitle />
             {!favouriteItems || favouriteItems.length === 0 ? (
               <NotFoundPlaceholder message={NO_FAVOURITE_ITEMS_MESSAGE} />
             ) : (
-              <div className="favourites__main">
+              <main className="favourites__main">
                 <div className="favourites__main__title">
-                  <p className="favourites__main__title__sub">Saved by you</p>
-                  <div className="favourites__main__title__main">
+                  <h4 className="favourites__main__title__sub">Saved by you</h4>
+                  <h2 className="favourites__main__title__main">
                     Your favorites list
                     <div className="sort-icon">
                       <SortMenu
@@ -70,10 +70,10 @@ function Favourites() {
                         setData={handleSetFavourites}
                       />
                     </div>
-                  </div>
+                  </h2>
                 </div>
                 <div className="favourites__main__list">{favouriteItems}</div>
-              </div>
+              </main>
             )}
           </div>
         </div>
@@ -85,7 +85,7 @@ function Favourites() {
 
 function FavouritesTitle() {
   return (
-    <p className="favourites__title">
+    <h1 className="favourites__title">
       Here Are Your
       <br />
       <span className="favourites__title__sub">
@@ -106,7 +106,7 @@ function FavouritesTitle() {
         </svg>{" "}
         Favourites
       </span>
-    </p>
+    </h1>
   );
 }
 

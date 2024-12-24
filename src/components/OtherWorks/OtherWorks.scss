@@ -1,22 +1,28 @@
 @use "@Utils/theme" as *;
 
 .other-works {
+  text-align: center;
+
   &__pretitle {
     @include text-small;
     color: $text-color-secondary;
   }
 
   &__title {
-    @include text-medium;
-    color: $text-color-primary;
+    &__container {
+      position: relative;
 
-    position: relative;
+      .sort-icon {
+        position: absolute;
+        height: 100%;
+        right: 0;
+        top: 0;
+      }
+    }
 
-    .sort-icon {
-      position: absolute;
-      height: 100%;
-      right: 0;
-      top: 0;
+    &__text {
+      @include text-medium;
+      color: $text-color-primary;
     }
   }
 
@@ -29,6 +35,7 @@
     margin-top: $indent-m;
   }
 }
+
 @media screen and (max-width: 1300px) {
   .other-works {
     &__main {
@@ -46,8 +53,8 @@
 }
 
 @media (max-width: 500px) {
-  .other-works__title,
-  .other-works__pretitle {
+  .other-works,
+  .other-works__title__text {
     text-align: left;
   }
 }

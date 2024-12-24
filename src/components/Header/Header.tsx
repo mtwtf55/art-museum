@@ -14,14 +14,14 @@ function Header() {
   const { width: windowWidth } = useWindowDimensions();
 
   const MainMenu = (
-    <div className="header__inner__links">
+    <ul className="header__inner__links">
       <HomeLink />
       <FavouritesLink />
-    </div>
+    </ul>
   );
 
   return (
-    <div className="header">
+    <header className="header">
       <div className="header__container">
         <div className="header__inner">
           <div className="header__inner__logo">
@@ -30,7 +30,7 @@ function Header() {
           {windowWidth < WINDOW_WIDTH_LIMIT ? <BurgerMenu /> : MainMenu}
         </div>
       </div>
-    </div>
+    </header>
   );
 }
 

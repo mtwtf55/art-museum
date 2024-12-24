@@ -23,14 +23,14 @@ function BurgerMenu() {
           onClick={handleBurgerMenuClicked}
         />
       </div>
-      <div className={`burger-menu__links${isActive ? " active" : ""}`}>
-        <div className="burger-menu__links__container">
+      <ul className={`burger-menu__links${isActive ? " active" : ""}`}>
+        <li className="burger-menu__links__container">
           <HomeLink />
-        </div>
-        <div className="burger-menu__links__container">
+        </li>
+        <li className="burger-menu__links__container">
           <FavouritesLink />
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   );
 }

@@ -107,13 +107,13 @@ function Home() {
   return (
     <div>
       <Header />
-      <div className="main">
+      <main className="main">
         <div className="container">
-          <p className="main__title">
+          <h1 className="main__title">
             Let&#39;s Find Some{" "}
             <span className={"main__title__inner"}>Art</span>
             <br /> Here!
-          </p>
+          </h1>
 
           <Search onSearch={handleSearch} initialValue={searchString} />
 
@@ -133,7 +133,7 @@ function Home() {
             <LoadingPlaceholder />
           ) : (
             <>
-              <div className="main__special-gallery">
+              <section className="main__special-gallery">
                 <ErrorBoundary>
                   <SpecialGallery
                     artworks={artworks?.data ?? []}
@@ -142,8 +142,9 @@ function Home() {
                     currentPage={currentPage}
                   />
                 </ErrorBoundary>
-              </div>
-              <div className="main__other-works">
+              </section>
+
+              <section className="main__other-works">
                 <ErrorBoundary>
                   <OtherWorks
                     artworks={otherArtworks?.data ?? []}
@@ -151,11 +152,11 @@ function Home() {
                     setArtworks={handleSetOtherArtworks}
                   />
                 </ErrorBoundary>
-              </div>
+              </section>
             </>
           )}
         </div>
-      </div>
+      </main>
       <Footer />
     </div>
   );

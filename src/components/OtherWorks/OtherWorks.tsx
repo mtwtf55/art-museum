@@ -19,9 +19,9 @@ function OtherWorks({ artworks, iiifUrl, setArtworks }: OtherWorksProps) {
 
   return (
     <div className="other-works">
-      <p className="other-works__pretitle">Here some more</p>
-      <div className="other-works__title">
-        Other works for you
+      <span className="other-works__pretitle">Here some more</span>
+      <div className="other-works__title__container">
+        <h2 className="other-works__title__text">Other works for you</h2>
         <div className="sort-icon">
           <SortMenu data={artworks} setData={setArtworks} />
         </div>

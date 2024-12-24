@@ -32,17 +32,21 @@
 
 .search-results {
   &__title {
-    margin-top: $indent-m;
-    @include text-medium;
-    color: $text-color-primary;
+    &__container {
+      margin-top: $indent-m;
+      position: relative;
 
-    position: relative;
+      .sort-icon {
+        position: absolute;
+        height: 100%;
+        right: 0;
+        top: 0;
+      }
+    }
 
-    .sort-icon {
-      position: absolute;
-      height: 100%;
-      right: 0;
-      top: 0;
+    &__text {
+      @include text-medium;
+      color: $text-color-primary;
     }
   }
 

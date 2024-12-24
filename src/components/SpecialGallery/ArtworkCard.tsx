@@ -49,8 +49,8 @@ function ArtworkCard({
       <div className="card__info">
         <div className="card__info__wrapper">
           <div className="card__info__description">
-            <p className="card__info__description__title">{title}</p>
-            <p className="card__info__description__author">{author}</p>
+            <h3 className="card__info__description__title">{title}</h3>
+            <h4 className="card__info__description__author">{author}</h4>
           </div>
           <p className="card__info__isPublic">
             {isPublic ? "Public" : "Copyright"}

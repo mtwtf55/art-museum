@@ -8,7 +8,7 @@ const MODSEN_LOGO_NAME = "modsen-logo.svg";
 
 function Footer() {
   return (
-    <div className={"footer"}>
+    <footer className="footer">
       <div className="footer__container">
         <div className="footer__inner">
           <div className="footer__inner__logo">
@@ -19,7 +19,7 @@ function Footer() {
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }
 

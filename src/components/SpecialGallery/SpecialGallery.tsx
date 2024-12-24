@@ -37,8 +37,8 @@ function SpecialGallery({
 
   return (
     <div className="gallery">
-      <p className="gallery__pretitle">Topics for you</p>
-      <p className="gallery__title">Our special gallery</p>
+      <span className="gallery__pretitle">Topics for you</span>
+      <h2 className="gallery__title">Our special gallery</h2>
       <div className="gallery__main">{galleryItems}</div>
       <Pagination pagesCount={4} page={currentPage} setPage={handleNextPage} />
     </div>

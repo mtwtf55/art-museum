@@ -40,8 +40,8 @@ function ArtworkCardSmall({
         <Image iiifUrl={iiifUrl} imageId={image_id} />
       </div>
       <div className="artwork-card-small__content">
-        <p className="artwork-card-small__content__title">{title}</p>
-        <p className="artwork-card-small__content__artist">{artist_title}</p>
+        <h3 className="artwork-card-small__content__title">{title}</h3>
+        <h4 className="artwork-card-small__content__artist">{artist_title}</h4>
         <p className="artwork-card-small__content__is-public">
           {is_public_domain ? "Public" : "Copyright"}
         </p>

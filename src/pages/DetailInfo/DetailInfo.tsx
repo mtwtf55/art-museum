@@ -67,9 +67,9 @@ function DetailInfo() {
             </div>
             <div className="detail-info-page__main__info">
               <div className="detail-info-page__main__info__general">
-                <p className="detail-info-page__main__info__general__title">
+                <h3 className="detail-info-page__main__info__general__title">
                   {artwork?.data?.title}
-                </p>
+                </h3>
                 <p className="detail-info-page__main__info__general__author">
                   {artwork?.data?.artist_title}
                 </p>
@@ -78,9 +78,9 @@ function DetailInfo() {
                 </p>
               </div>
               <div className="detail-info-page__main__info__overview">
-                <p className="detail-info-page__main__info__overview__title">
+                <h2 className="detail-info-page__main__info__overview__title">
                   Overview
-                </p>
+                </h2>
                 <p className="detail-info-page__main__info__overview__item">
                   <span className="overview-category">
                     Artist nationality:{" "}

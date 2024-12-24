@@ -9,7 +9,7 @@ type NotFoundPlaceholderType = {
 function NotFoundPlaceholder({ message }: NotFoundPlaceholderType) {
   return (
     <div className="not-found-placeholder">
-      <p className="not-found-placeholder__text">{message}</p>
+      <h2 className="not-found-placeholder__text">{message}</h2>
     </div>
   );
 }
