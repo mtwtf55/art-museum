@@ -1,0 +1,29 @@
+@use "@Utils/theme" as *;
+
+.image {
+  background-color: $image-background-color;
+  height: 100%;
+  position: relative;
+
+  &__error-message {
+    @include text(1em);
+
+    color: $text-color-secondary;
+    position: absolute;
+    width: 100%;
+
+    @include centerAbsoluteElement;
+  }
+
+  &__main {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    visibility: hidden;
+  }
+  &__spinner {
+    position: absolute;
+
+    @include centerAbsoluteElement;
+  }
+}

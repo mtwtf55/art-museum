@@ -1,15 +1,13 @@
 import "./DetailInfo.scss";
 
-import { AddToFavouritesIcon, Footer, Header, Spinner } from "@Components";
-import {
-  DEFAULT_IMG_PATH_PAYLOAD__BIG_SIZE,
-  REQUESTED_FIELDS,
-} from "@Constants/constants";
+import { AddToFavouritesIcon, Footer, Header } from "@Components";
+import Image from "@Components/Image/Image";
+import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants/constants";
 import { ArtworkResponseType } from "@Types/types";
 import { createRequestUrl } from "@Utils/functions/createRequestUrl";
 import { sessionStorageHelper } from "@Utils/functions/sessionStorageHelper";
 import { useQuery } from "@Utils/hooks/useQuery";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function DetailInfo() {
@@ -24,19 +22,10 @@ function DetailInfo() {
   const [isArtworkInFavourites, setIsArtworkInFavourites] = useState(
     storageHelper.has(artwork?.data.id),
   );
-  const [isImageLoading, setIsImageLoading] = useState(true);
 
   useEffect(() => {
     getArtwork();
   }, []);
-
-  const imgUrl = useMemo(
-    () =>
-      artwork?.config.iiif_url +
-      `/${artwork?.data?.image_id}` +
-      DEFAULT_IMG_PATH_PAYLOAD__BIG_SIZE,
-    [artwork],
-  );
 
   function handleAddToFavourites(event: React.MouseEvent<HTMLElement>) {
     setIsArtworkInFavourites(!isArtworkInFavourites);
@@ -49,22 +38,16 @@ function DetailInfo() {
 
   const isFavourite = storageHelper.has(artwork?.data.id);
 
-  function handleImageLoads() {
-    setIsImageLoading(false);
-  }
-
   return (
     <div className={"detail-info-page"}>
       <Header />
       <div className="detail-info-page__main-wrapper">
         <div className="detail-info-page__main">
           <div className="detail-info-page__main__image">
-            {isImageLoading && (
-              <div className="spinner-wrapper">
-                <Spinner />
-              </div>
-            )}
-            <img src={imgUrl} alt="" onLoad={handleImageLoads} />
+            <Image
+              iiifUrl={artwork?.config.iiif_url || DEFAULT_IIIF_URL}
+              imageId={artwork?.data.image_id}
+            />
             <div className="detail-info-page__main__image__icon">
               <AddToFavouritesIcon
                 onClick={handleAddToFavourites}

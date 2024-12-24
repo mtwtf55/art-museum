@@ -1,7 +1,7 @@
 import "./ArtworkCardSmall.scss";
 
-import { AddToFavouritesIcon, Spinner } from "@Components";
-import { DEFAULT_IMG_PATH_PAYLOAD__SMALL_SIZE } from "@Constants/constants";
+import { AddToFavouritesIcon } from "@Components";
+import Image from "@Components/Image/Image";
 import { Artwork } from "@Types/types";
 import { sessionStorageHelper } from "@Utils/functions/sessionStorageHelper";
 import React, { useState } from "react";
@@ -21,10 +21,6 @@ function ArtworkCardSmall({
   const [isArtworkInFavourites, setIsArtworkInFavourites] = useState(
     storageHelper.has(artworkId),
   );
-  const [isImageLoading, setIsImageLoading] = useState(true);
-
-  const imgUrl =
-    iiifUrl + `/${image_id}` + DEFAULT_IMG_PATH_PAYLOAD__SMALL_SIZE;
 
   function handleOnClick() {
     navigate(`/artworks/${artworkId}`);
@@ -41,12 +37,7 @@ function ArtworkCardSmall({
   return (
     <div className={"artwork-card-small"} onClick={handleOnClick}>
       <div className="artwork-card-small__image">
-        {isImageLoading && (
-          <div className="spinner-wrapper">
-            <Spinner />
-          </div>
-        )}
-        <img src={imgUrl} alt="" onLoad={() => setIsImageLoading(false)} />
+        <Image iiifUrl={iiifUrl} imageId={image_id} />
       </div>
       <div className="artwork-card-small__content">
         <p className="artwork-card-small__content__title">{title}</p>

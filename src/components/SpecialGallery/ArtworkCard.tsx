@@ -1,7 +1,7 @@
 import "./SpecialGallery.scss";
 
 import { AddToFavouritesIcon } from "@Components";
-import { DEFAULT_IMG_PATH_PAYLOAD__MEDIUM_SIZE } from "@Constants/constants";
+import Image from "@Components/Image/Image";
 import { sessionStorageHelper } from "@Utils/functions/sessionStorageHelper";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -28,8 +28,6 @@ function ArtworkCard({
   const [isArtworkInFavourites, setIsArtworkInFavourites] = useState(
     storageHelper.has(artworkId),
   );
-  const imgUrl =
-    iiifUrl + `/${imageId}` + DEFAULT_IMG_PATH_PAYLOAD__MEDIUM_SIZE;
 
   function handleOnClick() {
     navigate(`/artworks/${artworkId}`);
@@ -46,7 +44,7 @@ function ArtworkCard({
   return (
     <div className="card" onClick={handleOnClick}>
       <div className="card__picture">
-        <img src={imgUrl} alt="" />
+        <Image iiifUrl={iiifUrl} imageId={imageId} />
       </div>
       <div className="card__info">
         <div className="card__info__wrapper">

@@ -26,7 +26,7 @@ $background-color-primary: #fff;
 $background-color-secondary: #fafafa;
 $background-color-alternative: #f17900;
 
-$image-background-color: busque;
+$image-background-color: bisque;
 
 $input-background-color: #3939390d;
 
@@ -58,4 +58,10 @@ $header-height: 130px;
 
 @mixin text-medium() {
   @include text($font-size-medium);
+}
+
+@mixin centerAbsoluteElement() {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
