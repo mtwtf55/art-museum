@@ -9,6 +9,7 @@ type CreateRequestUrlType = {
   search: (q: string) => CreateRequestUrlType;
   ids: (ids: number[]) => CreateRequestUrlType;
   random: (length?: number) => CreateRequestUrlType;
+  offset: (value: number) => CreateRequestUrlType;
   build: () => string;
 };
 
@@ -24,6 +25,7 @@ export function createRequestUrl(): CreateRequestUrlType {
     page?: number;
     q?: string;
     ids?: number[];
+    offset?: number;
   } = {};
 
   function limit(this: CreateRequestUrlType, limit: number) {
@@ -52,12 +54,14 @@ export function createRequestUrl(): CreateRequestUrlType {
   }
 
   function random(this: CreateRequestUrlType, length?: number) {
-    const randomIds = Array.from(
-      { length: length ?? RANDOM_ARTWORKS_COUNT },
-      () => Math.round(Math.random() * RANDOM_CEILING),
+    params.ids = Array.from({ length: length ?? RANDOM_ARTWORKS_COUNT }, () =>
+      Math.round(Math.random() * RANDOM_CEILING),
     );
-    params.ids = randomIds;
-    console.log({ randomIds });
+    return this;
+  }
+
+  function offset(this: CreateRequestUrlType, value: number) {
+    params.offset = value;
     return this;
   }
 
@@ -73,12 +77,30 @@ export function createRequestUrl(): CreateRequestUrlType {
   }
 
   function build() {
+    _processOffset();
+
     const urlParams = Object.entries(params)
       .map((entry) => `${entry[0]}=${entry[1].toString()}`)
       .join("&");
 
     return `${reqUrl}?${urlParams}`;
+
+    function _processOffset() {
+      if (params.offset && !params.page) params.page = params.offset;
+      else if (params.page && params.offset) params.page += params.offset;
+    }
   }
 
-  return { limit, artwork, build, fields, page, q, search, ids, random };
+  return {
+    limit,
+    artwork,
+    build,
+    fields,
+    page,
+    q,
+    search,
+    ids,
+    random,
+    offset,
+  };
 }

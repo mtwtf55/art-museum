@@ -1,13 +1,8 @@
 import "./Home.scss";
 
-import {
-  Footer,
-  Header,
-  OtherWorks,
-  SpecialGallery,
-  Spinner,
-} from "@Components";
+import { Footer, Header, OtherWorks, SpecialGallery } from "@Components";
 import ErrorBoundary from "@Components/ErrorBoundaryFallback/ErrorBoundary";
+import LoadingPlaceholder from "@Components/Placeholders/LoadingPlaceholder/LoadingPlaceholder";
 import Search from "@Components/Search/Search";
 import SearchResults from "@Components/Search/SearchResults";
 import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants/constants";
@@ -17,12 +12,22 @@ import mutateSet from "@Utils/functions/mutateSet";
 import { useQuery } from "@Utils/hooks/useQuery";
 import React, { useEffect, useMemo, useState } from "react";
 
-const SEARCH_RESULT_LIMIT = 15;
+const SEARCH_RESULT_LIMIT = 30;
+const OTHER_ARTWORKS_LIMIT = 15;
 const GALLERY_ARTWORKS_PER_PAGE = 3;
+const RANDOM_SEED = 300;
 
 function Home() {
   const [searchString, setSearchString] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
+  const specialGalleryOffset = useMemo(
+    () => Math.round(Math.random() * RANDOM_SEED),
+    [],
+  );
+  const otherArtworksOffset = useMemo(
+    () => Math.round(Math.random() * RANDOM_SEED),
+    [],
+  );
 
   const searchReqUrl = useMemo(
     () =>
@@ -39,6 +44,7 @@ function Home() {
       createRequestUrl()
         .limit(GALLERY_ARTWORKS_PER_PAGE)
         .page(currentPage)
+        .offset(specialGalleryOffset)
         .fields(REQUESTED_FIELDS)
         .build(),
     [currentPage],
@@ -48,6 +54,7 @@ function Home() {
     query: searchQuery,
     data: searchResults,
     setData: setSearchResults,
+    loading: searchIsLoading,
   } = useQuery<ArtworksResponseType>({
     url: searchReqUrl,
   });
@@ -66,7 +73,11 @@ function Home() {
     loading: otherArtworksLoading,
     setData: setOtherArtworks,
   } = useQuery<ArtworksResponseType>({
-    url: createRequestUrl().random().fields(REQUESTED_FIELDS).build(),
+    url: createRequestUrl()
+      .offset(otherArtworksOffset)
+      .limit(OTHER_ARTWORKS_LIMIT)
+      .fields(REQUESTED_FIELDS)
+      .build(),
   });
 
   useEffect(() => {
@@ -107,43 +118,39 @@ function Home() {
           <Search onSearch={handleSearch} initialValue={searchString} />
 
           {searchString.length !== 0 ? (
-            <ErrorBoundary>
-              <SearchResults
-                artworks={searchResults?.data || []}
-                iiifUrl={searchResults?.config.iiif_url || DEFAULT_IIIF_URL}
-                setArtworks={handleSetSearchResults}
-              />
-            </ErrorBoundary>
+            searchIsLoading ? (
+              <LoadingPlaceholder />
+            ) : (
+              <ErrorBoundary>
+                <SearchResults
+                  artworks={searchResults?.data || []}
+                  iiifUrl={searchResults?.config.iiif_url || DEFAULT_IIIF_URL}
+                  setArtworks={handleSetSearchResults}
+                />
+              </ErrorBoundary>
+            )
+          ) : artworksLoading || otherArtworksLoading ? (
+            <LoadingPlaceholder />
           ) : (
             <>
               <div className="main__special-gallery">
-                {artworksLoading ? (
-                  <Spinner />
-                ) : (
-                  <ErrorBoundary>
-                    <SpecialGallery
-                      artworks={artworks?.data ?? []}
-                      iiifUrl={artworks?.config.iiif_url ?? DEFAULT_IIIF_URL}
-                      onNextPage={handleNextPage}
-                      currentPage={currentPage}
-                    />
-                  </ErrorBoundary>
-                )}
+                <ErrorBoundary>
+                  <SpecialGallery
+                    artworks={artworks?.data ?? []}
+                    iiifUrl={artworks?.config.iiif_url ?? DEFAULT_IIIF_URL}
+                    onNextPage={handleNextPage}
+                    currentPage={currentPage}
+                  />
+                </ErrorBoundary>
               </div>
               <div className="main__other-works">
-                {otherArtworksLoading ? (
-                  <Spinner />
-                ) : (
-                  <ErrorBoundary>
-                    <OtherWorks
-                      artworks={otherArtworks?.data ?? []}
-                      iiifUrl={
-                        otherArtworks?.config.iiif_url || DEFAULT_IIIF_URL
-                      }
-                      setArtworks={handleSetOtherArtworks}
-                    />
-                  </ErrorBoundary>
-                )}
+                <ErrorBoundary>
+                  <OtherWorks
+                    artworks={otherArtworks?.data ?? []}
+                    iiifUrl={otherArtworks?.config.iiif_url || DEFAULT_IIIF_URL}
+                    setArtworks={handleSetOtherArtworks}
+                  />
+                </ErrorBoundary>
               </div>
             </>
           )}

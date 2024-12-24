@@ -1,6 +1,8 @@
 import "./Favourites.scss";
 
-import { ArtworkCardSmall, Footer, Header, Spinner } from "@Components";
+import { ArtworkCardSmall, Footer, Header } from "@Components";
+import LoadingPlaceholder from "@Components/Placeholders/LoadingPlaceholder/LoadingPlaceholder";
+import NotFoundPlaceholder from "@Components/Placeholders/NotFoundPlaceholder/NotFoundPlaceholder";
 import SortMenu from "@Components/SortMenu/SortMenu";
 import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants/constants";
 import { Artwork, ArtworksResponseType } from "@Types/types";
@@ -9,6 +11,8 @@ import mutateSet from "@Utils/functions/mutateSet";
 import { sessionStorageHelper } from "@Utils/functions/sessionStorageHelper";
 import { useQuery } from "@Utils/hooks/useQuery";
 import React, { useEffect, useMemo } from "react";
+
+const NO_FAVOURITE_ITEMS_MESSAGE = `You don't have any favourite artworks`;
 
 function Favourites() {
   const storageHelper = useMemo(sessionStorageHelper, []);
@@ -46,32 +50,34 @@ function Favourites() {
   return (
     <div>
       <Header />
-      <div className="favourites-wrapper">
-        <div className={"favourites"}>
-          <FavouritesTitle />
-          <div className="favourites__main">
-            <div className="favourites__main__title">
-              <p className="favourites__main__title__sub">Saved by you</p>
-              <div className="favourites__main__title__main">
-                Your favorites list
-                <div className="sort-icon">
-                  <SortMenu
-                    data={favourites?.data ?? []}
-                    setData={handleSetFavourites}
-                  />
-                </div>
-              </div>
-            </div>
-            {favouritesLoading ? (
-              <div className="favourites__main__spinner-wrapper">
-                <Spinner />
-              </div>
+      {favouritesLoading ? (
+        <LoadingPlaceholder />
+      ) : (
+        <div className="favourites-wrapper">
+          <div className={"favourites"}>
+            <FavouritesTitle />
+            {!favouriteItems || favouriteItems.length === 0 ? (
+              <NotFoundPlaceholder message={NO_FAVOURITE_ITEMS_MESSAGE} />
             ) : (
-              <div className="favourites__main__list">{favouriteItems}</div>
+              <div className="favourites__main">
+                <div className="favourites__main__title">
+                  <p className="favourites__main__title__sub">Saved by you</p>
+                  <div className="favourites__main__title__main">
+                    Your favorites list
+                    <div className="sort-icon">
+                      <SortMenu
+                        data={favourites?.data ?? []}
+                        setData={handleSetFavourites}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="favourites__main__list">{favouriteItems}</div>
+              </div>
             )}
           </div>
         </div>
-      </div>
+      )}
       <Footer />
     </div>
   );
