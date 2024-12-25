@@ -1,9 +1,9 @@
 import "./ArtworkCardSmall.scss";
 
-import { AddToFavouritesIcon } from "@Components";
-import Image from "@Components/Image/Image";
-import { Artwork } from "@Types/types";
-import { sessionStorageHelper } from "@Utils/functions/sessionStorageHelper";
+import { AddToFavouritesIcon } from "@Components/Buttons/AddToFavourites/AddToFavouritesIcon";
+import { Image } from "@Components/Image/Image";
+import { Artwork } from "@Types";
+import { sessionStorageHelper } from "@Utils";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +12,7 @@ export type ArtworkCardSmallProps = {
   iiifUrl: string;
 };
 
-function ArtworkCardSmall({
+export function ArtworkCardSmall({
   artwork: { title, artist_title, is_public_domain, image_id, id: artworkId },
   iiifUrl,
 }: ArtworkCardSmallProps) {
@@ -59,5 +59,3 @@ function ArtworkCardSmall({
     </div>
   );
 }
-
-export default ArtworkCardSmall;

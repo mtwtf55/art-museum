@@ -1,16 +1,15 @@
 import "./Header.scss";
 
-import { Icon } from "@Components";
-import BurgerMenu from "@Components/BurgerMenu/BurgerMenu";
-import FavouritesLink from "@Components/Header/Links/FavouritesLink";
-import HomeLink from "@Components/Header/Links/HomeLink";
-import useWindowDimensions from "@Utils/hooks/useWindowDimensions";
-import React from "react";
+import { BurgerMenu } from "@Components/BurgerMenu/BurgerMenu";
+import { FavouritesLink } from "@Components/Header/Links/FavouritesLink";
+import { HomeLink } from "@Components/Header/Links/HomeLink";
+import { Icon } from "@Components/Icon/Icon";
+import { useWindowDimensions } from "@Utils";
 
 const MUSEUM_LOGO_NAME = "museum-logo-light.svg";
 const WINDOW_WIDTH_LIMIT = 700;
 
-function Header() {
+export function Header() {
   const { width: windowWidth } = useWindowDimensions();
 
   const MainMenu = (
@@ -33,5 +32,3 @@ function Header() {
     </header>
   );
 }
-
-export default Header;

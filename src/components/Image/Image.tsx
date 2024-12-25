@@ -1,8 +1,8 @@
 import "./Image.scss";
 
-import Spinner from "@Components/Spinner/Spinner";
-import { DEFAULT_IMG_PATH_PAYLOAD } from "@Constants/constants";
-import React, { SyntheticEvent, useMemo, useState } from "react";
+import { Spinner } from "@Components/Spinner/Spinner";
+import { DEFAULT_IMG_PATH_PAYLOAD } from "@Constants";
+import { SyntheticEvent, useMemo, useState } from "react";
 
 type ImageProps = {
   iiifUrl: string;
@@ -12,7 +12,7 @@ type ImageProps = {
 const LOADING_LIMIT_MS = 5000;
 const ERROR_MESSAGE = "Could not load the image.";
 
-function Image({ iiifUrl, imageId }: ImageProps) {
+export function Image({ iiifUrl, imageId }: ImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
@@ -58,5 +58,3 @@ function Image({ iiifUrl, imageId }: ImageProps) {
     </div>
   );
 }
-
-export default Image;

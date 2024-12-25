@@ -1,12 +1,14 @@
+import { ErrorBoundaryFallback } from "@Components/ErrorBoundary/ErrorBoundaryFallback";
 import React, { Component, PropsWithChildren } from "react";
-
-import ErrorBoundaryFallback from "./ErrorBoundaryFallback";
 
 type ErrorBoundaryState = {
   hasError: boolean;
 };
 
-class ErrorBoundary extends Component<PropsWithChildren, ErrorBoundaryState> {
+export class ErrorBoundary extends Component<
+  PropsWithChildren,
+  ErrorBoundaryState
+> {
   constructor(props: PropsWithChildren) {
     super(props);
     this.state = { hasError: false };
@@ -23,5 +25,3 @@ class ErrorBoundary extends Component<PropsWithChildren, ErrorBoundaryState> {
     return this.props.children;
   }
 }
-
-export default ErrorBoundary;

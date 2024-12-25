@@ -1,9 +1,9 @@
 import "@testing-library/jest-dom";
 
+import { SortMenu } from "@Components";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import SortMenu from "../../components/SortMenu/SortMenu";
 import { ICON_TEST_ID } from "../testIds";
 
 const SORT_MENU_TEST_ID = "sort-menu";

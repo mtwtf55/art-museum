@@ -1,15 +1,15 @@
 import "@testing-library/jest-dom";
 
+import { OtherWorks } from "@Components";
 import { render, screen } from "@testing-library/react";
 
-import { OtherWorks } from "../../components";
 import { mockArtwork } from "../helpers/mocks";
 
 const CARD_MOCK_ID = "card-mock";
 
 jest.mock("@Components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall", () => ({
   __esModule: true,
-  default: () => <div data-testid={CARD_MOCK_ID} />,
+  ArtworkCardSmall: () => <div data-testid={CARD_MOCK_ID} />,
 }));
 
 jest.mock("@Components/SortMenu/SortMenu");

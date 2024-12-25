@@ -5,7 +5,7 @@ import React from "react";
 
 const TICK_ICON = "tick-icon.svg";
 
-function SortMenuItem({
+export function SortMenuItem({
   title,
   onSelect: handleSelect,
   isSelected,
@@ -27,5 +27,3 @@ function SortMenuItem({
     </div>
   );
 }
-
-export default SortMenuItem;

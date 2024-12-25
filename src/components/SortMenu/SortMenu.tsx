@@ -1,9 +1,10 @@
 import "./SortMenu.scss";
 
-import Icon from "@Components/Icon/Icon";
-import SortMenuItem from "@Components/SortMenu/SortMenuItem";
-import { Artwork } from "@Types/types";
-import React, { useState } from "react";
+import { Icon } from "@Components/Icon/Icon";
+import { Artwork } from "@Types";
+import { useState } from "react";
+
+import { SortMenuItem } from "./SortMenuItem";
 
 type SortMenuProps = {
   data: Artwork[];
@@ -18,7 +19,7 @@ const SORT_BY = {
 
 const SORT_ICON_NAME = "sort-icon.svg";
 
-function SortMenu({ data, setData }: SortMenuProps) {
+export function SortMenu({ data, setData }: SortMenuProps) {
   const [isSortClicked, setIsSortClicked] = useState<boolean>(false);
   const [sortBySelected, setSortBySelected] = useState<string | null>(null);
 
@@ -72,5 +73,3 @@ function SortMenu({ data, setData }: SortMenuProps) {
     </div>
   );
 }
-
-export default SortMenu;

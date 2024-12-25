@@ -6,7 +6,7 @@ import React from "react";
 const MUSEUM_LOGO_NAME = "museum-logo-dark.svg";
 const MODSEN_LOGO_NAME = "modsen-logo.svg";
 
-function Footer() {
+export function Footer() {
   return (
     <footer className="footer">
       <div className="footer__container">
@@ -22,5 +22,3 @@ function Footer() {
     </footer>
   );
 }
-
-export default Footer;

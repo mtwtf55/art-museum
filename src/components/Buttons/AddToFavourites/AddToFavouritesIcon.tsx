@@ -6,7 +6,7 @@ import iconFilledHovered from "@Assets/add-to-favourites-icon-filled-hovered.svg
 import iconHovered from "@Assets/add-to-favourites-icon-hovered.svg";
 import React, { useState } from "react";
 
-function AddToFavouritesIcon({
+export function AddToFavouritesIcon({
   isFavourite,
   onClick: handleOnClick,
 }: {
@@ -72,5 +72,3 @@ function AddToFavouritesIcon({
     </div>
   );
 }
-
-export default AddToFavouritesIcon;

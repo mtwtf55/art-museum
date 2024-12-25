@@ -1,6 +1,5 @@
 import { act, fireEvent, renderHook } from "@testing-library/react";
-
-import useWindowDimensions from "../../utils/hooks/useWindowDimensions";
+import { useWindowDimensions } from "@Utils/hooks/useWindowDimensions";
 
 function defineWindowDimensions(width: number, height: number) {
   Object.defineProperty(window, "innerWidth", { value: width });

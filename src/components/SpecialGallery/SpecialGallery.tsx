@@ -1,10 +1,8 @@
 import "./SpecialGallery.scss";
 
-import { Pagination } from "@Components";
-import { Artwork } from "@Types/types";
-import React from "react";
-
-import ArtworkCard from "./ArtworkCard";
+import { Pagination } from "@Components/Pagination/Pagination";
+import { ArtworkCard } from "@Components/SpecialGallery/ArtworkCard";
+import { Artwork } from "@Types";
 
 type SpecialGalleryProps = {
   artworks: Artwork[];
@@ -13,7 +11,7 @@ type SpecialGalleryProps = {
   currentPage: number;
 };
 
-function SpecialGallery({
+export function SpecialGallery({
   artworks,
   iiifUrl,
   onNextPage: handleNextPage,
@@ -44,5 +42,3 @@ function SpecialGallery({
     </div>
   );
 }
-
-export default SpecialGallery;

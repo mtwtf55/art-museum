@@ -1,11 +1,9 @@
 import "@testing-library/jest-dom";
 
+import { BurgerMenu, FavouritesLink, HomeLink } from "@Components";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import BurgerMenu from "../../components/BurgerMenu/BurgerMenu";
-import FavouritesLink from "../../components/Header/Links/FavouritesLink";
-import HomeLink from "../../components/Header/Links/HomeLink";
 import { ICON_TEST_ID } from "../testIds";
 
 jest.mock("@Components/Header/Links/HomeLink");

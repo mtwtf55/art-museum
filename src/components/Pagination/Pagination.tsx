@@ -1,9 +1,8 @@
 import "./Pagination.scss";
 
-import { Icon } from "@Components";
+import { Icon } from "@Components/Icon/Icon";
+import { PaginationItem } from "@Components/Pagination/PaginationItem";
 import React from "react";
-
-import PaginationItem from "./PaginationItem";
 
 const NEXT_ICON_NAME = "next-icon.svg";
 
@@ -13,7 +12,7 @@ type PaginationProps = {
   pagesCount: number;
 };
 
-function Pagination({ page, setPage, pagesCount }: PaginationProps) {
+export function Pagination({ page, setPage, pagesCount }: PaginationProps) {
   function handleNextIconClicked() {
     if (page === pagesCount) setPage(1);
     else setPage(page + 1);
@@ -50,5 +49,3 @@ function Pagination({ page, setPage, pagesCount }: PaginationProps) {
     </div>
   );
 }
-
-export default Pagination;

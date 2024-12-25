@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom";
 
+import { SearchResults } from "@Components";
 import { render, screen } from "@testing-library/react";
 
-import SearchResults from "../../components/Search/SearchResults";
 import { mockArtwork } from "../helpers/mocks";
 import { NOT_FOUND_PLACEHOLDER_TEST_ID } from "../testIds";
 
@@ -11,7 +11,7 @@ const CARD_TEST_ID = "card";
 
 jest.mock("@Components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall", () => ({
   __esModule: true,
-  default: () => <div data-testid={CARD_TEST_ID} />,
+  ArtworkCardSmall: () => <div data-testid={CARD_TEST_ID} />,
 }));
 
 describe(SearchResults.name, () => {

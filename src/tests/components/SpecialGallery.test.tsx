@@ -10,7 +10,7 @@ const CARD_TEST_ID = "card";
 
 jest.mock("@Components/SpecialGallery/ArtworkCard", () => ({
   __esModule: true,
-  default: () => <div data-testid={CARD_TEST_ID} />,
+  ArtworkCard: () => <div data-testid={CARD_TEST_ID} />,
 }));
 
 describe(SpecialGallery.name, () => {

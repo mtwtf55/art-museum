@@ -1,15 +1,18 @@
 import "./Home.scss";
 
-import { Footer, Header, OtherWorks, SpecialGallery } from "@Components";
-import ErrorBoundary from "@Components/ErrorBoundaryFallback/ErrorBoundary";
-import LoadingPlaceholder from "@Components/Placeholders/LoadingPlaceholder/LoadingPlaceholder";
-import Search from "@Components/Search/Search";
-import SearchResults from "@Components/Search/SearchResults";
-import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants/constants";
-import { ArtworksResponseType } from "@Types/types";
-import { createRequestUrl } from "@Utils/functions/createRequestUrl";
-import mutateSet from "@Utils/functions/mutateSet";
-import { useQuery } from "@Utils/hooks/useQuery";
+import {
+  ErrorBoundary,
+  Footer,
+  Header,
+  LoadingPlaceholder,
+  OtherWorks,
+  Search,
+  SearchResults,
+  SpecialGallery,
+} from "@Components";
+import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants";
+import { ArtworksResponseType } from "@Types";
+import { createRequestUrl, mutateSet, useQuery } from "@Utils";
 import React, { useEffect, useMemo, useState } from "react";
 
 const SEARCH_RESULT_LIMIT = 30;
@@ -17,7 +20,7 @@ const OTHER_ARTWORKS_LIMIT = 15;
 const GALLERY_ARTWORKS_PER_PAGE = 3;
 const RANDOM_SEED = 300;
 
-function Home() {
+export function Home() {
   const [searchString, setSearchString] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const specialGalleryOffset = useMemo(
@@ -161,5 +164,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;

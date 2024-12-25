@@ -1,7 +1,7 @@
 import "./SpecialGallery.scss";
 
-import { AddToFavouritesIcon } from "@Components";
-import Image from "@Components/Image/Image";
+import { AddToFavouritesIcon } from "@Components/Buttons/AddToFavourites/AddToFavouritesIcon";
+import { Image } from "@Components/Image/Image";
 import { sessionStorageHelper } from "@Utils/functions/sessionStorageHelper";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ type ArtworkCardProps = {
   iiifUrl: string;
 };
 
-function ArtworkCard({
+export function ArtworkCard({
   imageId,
   title,
   author,
@@ -64,5 +64,3 @@ function ArtworkCard({
     </div>
   );
 }
-
-export default ArtworkCard;

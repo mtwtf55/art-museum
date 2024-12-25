@@ -1,14 +1,12 @@
 import "./LoadingPlaceholder.scss";
 
-import { Spinner } from "@Components";
+import { Spinner } from "@Components/Spinner/Spinner";
 import React from "react";
 
-function LoadingPlaceholder() {
+export function LoadingPlaceholder() {
   return (
     <div className="loading-placeholder">
       <Spinner />
     </div>
   );
 }
-
-export default LoadingPlaceholder;

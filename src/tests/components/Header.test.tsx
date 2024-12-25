@@ -1,9 +1,9 @@
 import "@testing-library/jest-dom";
 
-import Header from "@Components/Header/Header";
+import { Header } from "@Components";
 import { render, screen } from "@testing-library/react";
+import * as useWindowDimensions from "@Utils/hooks/useWindowDimensions";
 
-import * as useWindowDimensions from "../../utils/hooks/useWindowDimensions";
 import { BURGER_MENU_TEST_ID } from "../testIds";
 
 const MAIN_MENU_TEST_ID = "main-menu";
@@ -14,10 +14,12 @@ jest.mock("@Components/Header/Links/HomeLink");
 jest.mock("@Components/Header/Links/FavouritesLink");
 
 function mockUseDimensionsHook(width: number, height: number) {
-  jest.spyOn(useWindowDimensions, "default").mockImplementation(() => ({
-    width,
-    height,
-  }));
+  jest
+    .spyOn(useWindowDimensions, "useWindowDimensions")
+    .mockImplementation(() => ({
+      width,
+      height,
+    }));
 }
 
 describe(Header.name, () => {

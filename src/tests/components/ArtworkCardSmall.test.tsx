@@ -1,9 +1,9 @@
 import "@testing-library/jest-dom";
 
 import { ArtworkCardSmall } from "@Components";
+import { ArtworkCardSmallProps } from "@Components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
 import { render, screen } from "@testing-library/react";
 
-import { ArtworkCardSmallProps } from "../../components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
 import { mockArtwork } from "../helpers/mocks";
 
 const MOCK_PROPS: ArtworkCardSmallProps = {

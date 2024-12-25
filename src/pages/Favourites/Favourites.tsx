@@ -1,20 +1,26 @@
 import "./Favourites.scss";
 
-import { ArtworkCardSmall, Footer, Header } from "@Components";
-import LoadingPlaceholder from "@Components/Placeholders/LoadingPlaceholder/LoadingPlaceholder";
-import NotFoundPlaceholder from "@Components/Placeholders/NotFoundPlaceholder/NotFoundPlaceholder";
-import SortMenu from "@Components/SortMenu/SortMenu";
-import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants/constants";
-import { Artwork, ArtworksResponseType } from "@Types/types";
-import { createRequestUrl } from "@Utils/functions/createRequestUrl";
-import mutateSet from "@Utils/functions/mutateSet";
-import { sessionStorageHelper } from "@Utils/functions/sessionStorageHelper";
-import { useQuery } from "@Utils/hooks/useQuery";
+import {
+  ArtworkCardSmall,
+  Footer,
+  Header,
+  LoadingPlaceholder,
+  NotFoundPlaceholder,
+  SortMenu,
+} from "@Components";
+import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants";
+import { Artwork, ArtworksResponseType } from "@Types";
+import {
+  createRequestUrl,
+  mutateSet,
+  sessionStorageHelper,
+  useQuery,
+} from "@Utils";
 import React, { useEffect, useMemo } from "react";
 
 const NO_FAVOURITE_ITEMS_MESSAGE = `You don't have any favourite artworks`;
 
-function Favourites() {
+export function Favourites() {
   const storageHelper = useMemo(sessionStorageHelper, []);
   const validIds = useMemo(
     () => storageHelper.getValidArtworksIds(),
@@ -112,5 +118,3 @@ function FavouritesTitle() {
     </h1>
   );
 }
-
-export default Favourites;

@@ -8,7 +8,7 @@ export type LinkProps = {
   isClickable?: boolean;
 };
 
-function Icon({
+export function Icon({
   onClick: handleClick,
   imgName,
   isClickable = true,
@@ -28,5 +28,3 @@ function Icon({
     />
   );
 }
-
-export default Icon;

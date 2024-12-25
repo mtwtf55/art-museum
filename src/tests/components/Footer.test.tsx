@@ -1,7 +1,7 @@
+import { Footer } from "@Components";
 import { render, screen } from "@testing-library/react";
 import React from "react";
 
-import Footer from "../../components/Footer/Footer";
 import { ICON_TEST_ID } from "../testIds";
 
 describe(Footer.name, () => {

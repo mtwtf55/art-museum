@@ -1,7 +1,4 @@
-import {
-  SessionStorageHelper,
-  sessionStorageHelper,
-} from "../../utils/functions/sessionStorageHelper";
+import { SessionStorageHelper, sessionStorageHelper } from "@Utils";
 
 const SESSION_STORAGE_DUMMY_DATA = {
   "1": "TItle1",

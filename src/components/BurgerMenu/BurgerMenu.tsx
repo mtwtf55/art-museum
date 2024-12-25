@@ -1,13 +1,13 @@
 import "./BurgerMenu.scss";
 
-import FavouritesLink from "@Components/Header/Links/FavouritesLink";
-import HomeLink from "@Components/Header/Links/HomeLink";
-import Icon from "@Components/Icon/Icon";
-import React, { useState } from "react";
+import { FavouritesLink } from "@Components/Header/Links/FavouritesLink";
+import { HomeLink } from "@Components/Header/Links/HomeLink";
+import { Icon } from "@Components/Icon/Icon";
+import { useState } from "react";
 
 const BURGER_MENU_ICON_NAME = "burger-menu-icon.svg";
 
-function BurgerMenu() {
+export function BurgerMenu() {
   const [isActive, setIsActive] = useState(false);
 
   function handleBurgerMenuClicked() {
@@ -37,5 +37,3 @@ function BurgerMenu() {
     </div>
   );
 }
-
-export default BurgerMenu;

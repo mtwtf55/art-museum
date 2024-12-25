@@ -6,12 +6,10 @@ type NotFoundPlaceholderType = {
   message: string;
 };
 
-function NotFoundPlaceholder({ message }: NotFoundPlaceholderType) {
+export function NotFoundPlaceholder({ message }: NotFoundPlaceholderType) {
   return (
     <div className="not-found-placeholder" data-testid="not-found-placeholder">
       <h2 className="not-found-placeholder__text">{message}</h2>
     </div>
   );
 }
-
-export default NotFoundPlaceholder;

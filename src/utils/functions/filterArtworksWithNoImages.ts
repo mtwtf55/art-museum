@@ -1,5 +1,5 @@
-import { Artwork } from "@Types/types";
+import { Artwork } from "@Types";
 
-export default function filterArtworksWithImages(artworks: Artwork[]) {
+export function filterArtworksWithImages(artworks: Artwork[]) {
   return artworks.filter((artwork) => artwork.image_id);
 }

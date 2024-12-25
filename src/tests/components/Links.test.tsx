@@ -1,10 +1,8 @@
 import "@testing-library/jest-dom";
 
-import FavouritesLink from "@Components/Header/Links/FavouritesLink";
-import HomeLink from "@Components/Header/Links/HomeLink";
-import pathNames from "@Constants/path-names";
-import Favourites from "@Pages/Favourites/Favourites";
-import Home from "@Pages/Home/Home";
+import { FavouritesLink, HomeLink } from "@Components";
+import { PathNames } from "@Constants";
+import { Favourites, Home } from "@Pages";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
@@ -16,12 +14,12 @@ const FAVOURITES_PAGE_TEST_ID = "favourites-page";
 
 jest.mock("@Pages/Home/Home", () => ({
   __esModule: true,
-  default: () => <div data-testid={HOME_PAGE_TEST_ID} />,
+  Home: () => <div data-testid={HOME_PAGE_TEST_ID} />,
 }));
 
 jest.mock("@Pages/Favourites/Favourites", () => ({
   __esModule: true,
-  default: () => <div data-testid={FAVOURITES_PAGE_TEST_ID} />,
+  Favourites: () => <div data-testid={FAVOURITES_PAGE_TEST_ID} />,
 }));
 
 describe("Links", () => {
@@ -34,8 +32,8 @@ describe("Links", () => {
     render(
       <MemoryRouter>
         <Routes>
-          <Route path={pathNames.HOME} element={<Home />} />
-          <Route path={pathNames.FAVOURITES} element={<Favourites />} />
+          <Route path={PathNames.HOME} element={<Home />} />
+          <Route path={PathNames.FAVOURITES} element={<Favourites />} />
         </Routes>
         <FavouritesLink />
         <HomeLink />

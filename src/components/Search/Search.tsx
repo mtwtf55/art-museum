@@ -13,7 +13,7 @@ type SearchType = {
   initialValue?: string;
 };
 
-function Search({ onSearch: handleSearch, initialValue }: SearchType) {
+export function Search({ onSearch: handleSearch, initialValue }: SearchType) {
   const [value, setValue] = useState<string>(initialValue || ""); // raw value from input field
   const [validatedValue, setValidatedValue] = useState<string | undefined>(); // validated value after yup schema verification
   const [error, setError] = useState<string | null>(null); // represents errors after validation
@@ -84,5 +84,3 @@ function ValidationErrorField({ message }: { message: string }) {
     </div>
   );
 }
-
-export default Search;

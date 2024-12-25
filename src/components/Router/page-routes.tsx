@@ -1,11 +1,8 @@
-import PathNames from "@Constants/path-names";
-import DetailInfo from "@Pages/DetailInfo/DetailInfo";
-import Favourites from "@Pages/Favourites/Favourites";
-import Home from "@Pages/Home/Home";
-import { RouteType } from "@Types/route.type";
-import React from "react";
+import { PathNames } from "@Constants";
+import { DetailInfo, Favourites, Home } from "@Pages";
+import { RouteType } from "@Types";
 
-const pageRoutes: RouteType[] = [
+export const pageRoutes: RouteType[] = [
   {
     path: PathNames.HOME,
     title: "Home",
@@ -22,5 +19,3 @@ const pageRoutes: RouteType[] = [
     element: <DetailInfo />,
   },
 ];
-
-export default pageRoutes;

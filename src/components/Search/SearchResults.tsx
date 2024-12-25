@@ -1,8 +1,9 @@
-import { ArtworkCardSmall } from "@Components";
-import NotFoundPlaceholder from "@Components/Placeholders/NotFoundPlaceholder/NotFoundPlaceholder";
-import SortMenu from "@Components/SortMenu/SortMenu";
-import { Artwork } from "@Types/types";
-import React from "react";
+import "./Search.scss";
+
+import { ArtworkCardSmall } from "@Components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
+import { NotFoundPlaceholder } from "@Components/Placeholders/NotFoundPlaceholder/NotFoundPlaceholder";
+import { SortMenu } from "@Components/SortMenu/SortMenu";
+import { Artwork } from "@Types";
 
 type SearchResultsType = {
   artworks: Artwork[];
@@ -12,7 +13,11 @@ type SearchResultsType = {
 
 const NO_RESULTS_MESSAGE = "Searching has no results";
 
-function SearchResults({ artworks, iiifUrl, setArtworks }: SearchResultsType) {
+export function SearchResults({
+  artworks,
+  iiifUrl,
+  setArtworks,
+}: SearchResultsType) {
   function createArtworkCard(a: Artwork) {
     return <ArtworkCardSmall artwork={a} key={a.id} iiifUrl={iiifUrl} />;
   }
@@ -33,5 +38,3 @@ function SearchResults({ artworks, iiifUrl, setArtworks }: SearchResultsType) {
     </section>
   );
 }
-
-export default SearchResults;

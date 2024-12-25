@@ -1,17 +1,19 @@
 import "./DetailInfo.scss";
 
-import { AddToFavouritesIcon, Footer, Header } from "@Components";
-import Image from "@Components/Image/Image";
-import LoadingPlaceholder from "@Components/Placeholders/LoadingPlaceholder/LoadingPlaceholder";
-import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants/constants";
-import { ArtworkResponseType } from "@Types/types";
-import { createRequestUrl } from "@Utils/functions/createRequestUrl";
-import { sessionStorageHelper } from "@Utils/functions/sessionStorageHelper";
-import { useQuery } from "@Utils/hooks/useQuery";
-import React, { useEffect, useState } from "react";
+import {
+  AddToFavouritesIcon,
+  Footer,
+  Header,
+  Image,
+  LoadingPlaceholder,
+} from "@Components";
+import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants";
+import { ArtworkResponseType } from "@Types";
+import { createRequestUrl, sessionStorageHelper, useQuery } from "@Utils";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-function DetailInfo() {
+export function DetailInfo() {
   const { artworkId } = useParams();
   const storageHelper = sessionStorageHelper();
 
@@ -108,5 +110,3 @@ function DetailInfo() {
     </div>
   );
 }
-
-export default DetailInfo;

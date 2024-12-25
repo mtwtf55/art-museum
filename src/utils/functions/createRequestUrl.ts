@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "@Constants/constants";
+import { API_BASE_URL } from "@Constants";
 
 type CreateRequestUrlType = {
   limit: (limit: number) => CreateRequestUrlType;

@@ -1,6 +1,5 @@
-import { REQUESTED_FIELDS } from "@Constants/constants";
-import { createRequestUrl } from "@Utils/functions/createRequestUrl";
-
+import { REQUESTED_FIELDS } from "@Constants";
+import { createRequestUrl } from "@Utils";
 const QUERY_REGEX = /[?&]([^=]+)(=([^&#]*))?/g;
 
 describe(createRequestUrl.name, () => {

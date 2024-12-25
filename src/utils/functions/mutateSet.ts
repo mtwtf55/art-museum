@@ -1,7 +1,7 @@
-import { Artwork, ArtworksResponseType } from "@Types/types";
+import { Artwork, ArtworksResponseType } from "@Types";
 import { SetStateAction } from "react";
 
-function mutateSet(
+export function mutateSet(
   setFunc: (value: SetStateAction<ArtworksResponseType | null>) => void,
 ) {
   return (artworks: Artwork[]) => {
@@ -14,5 +14,3 @@ function mutateSet(
     });
   };
 }
-
-export default mutateSet;

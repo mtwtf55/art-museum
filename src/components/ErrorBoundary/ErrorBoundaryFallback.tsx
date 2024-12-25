@@ -2,7 +2,7 @@ import "./ErrorBoundaryFallback.scss";
 
 import React from "react";
 
-function ErrorBoundaryFallback() {
+export function ErrorBoundaryFallback() {
   return (
     <div className="error-boundary-fallback">
       <h2 className="error-boundary-fallback__text">
@@ -11,5 +11,3 @@ function ErrorBoundaryFallback() {
     </div>
   );
 }
-
-export default ErrorBoundaryFallback;
