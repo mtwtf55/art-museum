@@ -64,7 +64,11 @@ function SortMenu({ data, setData }: SortMenuProps) {
         isClickable={true}
         onClick={handleSortIconClicked}
       />
-      {isSortClicked && <div className="sort-menu__main">{menuItems}</div>}
+      {isSortClicked && (
+        <div className="sort-menu__main" data-testid="sort-menu">
+          {menuItems}
+        </div>
+      )}
     </div>
   );
 }

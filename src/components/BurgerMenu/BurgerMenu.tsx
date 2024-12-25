@@ -1,8 +1,8 @@
 import "./BurgerMenu.scss";
 
-import { Icon } from "@Components";
 import FavouritesLink from "@Components/Header/Links/FavouritesLink";
 import HomeLink from "@Components/Header/Links/HomeLink";
+import Icon from "@Components/Icon/Icon";
 import React, { useState } from "react";
 
 const BURGER_MENU_ICON_NAME = "burger-menu-icon.svg";
@@ -15,7 +15,7 @@ function BurgerMenu() {
   }
 
   return (
-    <div className="burger-menu">
+    <div className="burger-menu" data-testid="burger-menu">
       <div className="burger-menu__icon">
         <Icon
           imgName={BURGER_MENU_ICON_NAME}
@@ -23,7 +23,10 @@ function BurgerMenu() {
           onClick={handleBurgerMenuClicked}
         />
       </div>
-      <ul className={`burger-menu__links${isActive ? " active" : ""}`}>
+      <ul
+        className={`burger-menu__links${isActive ? " active" : ""}`}
+        data-testid="links-container"
+      >
         <li className="burger-menu__links__container">
           <HomeLink />
         </li>

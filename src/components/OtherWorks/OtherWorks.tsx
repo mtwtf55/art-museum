@@ -2,7 +2,7 @@ import "./OtherWorks.scss";
 
 import SortMenu from "@Components/SortMenu/SortMenu";
 import { Artwork } from "@Types/types";
-import React from "react";
+import React, { useMemo } from "react";
 
 import ArtworkCardSmall from "./ArtworkCardSmall/ArtworkCardSmall";
 
@@ -13,9 +13,13 @@ type OtherWorksProps = {
 };
 
 function OtherWorks({ artworks, iiifUrl, setArtworks }: OtherWorksProps) {
-  const artworksToRender = artworks.map((aw) => (
-    <ArtworkCardSmall artwork={aw} key={aw.id} iiifUrl={iiifUrl} />
-  ));
+  const artworksToRender = useMemo(
+    () =>
+      artworks.map((aw) => (
+        <ArtworkCardSmall artwork={aw} key={aw.id} iiifUrl={iiifUrl} />
+      )),
+    [artworks],
+  );
 
   return (
     <div className="other-works">
