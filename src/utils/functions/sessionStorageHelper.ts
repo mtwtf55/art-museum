@@ -1,4 +1,4 @@
-type SessionStorageHelper = {
+export type SessionStorageHelper = {
   getValidArtworksIds: () => string[];
   has: (artworkId: number | null | undefined) => boolean;
   add: (artworkId: number | undefined, title: string) => void;

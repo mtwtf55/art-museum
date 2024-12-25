@@ -24,6 +24,7 @@ function Icon({
       onMouseEnter={handleMouseEnter}
       onClick={handleClick}
       className="icon"
+      data-testid="icon"
     />
   );
 }

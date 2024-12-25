@@ -14,7 +14,7 @@ function Header() {
   const { width: windowWidth } = useWindowDimensions();
 
   const MainMenu = (
-    <ul className="header__inner__links">
+    <ul className="header__inner__links" data-testid="main-menu">
       <HomeLink />
       <FavouritesLink />
     </ul>

@@ -7,7 +7,7 @@ import { sessionStorageHelper } from "@Utils/functions/sessionStorageHelper";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-type ArtworkCardSmallProps = {
+export type ArtworkCardSmallProps = {
   artwork: Artwork;
   iiifUrl: string;
 };
@@ -35,7 +35,11 @@ function ArtworkCardSmall({
   }
 
   return (
-    <div className={"artwork-card-small"} onClick={handleOnClick}>
+    <div
+      className={"artwork-card-small"}
+      onClick={handleOnClick}
+      data-testid="artwork-card-small"
+    >
       <div className="artwork-card-small__image">
         <Image iiifUrl={iiifUrl} imageId={image_id} />
       </div>

@@ -24,7 +24,13 @@ function AddToFavouritesIcon({
   }
 
   const image = (
-    <img src={icon} alt="" onMouseEnter={handleEnter} onClick={handleOnClick} />
+    <img
+      src={icon}
+      alt=""
+      onMouseEnter={handleEnter}
+      onClick={handleOnClick}
+      data-testid="icon"
+    />
   );
   const imageHovered = (
     <img
@@ -32,6 +38,7 @@ function AddToFavouritesIcon({
       alt=""
       onMouseLeave={handleLeave}
       onClick={handleOnClick}
+      data-testid="icon-hovered"
     />
   );
   const imageFilled = (
@@ -40,6 +47,7 @@ function AddToFavouritesIcon({
       alt=""
       onMouseEnter={handleEnter}
       onClick={handleOnClick}
+      data-testid="filled-icon"
     />
   );
   const imageFilledHovered = (
@@ -48,6 +56,7 @@ function AddToFavouritesIcon({
       alt=""
       onMouseLeave={handleLeave}
       onClick={handleOnClick}
+      data-testid="filled-icon-hovered"
     />
   );
 
