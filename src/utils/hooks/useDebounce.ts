@@ -3,9 +3,11 @@ import { useEffect, useRef } from "react";
 type Timer = ReturnType<typeof setTimeout>;
 type SomeFunction = (...args: never[]) => void;
 
+const DEFAULT_DELAY = 1000;
+
 export function useDebounce<Func extends SomeFunction>(
   func: Func,
-  delay = 1000,
+  delay = DEFAULT_DELAY,
 ) {
   const timer = useRef<Timer>();
 

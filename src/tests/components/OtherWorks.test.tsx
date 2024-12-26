@@ -6,6 +6,7 @@ import { render, screen } from "@testing-library/react";
 import { mockArtwork } from "../helpers/mocks";
 
 const CARD_MOCK_ID = "card-mock";
+const CARDS_COUNT = 5;
 
 jest.mock("@Components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall", () => ({
   __esModule: true,
@@ -29,7 +30,7 @@ describe(OtherWorks.name, () => {
   });
 
   it("should render all cards", () => {
-    const artworks = Array.from({ length: 5 }).map(mockArtwork);
+    const artworks = Array.from({ length: CARDS_COUNT }).map(mockArtwork);
 
     render(
       <OtherWorks
@@ -38,6 +39,6 @@ describe(OtherWorks.name, () => {
         iiifUrl={"iiifUrl"}
       />,
     );
-    expect(screen.queryAllByTestId(CARD_MOCK_ID).length).toBe(5);
+    expect(screen.queryAllByTestId(CARD_MOCK_ID).length).toBe(CARDS_COUNT);
   });
 });

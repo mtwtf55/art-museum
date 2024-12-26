@@ -32,6 +32,7 @@ export function AddToFavouritesIcon({
       data-testid="icon"
     />
   );
+
   const imageHovered = (
     <img
       src={iconHovered}
@@ -41,6 +42,7 @@ export function AddToFavouritesIcon({
       data-testid="icon-hovered"
     />
   );
+
   const imageFilled = (
     <img
       src={iconFilled}
@@ -50,6 +52,7 @@ export function AddToFavouritesIcon({
       data-testid="filled-icon"
     />
   );
+
   const imageFilledHovered = (
     <img
       src={iconFilledHovered}

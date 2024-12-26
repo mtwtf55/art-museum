@@ -71,16 +71,5 @@ export function Search({ onSearch: handleSearch, initialValue }: SearchType) {
 }
 
 function ValidationErrorField({ message }: { message: string }) {
-  return (
-    <div
-      style={{
-        color: "red",
-        position: "absolute",
-        top: "-20px",
-        left: "0px",
-      }}
-    >
-      {message}
-    </div>
-  );
+  return <div className="error-field">{message}</div>;
 }

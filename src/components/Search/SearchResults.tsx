@@ -4,6 +4,7 @@ import { ArtworkCardSmall } from "@Components/OtherWorks/ArtworkCardSmall/Artwor
 import { NotFoundPlaceholder } from "@Components/Placeholders/NotFoundPlaceholder/NotFoundPlaceholder";
 import { SortMenu } from "@Components/SortMenu/SortMenu";
 import { Artwork } from "@Types";
+import { useMemo } from "react";
 
 type SearchResultsType = {
   artworks: Artwork[];
@@ -22,7 +23,10 @@ export function SearchResults({
     return <ArtworkCardSmall artwork={a} key={a.id} iiifUrl={iiifUrl} />;
   }
 
-  const artworkCards = artworks.map(createArtworkCard);
+  const artworkCards = useMemo(
+    () => artworks.map(createArtworkCard),
+    [artworks],
+  );
 
   return artworks.length === 0 ? (
     <NotFoundPlaceholder message={NO_RESULTS_MESSAGE} />

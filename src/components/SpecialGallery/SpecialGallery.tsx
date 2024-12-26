@@ -3,6 +3,7 @@ import "./SpecialGallery.scss";
 import { Pagination } from "@Components/Pagination/Pagination";
 import { ArtworkCard } from "@Components/SpecialGallery/ArtworkCard";
 import { Artwork } from "@Types";
+import { useMemo } from "react";
 
 type SpecialGalleryProps = {
   artworks: Artwork[];
@@ -31,7 +32,10 @@ export function SpecialGallery({
     );
   }
 
-  const galleryItems = artworks.map(createArtworkCard);
+  const galleryItems = useMemo(
+    () => artworks.map(createArtworkCard),
+    [artworks],
+  );
 
   return (
     <div className="gallery">

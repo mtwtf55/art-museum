@@ -29,20 +29,20 @@ export function ArtworkCard({
     storageHelper.has(artworkId),
   );
 
-  function handleOnClick() {
+  function handleClicked() {
     navigate(`/artworks/${artworkId}`);
   }
 
   function handleAddToFavourites(event: React.MouseEvent<HTMLElement>) {
-    setIsArtworkInFavourites(!isArtworkInFavourites);
     event.stopPropagation();
+    setIsArtworkInFavourites(!isArtworkInFavourites);
 
     if (!storageHelper.has(artworkId)) storageHelper.add(artworkId, title);
     else storageHelper.remove(artworkId);
   }
 
   return (
-    <div className="card" onClick={handleOnClick}>
+    <div className="card" onClick={handleClicked}>
       <div className="card__picture">
         <Image iiifUrl={iiifUrl} imageId={imageId} />
       </div>

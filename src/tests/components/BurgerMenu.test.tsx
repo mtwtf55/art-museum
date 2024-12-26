@@ -11,6 +11,7 @@ jest.mock("@Components/Header/Links/FavouritesLink");
 
 const BURGER_MENU_ICON = ICON_TEST_ID;
 const BURGER_MENU_LINKS = "links-container";
+const ACTIVE_STYLE = "active";
 
 describe(BurgerMenu.name, () => {
   beforeEach(() => {
@@ -30,12 +31,12 @@ describe(BurgerMenu.name, () => {
   it("should activate menu links when clicked on icon", () => {
     userEvent.click(screen.getByTestId(BURGER_MENU_ICON));
     expect(
-      screen.getByTestId(BURGER_MENU_LINKS).className.includes("active"),
+      screen.getByTestId(BURGER_MENU_LINKS).className.includes(ACTIVE_STYLE),
     ).toBe(true);
 
     userEvent.click(screen.getByTestId(BURGER_MENU_ICON));
     expect(
-      screen.getByTestId(BURGER_MENU_LINKS).className.includes("active"),
+      screen.getByTestId(BURGER_MENU_LINKS).className.includes(ACTIVE_STYLE),
     ).toBe(false);
   });
 });

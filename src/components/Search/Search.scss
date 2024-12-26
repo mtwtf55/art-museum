@@ -59,6 +59,13 @@
   }
 }
 
+.error-field {
+  color: $text-color-secondary;
+  position: absolute;
+  top: -1.5em;
+  left: 0;
+}
+
 @media screen and (max-width: 1300px) {
   .search-results__main {
     grid-template-columns: repeat(2, 1fr);
