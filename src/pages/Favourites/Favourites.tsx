@@ -1,64 +1,92 @@
-import React, { useEffect } from "react";
 import "./Favourites.scss";
-import Header from "@components/Header/Header";
-import { useAppDispatch, useAppSelector } from "@src/withTypes";
-import {
-  selectFavouriteArtworks,
-  selectFavouriteArtworksIIIFUrl,
-  selectFavouritesAreLoading,
-} from "@store/selectors";
-import { fetchArtworksByIds } from "@store/thunks";
-import ArtworkCardSmall from "@components/OtherWorks/ArtworkCardSmall/ArtworkCardSmall";
-import Footer from "@components/Footer/Footer";
-import Spinner from "@components/Spinner/Spinner";
 
-function Favourites() {
-  const dispatch = useAppDispatch();
-  const favouriteArtworks = useAppSelector(selectFavouriteArtworks);
-  const favouriteArtworksIIIFUrl = useAppSelector(
-    selectFavouriteArtworksIIIFUrl,
+import {
+  ArtworkCardSmall,
+  Footer,
+  Header,
+  LoadingPlaceholder,
+  NotFoundPlaceholder,
+  SortMenu,
+} from "@Components";
+import { DEFAULT_IIIF_URL, REQUESTED_FIELDS } from "@Constants";
+import { Artwork, ArtworksResponseType } from "@Types";
+import {
+  createRequestUrl,
+  mutateSet,
+  sessionStorageHelper,
+  useQuery,
+} from "@Utils";
+import React, { useEffect, useMemo } from "react";
+
+const NO_FAVOURITE_ITEMS_MESSAGE = `You don't have any favourite artworks`;
+
+export function Favourites() {
+  const storageHelper = useMemo(sessionStorageHelper, []);
+  const validIds = useMemo(
+    () => storageHelper.getValidArtworksIds(),
+    [storageHelper],
   );
-  const areLoading = useAppSelector(selectFavouritesAreLoading);
+
+  const {
+    query: getFavourites,
+    data: favourites,
+    loading: favouritesLoading,
+    setData: setFavourites,
+  } = useQuery<ArtworksResponseType>({
+    url: createRequestUrl()
+      .ids(validIds.map(Number))
+      .fields(REQUESTED_FIELDS)
+      .build(),
+  });
 
   useEffect(() => {
-    const validIds = Object.keys(sessionStorage).filter(
-      (k) => !isNaN(Number(k)),
+    if (validIds.length !== 0) getFavourites();
+  }, [validIds]);
+
+  function createArtworkCard(a: Artwork) {
+    return (
+      <ArtworkCardSmall
+        artwork={a}
+        key={a.id}
+        iiifUrl={favourites?.config.iiif_url || DEFAULT_IIIF_URL}
+      />
     );
-    if (validIds.length === 0) return;
-    dispatch(fetchArtworksByIds(validIds));
-  }, []);
+  }
+
+  const favouriteItems = favourites?.data.map(createArtworkCard);
+  const handleSetFavourites = mutateSet(setFavourites);
 
   return (
     <div>
       <Header />
-      <div className="favourites-wrapper">
-        <div className={"favourites"}>
-          <FavouritesTitle />
-          <div className="favourites__main">
-            <div className="favourites__main__title">
-              <p className="favourites__main__title__sub">Saved by you</p>
-              <p className="favourites__main__title__main">
-                Your favorites list
-              </p>
-            </div>
-            {areLoading ? (
-              <div className="favourites__main__spinner-wrapper">
-                <Spinner />
-              </div>
+      {favouritesLoading ? (
+        <LoadingPlaceholder />
+      ) : (
+        <div className="favourites-wrapper">
+          <div className="favourites">
+            <FavouritesTitle />
+            {!favouriteItems || favouriteItems.length === 0 ? (
+              <NotFoundPlaceholder message={NO_FAVOURITE_ITEMS_MESSAGE} />
             ) : (
-              <div className="favourites__main__list">
-                {favouriteArtworks.map((a) => (
-                  <ArtworkCardSmall
-                    artwork={a}
-                    key={a.id}
-                    iiifUrl={favouriteArtworksIIIFUrl}
-                  />
-                ))}
-              </div>
+              <main className="favourites__main">
+                <div className="favourites__main__title">
+                  <h4 className="favourites__main__title__sub">Saved by you</h4>
+                  <h2 className="favourites__main__title__main">
+                    Your favorites list
+                    <div className="sort-icon">
+                      <SortMenu
+                        data={favourites?.data ?? []}
+                        setData={handleSetFavourites}
+                      />
+                    </div>
+                  </h2>
+                </div>
+                <div className="favourites__main__list">{favouriteItems}</div>
+              </main>
             )}
           </div>
         </div>
-      </div>
+      )}
       <Footer />
     </div>
   );
@@ -66,7 +94,7 @@ function Favourites() {
 
 function FavouritesTitle() {
   return (
-    <p className="favourites__title">
+    <h1 className="favourites__title">
       Here Are Your
       <br />
       <span className="favourites__title__sub">
@@ -87,8 +115,6 @@ function FavouritesTitle() {
         </svg>{" "}
         Favourites
       </span>
-    </p>
+    </h1>
   );
 }
-
-export default Favourites;

@@ -1,0 +1,8 @@
+@use "@Utils/theme" as *;
+
+.error-boundary-fallback {
+  &__text {
+    @include text-medium;
+    color: $text-color-primary;
+  }
+}

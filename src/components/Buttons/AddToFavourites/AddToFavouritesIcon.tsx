@@ -1,15 +1,12 @@
-import React, { MouseEventHandler, useState } from "react";
 import "./AddToFavouritesIcon.scss";
-// @ts-ignore
-import icon from "@assets/add-to-favourites-icon.svg";
-// @ts-ignore
-import iconHovered from "@assets/add-to-favourites-icon-hovered.svg";
-// @ts-ignore
-import iconFilled from "@assets/add-to-favourites-icon-filled.svg";
-// @ts-ignore
-import iconFilledHovered from "@assets/add-to-favourites-icon-filled-hovered.svg";
 
-function AddToFavouritesIcon({
+import icon from "@Assets/add-to-favourites-icon.svg";
+import iconFilled from "@Assets/add-to-favourites-icon-filled.svg";
+import iconFilledHovered from "@Assets/add-to-favourites-icon-filled-hovered.svg";
+import iconHovered from "@Assets/add-to-favourites-icon-hovered.svg";
+import React, { useState } from "react";
+
+export function AddToFavouritesIcon({
   isFavourite,
   onClick: handleOnClick,
 }: {
@@ -18,36 +15,51 @@ function AddToFavouritesIcon({
 }) {
   const [isHovered, setIsHovered] = useState(false);
 
+  function handleEnter() {
+    setIsHovered(true);
+  }
+
+  function handleLeave() {
+    setIsHovered(false);
+  }
+
   const image = (
     <img
       src={icon}
       alt=""
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={handleEnter}
       onClick={handleOnClick}
+      data-testid="icon"
     />
   );
+
   const imageHovered = (
     <img
       src={iconHovered}
       alt=""
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={handleLeave}
       onClick={handleOnClick}
+      data-testid="icon-hovered"
     />
   );
+
   const imageFilled = (
     <img
       src={iconFilled}
       alt=""
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={handleEnter}
       onClick={handleOnClick}
+      data-testid="filled-icon"
     />
   );
+
   const imageFilledHovered = (
     <img
       src={iconFilledHovered}
       alt=""
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={handleLeave}
       onClick={handleOnClick}
+      data-testid="filled-icon-hovered"
     />
   );
 
@@ -63,5 +75,3 @@ function AddToFavouritesIcon({
     </div>
   );
 }
-
-export default AddToFavouritesIcon;

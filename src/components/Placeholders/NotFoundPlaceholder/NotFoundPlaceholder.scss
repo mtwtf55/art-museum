@@ -1,0 +1,14 @@
+@use "@Utils/theme" as *;
+
+.not-found-placeholder {
+  height: 100vh;
+  padding-top: $indent-m;
+
+  display: flex;
+  justify-content: center;
+
+  &__text {
+    @include text-medium;
+    color: $text-color-primary;
+  }
+}

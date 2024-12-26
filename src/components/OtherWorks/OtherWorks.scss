@@ -1,39 +1,41 @@
-@use "@utils/variables" as v;
+@use "@Utils/theme" as *;
 
 .other-works {
+  text-align: center;
+
   &__pretitle {
-    margin: 0;
-    font-family: Lexend Deca;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    text-align: center;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    color: v.$text-color-orange;
+    @include text-small;
+    color: $text-color-secondary;
   }
 
   &__title {
-    margin: 0;
-    font-family: Lexend Deca;
-    font-size: 32px;
-    font-weight: 400;
-    line-height: 40px;
-    text-align: center;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    color: v.$text-color-black;
+    &__container {
+      position: relative;
+
+      .sort-icon {
+        position: absolute;
+        height: 100%;
+        right: 0;
+        top: 0;
+      }
+    }
+
+    &__text {
+      @include text-medium;
+      color: $text-color-primary;
+    }
   }
 
   &__main {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 130px;
-    grid-gap: 16px;
+    grid-gap: $indent-s;
 
-    margin-top: 50px;
+    margin-top: $indent-m;
   }
 }
+
 @media screen and (max-width: 1300px) {
   .other-works {
     &__main {
@@ -47,5 +49,12 @@
     &__main {
       grid-template-columns: 1fr;
     }
+  }
+}
+
+@media (max-width: 500px) {
+  .other-works,
+  .other-works__title__text {
+    text-align: left;
   }
 }

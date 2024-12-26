@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useAppSelector } from "@src/withTypes";
-import { selectIIIFUrl } from "@store/selectors";
-import { DEFAULT_IMG_PATH_PAYLOAD__MEDIUM_SIZE } from "@constants/constants";
 import "./SpecialGallery.scss";
-import AddToFavouritesIcon from "@components/Buttons/AddToFavourites/AddToFavouritesIcon";
+
+import { AddToFavouritesIcon } from "@Components/Buttons/AddToFavourites/AddToFavouritesIcon";
+import { Image } from "@Components/Image/Image";
+import { sessionStorageHelper } from "@Utils/functions/sessionStorageHelper";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 type ArtworkCardProps = {
@@ -12,46 +12,45 @@ type ArtworkCardProps = {
   title: string;
   author: string;
   isPublic: boolean;
+  iiifUrl: string;
 };
 
-function ArtworkCard({
+export function ArtworkCard({
   imageId,
   title,
   author,
   isPublic,
   id: artworkId,
+  iiifUrl,
 }: ArtworkCardProps) {
   const navigate = useNavigate();
-  const iiifUrl = useAppSelector(selectIIIFUrl);
+  const storageHelper = sessionStorageHelper();
   const [isArtworkInFavourites, setIsArtworkInFavourites] = useState(
-    sessionStorage.getItem(artworkId.toString()) !== null,
+    storageHelper.has(artworkId),
   );
-  const imgUrl =
-    iiifUrl + `/${imageId}` + DEFAULT_IMG_PATH_PAYLOAD__MEDIUM_SIZE;
 
-  function handleOnClick() {
+  function handleClicked() {
     navigate(`/artworks/${artworkId}`);
   }
 
   function handleAddToFavourites(event: React.MouseEvent<HTMLElement>) {
-    setIsArtworkInFavourites(!isArtworkInFavourites);
     event.stopPropagation();
+    setIsArtworkInFavourites(!isArtworkInFavourites);
 
-    if (sessionStorage.getItem(artworkId.toString()) === null) {
-      sessionStorage.setItem(artworkId.toString(), title);
-    } else sessionStorage.removeItem(artworkId.toString());
+    if (!storageHelper.has(artworkId)) storageHelper.add(artworkId, title);
+    else storageHelper.remove(artworkId);
   }
 
   return (
-    <div className="card">
+    <div className="card" onClick={handleClicked}>
       <div className="card__picture">
-        <img src={imgUrl} alt="" />
+        <Image iiifUrl={iiifUrl} imageId={imageId} />
       </div>
-      <div className="card__info" onClick={handleOnClick}>
+      <div className="card__info">
         <div className="card__info__wrapper">
           <div className="card__info__description">
-            <p className="card__info__description__title">{title}</p>
-            <p className="card__info__description__author">{author}</p>
+            <h3 className="card__info__description__title">{title}</h3>
+            <h4 className="card__info__description__author">{author}</h4>
           </div>
           <p className="card__info__isPublic">
             {isPublic ? "Public" : "Copyright"}
@@ -65,5 +64,3 @@ function ArtworkCard({
     </div>
   );
 }
-
-export default ArtworkCard;

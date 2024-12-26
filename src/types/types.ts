@@ -19,3 +19,13 @@ export type Search = {
   id: number;
   title: string;
 };
+
+export type ArtworksResponseType = {
+  data: Artwork[];
+  config: { iiif_url: string };
+};
+
+export type ArtworkResponseType = {
+  data: Artwork;
+  config: { iiif_url: string };
+};

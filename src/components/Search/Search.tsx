@@ -1,54 +1,75 @@
-import React, { useEffect, useMemo, useState } from "react";
 import "./Search.scss";
-// @ts-ignore
-import searchIcon from "@assets/search.svg";
-import debounce from "lodash.debounce";
-import { useDispatch } from "react-redux";
-import { searchArtworks } from "@store/thunks";
-import { searchClear, updateSearchString } from "@store/slices/artworksSlice";
-import { DEBOUNCE_DELAY } from "@constants/constants";
-import { useAppSelector } from "@src/withTypes";
-import { selectSearchString } from "@store/selectors";
 
-function Search() {
-  const searchString = useAppSelector(selectSearchString);
-  const dispatch = useDispatch();
-  const [value, setValue] = useState(searchString);
+import { Icon } from "@Components";
+import { DEBOUNCE_DELAY } from "@Constants/constants";
+import { useDebounce } from "@Utils/hooks/useDebounce";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { string, ValidationError } from "yup";
+
+const SEARCH_ICON_NAME = "search.svg";
+
+type SearchType = {
+  onSearch: (q: string) => void;
+  initialValue?: string;
+};
+
+export function Search({ onSearch: handleSearch, initialValue }: SearchType) {
+  const [value, setValue] = useState<string>(initialValue || ""); // raw value from input field
+  const [validatedValue, setValidatedValue] = useState<string | undefined>(); // validated value after yup schema verification
+  const [error, setError] = useState<string | null>(null); // represents errors after validation
+  const validateInputDebounced = useDebounce(validateInput, DEBOUNCE_DELAY);
+
+  const searchStringSchema = string().matches(
+    /^[a-zA-Z0-9-\s]*$/,
+    "Only hyphen and space allowed as special characters",
+  );
 
   useEffect(() => {
-    dispatch(updateSearchString({ value }));
-    if (value === "") {
-      dispatch(searchClear());
-      return;
-    }
-    handleSearchDebounced(value);
+    validateInputDebounced(value);
   }, [value]);
 
-  const handleSearchDebounced = useMemo(
-    () => debounce(handleSearch, DEBOUNCE_DELAY),
-    [],
-  );
   useEffect(() => {
-    return () => handleSearchDebounced.cancel();
-  }, [handleSearchDebounced]);
+    if (value === "") handleEmptyInput();
+    handleSearch(validatedValue ?? "");
+  }, [validatedValue]);
 
-  function handleSearch(value: string) {
-    // @ts-ignore
-    if (value !== "") dispatch(searchArtworks(value));
+  function handleEmptyInput() {
+    setError(null);
+    setValidatedValue(undefined);
+  }
+
+  function validateInput(str: string) {
+    function handleError(error: ValidationError) {
+      setError(error.errors.join(","));
+    }
+
+    function handleFulfilled(value: string | undefined) {
+      setValidatedValue(value);
+      setError(null);
+    }
+
+    searchStringSchema.validate(str).then(handleFulfilled).catch(handleError);
+  }
+
+  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
+    setValue(e.currentTarget.value);
   }
 
   return (
     <div className="input-wrapper">
+      {error && <ValidationErrorField message={error} />}
       <input
         type="text"
         className="input"
         value={value}
-        onChange={(e) => setValue(e.currentTarget.value)}
+        onChange={handleInputChange}
         placeholder={"Search art, artist, work..."}
       />
-      <img src={searchIcon} alt="Search icon" className={"input-icon"} />
+      <Icon imgName={SEARCH_ICON_NAME} isClickable={true} />
     </div>
   );
 }
 
-export default Search;
+function ValidationErrorField({ message }: { message: string }) {
+  return <div className="error-field">{message}</div>;
+}

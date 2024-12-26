@@ -6,7 +6,11 @@ type PaginationItemProps = {
   selected: boolean;
 };
 
-function PaginationItem({ value, onClick, selected }: PaginationItemProps) {
+export function PaginationItem({
+  value,
+  onClick,
+  selected,
+}: PaginationItemProps) {
   return (
     <div
       className={`pagination__item${selected ? "__selected" : ""}`}
@@ -16,5 +20,3 @@ function PaginationItem({ value, onClick, selected }: PaginationItemProps) {
     </div>
   );
 }
-
-export default PaginationItem;

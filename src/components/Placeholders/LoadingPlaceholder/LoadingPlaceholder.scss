@@ -1,0 +1,10 @@
+@use "@Utils/theme" as *;
+
+.loading-placeholder {
+  background-color: $background-color-secondary;
+  padding-top: $indent-m;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+}

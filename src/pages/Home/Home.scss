@@ -1,7 +1,4 @@
-$text-color-black: #393939;
-$text-color-orange: #f17900;
-$page-background: #fafafa;
-$border-grey: #f0f1f1;
+@use "@Utils/theme" as *;
 
 .container {
   width: 70%;
@@ -12,41 +9,32 @@ $border-grey: #f0f1f1;
 }
 
 .main {
-  padding-top: 135px;
-  background-color: $page-background;
-  padding-bottom: 120px;
+  padding-top: $indent-l;
+  background-color: $background-color-secondary;
+  padding-bottom: $indent-l;
 
   &__title {
-    font-family:
-      Lexend Deca,
-      serif;
-    font-size: 64px;
-    font-weight: 700;
-    line-height: 80px;
-    text-align: center;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    color: $text-color-black;
+    @include text-big;
+    color: $text-color-primary;
+    margin-bottom: $indent-sm;
 
     &__inner {
-      font-family:
-        Lexend Deca,
-        serif;
-      font-size: 64px;
-      font-weight: 700;
-      line-height: 80px;
-      text-align: center;
-      text-underline-position: from-font;
-      text-decoration-skip-ink: none;
-      color: $text-color-orange;
+      @include text-big;
+      color: $text-color-secondary;
     }
   }
 
   &__other-works {
-    margin-top: 120px;
+    margin-top: $indent-l;
   }
 
   &__special-gallery {
-    margin-top: 120px;
+    margin-top: $indent-l;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    width: 90%;
   }
 }

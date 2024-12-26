@@ -1,8 +1,8 @@
-@use "@utils/variables" as v;
+@use "@Utils/theme" as *;
 
 .pagination {
   display: flex;
-  gap: 10px;
+  gap: $indent-xs;
   justify-content: flex-end;
   align-items: center;
   background-color: transparent;
@@ -15,19 +15,13 @@
     justify-content: center;
     align-items: center;
 
-    font-family: Lexend Deca;
-    font-size: 18px;
-    font-weight: 300;
-    line-height: 24px;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    text-align: center;
-    color: v.$text-color-black;
+    @include text(1.125rem);
+    color: $text-color-primary;
     background-color: transparent;
     cursor: none;
 
     &:hover {
-      color: v.$text-color-orange;
+      color: $text-color-secondary;
       cursor: pointer;
     }
 
@@ -39,15 +33,9 @@
       justify-content: center;
       align-items: center;
 
-      font-family: Lexend Deca;
-      font-size: 18px;
-      font-weight: 600;
-      line-height: 23px;
-      text-align: center;
-      text-underline-position: from-font;
-      text-decoration-skip-ink: none;
-      color: #ffffff;
-      background-color: v.$text-color-orange;
+      @include text(1.125rem, $font-weight-bold);
+      color: $text-color-alternative;
+      background-color: $background-color-alternative;
       border-radius: 4px;
       caret-color: transparent;
     }

@@ -1,28 +1,26 @@
-import React, { useState } from "react";
 import "./ArtworkCardSmall.scss";
-import { Artwork } from "@src/types/types";
-import { DEFAULT_IMG_PATH_PAYLOAD__SMALL_SIZE } from "@constants/constants";
-import { useNavigate } from "react-router-dom";
-import AddToFavouritesIcon from "@components/Buttons/AddToFavourites/AddToFavouritesIcon";
-import Spinner from "@components/Spinner/Spinner";
 
-type ArtworkCardSmall = {
+import { AddToFavouritesIcon } from "@Components/Buttons/AddToFavourites/AddToFavouritesIcon";
+import { Image } from "@Components/Image/Image";
+import { Artwork } from "@Types";
+import { sessionStorageHelper } from "@Utils";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+export type ArtworkCardSmallProps = {
   artwork: Artwork;
   iiifUrl: string;
 };
 
-function ArtworkCardSmall({
+export function ArtworkCardSmall({
   artwork: { title, artist_title, is_public_domain, image_id, id: artworkId },
   iiifUrl,
-}: ArtworkCardSmall) {
+}: ArtworkCardSmallProps) {
   const navigate = useNavigate();
+  const storageHelper = sessionStorageHelper();
   const [isArtworkInFavourites, setIsArtworkInFavourites] = useState(
-    sessionStorage.getItem(artworkId.toString()) !== null,
+    storageHelper.has(artworkId),
   );
-  const [isImageLoading, setIsImageLoading] = useState(true);
-
-  const imgUrl =
-    iiifUrl + `/${image_id}` + DEFAULT_IMG_PATH_PAYLOAD__SMALL_SIZE;
 
   function handleOnClick() {
     navigate(`/artworks/${artworkId}`);
@@ -32,30 +30,27 @@ function ArtworkCardSmall({
     setIsArtworkInFavourites(!isArtworkInFavourites);
     event.stopPropagation();
 
-    if (sessionStorage.getItem(artworkId.toString()) === null) {
-      sessionStorage.setItem(artworkId.toString(), title);
-    } else sessionStorage.removeItem(artworkId.toString());
+    if (!storageHelper.has(artworkId)) storageHelper.add(artworkId, title);
+    else storageHelper.remove(artworkId);
   }
 
   return (
-    <div className={"artwork-card-small"} onClick={handleOnClick}>
+    <div
+      className={"artwork-card-small"}
+      onClick={handleOnClick}
+      data-testid="artwork-card-small"
+    >
       <div className="artwork-card-small__image">
-        {isImageLoading && (
-          <div className="spinner-wrapper">
-            <Spinner />
-          </div>
-        )}
-        <img src={imgUrl} alt="" onLoad={() => setIsImageLoading(false)} />
+        <Image iiifUrl={iiifUrl} imageId={image_id} />
       </div>
       <div className="artwork-card-small__content">
-        <p className="artwork-card-small__content__title">{title}</p>
-        <p className="artwork-card-small__content__artist">{artist_title}</p>
+        <h3 className="artwork-card-small__content__title">{title}</h3>
+        <h4 className="artwork-card-small__content__artist">{artist_title}</h4>
         <p className="artwork-card-small__content__is-public">
           {is_public_domain ? "Public" : "Copyright"}
         </p>
       </div>
       <div className="artwork-card-small__add-to-favourites">
-        {/*{hovered ? iconHovered : icon}*/}
         <AddToFavouritesIcon
           onClick={handleAddToFavourites}
           isFavourite={isArtworkInFavourites}
@@ -64,5 +59,3 @@ function ArtworkCardSmall({
     </div>
   );
 }
-
-export default ArtworkCardSmall;

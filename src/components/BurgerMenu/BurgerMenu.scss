@@ -1,0 +1,32 @@
+@use "@Utils/theme" as *;
+
+.burger-menu {
+  &__icon {
+    height: 50px;
+    width: 50px;
+  }
+
+  &__links {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: $header-height;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: $header-burger-menu-background-color;
+
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+    &__container {
+      text-align: center;
+      padding: $indent-xs 0;
+    }
+  }
+}
+
+.active {
+  opacity: 1;
+}
